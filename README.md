@@ -1,4 +1,4 @@
- --UPDATE# HomeschoolGradesAndTranscripts
+# HomeschoolGradesAndTranscripts
 
 Windows application to track homeschool grades and create high school transcripts.
 
