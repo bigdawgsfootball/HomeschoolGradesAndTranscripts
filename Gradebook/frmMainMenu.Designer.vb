@@ -32,6 +32,10 @@ Partial Class frmMainMenu
         Me.btnEditJSON = New System.Windows.Forms.Button()
         Me.btnReportCard = New System.Windows.Forms.Button()
         Me.btnBackUp = New System.Windows.Forms.Button()
+        Me.btnSetLocations = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnCreateNew = New System.Windows.Forms.Button()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnOpenGB
@@ -66,7 +70,7 @@ Partial Class frmMainMenu
         'btnAddExtra
         '
         Me.btnAddExtra.Enabled = False
-        Me.btnAddExtra.Location = New System.Drawing.Point(7, 226)
+        Me.btnAddExtra.Location = New System.Drawing.Point(7, 132)
         Me.btnAddExtra.Name = "btnAddExtra"
         Me.btnAddExtra.Size = New System.Drawing.Size(119, 23)
         Me.btnAddExtra.TabIndex = 3
@@ -106,7 +110,7 @@ Partial Class frmMainMenu
         'btnEditJSON
         '
         Me.btnEditJSON.Enabled = False
-        Me.btnEditJSON.Location = New System.Drawing.Point(153, 127)
+        Me.btnEditJSON.Location = New System.Drawing.Point(153, 189)
         Me.btnEditJSON.Name = "btnEditJSON"
         Me.btnEditJSON.Size = New System.Drawing.Size(119, 23)
         Me.btnEditJSON.TabIndex = 8
@@ -126,18 +130,47 @@ Partial Class frmMainMenu
         'btnBackUp
         '
         Me.btnBackUp.Enabled = False
-        Me.btnBackUp.Location = New System.Drawing.Point(153, 157)
+        Me.btnBackUp.Location = New System.Drawing.Point(153, 219)
         Me.btnBackUp.Name = "btnBackUp"
         Me.btnBackUp.Size = New System.Drawing.Size(119, 23)
         Me.btnBackUp.TabIndex = 10
         Me.btnBackUp.Text = "Backup to GDrive"
         Me.btnBackUp.UseVisualStyleBackColor = True
         '
+        'btnSetLocations
+        '
+        Me.btnSetLocations.Location = New System.Drawing.Point(13, 218)
+        Me.btnSetLocations.Name = "btnSetLocations"
+        Me.btnSetLocations.Size = New System.Drawing.Size(134, 23)
+        Me.btnSetLocations.TabIndex = 11
+        Me.btnSetLocations.Text = "Set File Locations"
+        Me.btnSetLocations.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.btnCreateNew)
+        Me.GroupBox1.Location = New System.Drawing.Point(7, 173)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(272, 76)
+        Me.GroupBox1.TabIndex = 12
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Admin"
+        '
+        'btnCreateNew
+        '
+        Me.btnCreateNew.Location = New System.Drawing.Point(6, 16)
+        Me.btnCreateNew.Name = "btnCreateNew"
+        Me.btnCreateNew.Size = New System.Drawing.Size(134, 23)
+        Me.btnCreateNew.TabIndex = 0
+        Me.btnCreateNew.Text = "Create new gradebook"
+        Me.btnCreateNew.UseVisualStyleBackColor = True
+        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Controls.Add(Me.btnSetLocations)
         Me.Controls.Add(Me.btnBackUp)
         Me.Controls.Add(Me.btnReportCard)
         Me.Controls.Add(Me.btnEditJSON)
@@ -148,8 +181,10 @@ Partial Class frmMainMenu
         Me.Controls.Add(Me.btnAddCourse)
         Me.Controls.Add(Me.btnAddStudent)
         Me.Controls.Add(Me.btnOpenGB)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Name = "frmMainMenu"
         Me.Text = "MainMenu"
+        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -164,4 +199,7 @@ Partial Class frmMainMenu
     Friend WithEvents btnEditJSON As Button
     Friend WithEvents btnReportCard As Button
     Friend WithEvents btnBackUp As Button
+    Friend WithEvents btnSetLocations As Button
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents btnCreateNew As Button
 End Class

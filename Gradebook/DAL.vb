@@ -19,7 +19,16 @@ Module DAL
             GBFile = dialog.FileName
         End Using
 #Else
-        GBFile = ApplicationDeployment.CurrentDeployment.DataDirectory & "\gradebook.json"
+        'GBFile = ApplicationDeployment.CurrentDeployment.DataDirectory & "\gradebook.json"
+        Using dialog As New OpenFileDialog
+            dialog.Filter = "JSON Files (*.json) | *.json"
+            dialog.Title = "Select Gradebook file to open"
+            dialog.InitialDirectory = "ApplicationDeployment.CurrentDeployment.DataDirectory"
+            dialog.RestoreDirectory = True
+            If dialog.ShowDialog() <> DialogResult.OK Then Return
+            GBFile = dialog.FileName
+        End Using
+
 #End If
 
         If File.Exists(GBFile) Then
