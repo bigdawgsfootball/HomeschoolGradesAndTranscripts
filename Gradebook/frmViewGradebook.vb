@@ -65,43 +65,48 @@ Public Class frmViewGradebook
         Dim dt As New DataTable
         Dim CurCourse As New Course
 
-        CurCourse = cboCourses.SelectedItem
+        Try
 
-        If CurCourse.Assignments.Count > 0 Then
-            dt = ConvertToDataTable(Of Assignment)(CurCourse.Assignments)
+            CurCourse = cboCourses.SelectedItem
 
-            Dim cmb As New DataGridViewComboBoxColumn()
-            cmb.HeaderText = "AssignmentType"
-            cmb.Name = "Type"
-            cmb.DataPropertyName = "Type"
+            If CurCourse.Assignments.Count > 0 Then
+                dt = ConvertToDataTable(Of Assignment)(CurCourse.Assignments)
 
-            Dim items As Array
-            items = System.Enum.GetValues(GetType(AssignTypes))
-            For Each item In items
-                cmb.Items.Add(item)
-            Next
+                Dim cmb As New DataGridViewComboBoxColumn()
+                cmb.HeaderText = "AssignmentType"
+                cmb.Name = "Type"
+                cmb.DataPropertyName = "Type"
 
-            dgvGradebook.DataSource = dt
+                Dim items As Array
+                items = System.Enum.GetValues(GetType(AssignTypes))
+                For Each item In items
+                    cmb.Items.Add(item)
+                Next
 
-            Dim TypeIndex As Integer = dgvGradebook.Columns.IndexOf(dgvGradebook.Columns.Item("Type"))
-            dgvGradebook.Columns.Remove("Type")
-            dgvGradebook.Columns.Insert(TypeIndex, cmb)
+                dgvGradebook.DataSource = dt
 
-            dgvGradebook.DataSource = dt
+                Dim TypeIndex As Integer = dgvGradebook.Columns.IndexOf(dgvGradebook.Columns.Item("Type"))
+                dgvGradebook.Columns.Remove("Type")
+                dgvGradebook.Columns.Insert(TypeIndex, cmb)
 
-            cboRatingPeriod.Items.Clear()
-            cboRatingPeriod.Text = ""
-            cboRatingPeriod.Items.Add("All")
-            For Each assignment In CurCourse.Assignments
-                If Not cboRatingPeriod.Items.Contains(assignment.RatingPeriod) Then
-                    cboRatingPeriod.Items.Add(assignment.RatingPeriod)
-                    cboRatingPeriod.DisplayMember = "RatingPeriod"
-                End If
-            Next
+                dgvGradebook.DataSource = dt
 
-        End If
+                cboRatingPeriod.Items.Clear()
+                cboRatingPeriod.Text = ""
+                cboRatingPeriod.Items.Add("All")
+                For Each assign In CurCourse.Assignments
+                    If Not cboRatingPeriod.Items.Contains(assign.RatingPeriod) Then
+                        cboRatingPeriod.Items.Add(assign.RatingPeriod)
+                        cboRatingPeriod.DisplayMember = "RatingPeriod"
+                    End If
+                Next
 
-        dgvGradebook.Refresh()
+            End If
+
+            dgvGradebook.Refresh()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
 
     End Sub
@@ -218,5 +223,14 @@ Public Class frmViewGradebook
         dgvGradebook.Refresh()
 
 
+    End Sub
+
+    Private Sub dgvGradebook_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles dgvGradebook.DataError
+        If (e.Context = (DataGridViewDataErrorContexts.Formatting Or DataGridViewDataErrorContexts.Display) Or
+            (DataGridViewDataErrorContexts.Formatting Or DataGridViewDataErrorContexts.PreferredSize)) Then
+            e.ThrowException = False
+        Else
+            MsgBox(e.Exception.Message)
+        End If
     End Sub
 End Class
