@@ -123,6 +123,9 @@ Public Class PrintReportCard
     Function printReportCard() As Document
         Dim pdf As New Document
         Dim para As New Paragraph
+        Dim Sem1Col As Integer = 4
+        Dim Sem2Col As Integer = 8
+        Dim OverallCol As Integer = 9
 
         Cursor.Current = Cursors.WaitCursor
 
@@ -190,24 +193,24 @@ Public Class PrintReportCard
         Row.Cells(2).Format.Alignment = ParagraphAlignment.Center
         Row.Cells(3).AddParagraph("3")
         Row.Cells(3).Format.Alignment = ParagraphAlignment.Center
-        Row.Cells(4).AddParagraph("Sem 1")
-        Row.Cells(4).Format.Alignment = ParagraphAlignment.Center
+        Row.Cells(Sem1Col).AddParagraph("Sem 1")
+        Row.Cells(Sem1Col).Format.Alignment = ParagraphAlignment.Center
         Row.Cells(5).AddParagraph("4")
         Row.Cells(5).Format.Alignment = ParagraphAlignment.Center
         Row.Cells(6).AddParagraph("5")
         Row.Cells(6).Format.Alignment = ParagraphAlignment.Center
         Row.Cells(7).AddParagraph("6")
         Row.Cells(7).Format.Alignment = ParagraphAlignment.Center
-        Row.Cells(8).AddParagraph("Sem 2")
-        Row.Cells(8).Format.Alignment = ParagraphAlignment.Center
-        Row.Cells(9).AddParagraph("Final")
-        Row.Cells(9).Format.Alignment = ParagraphAlignment.Center
+        Row.Cells(Sem2Col).AddParagraph("Sem 2")
+        Row.Cells(Sem2Col).Format.Alignment = ParagraphAlignment.Center
+        Row.Cells(OverallCol).AddParagraph("Final")
+        Row.Cells(OverallCol).Format.Alignment = ParagraphAlignment.Center
 
         Dim RepCourses = GB.Students(Me.Student).Courses
         Dim PrintCourses As New List(Of Course)
         Dim AllGrades As New List(Of Decimal)
-        Dim Sem1Grades As New List(Of Assignment)
-        Dim Sem2Grades As New List(Of Assignment)
+        Dim Sem1Grades As New List(Of Decimal)
+        Dim Sem2Grades As New List(Of Decimal)
 
         For Each course In RepCourses
             Dim PrintAssignments As New List(Of Assignment)
@@ -251,43 +254,72 @@ Public Class PrintReportCard
 
                         If assign.RatingPeriod = i Then
                             RAssigns.Add(assign)
-
-                            If assign.RatingPeriod < 4 Then
-                                Sem1Grades.Add(assign)
-                            Else
-                                Sem2Grades.Add(assign)
-                            End If
-
                         End If
                     Next
 
-                    para.AddText(CalcGrade(RAssigns).ToString)
-                    AllGrades.Add(CalcGrade(RAssigns))
+                    If RAssigns.Count > 0 Then
+                        para.AddText(CalcGrade(RAssigns).ToString)
+                        AllGrades.Add(CalcGrade(RAssigns))
+
+                        If i < 4 Then
+                            Sem1Grades.Add(CalcGrade(RAssigns))
+                        Else
+                            Sem2Grades.Add(CalcGrade(RAssigns))
+                        End If
+                    Else
+                        para.AddText("N/A")
+                    End If
+
                 Next
 
                 'Calculate first semester average
                 Dim Sem1 As New Decimal
-                Sem1 = CalcGrade(Sem1Grades)
+                For Each grade In Sem1Grades
+                    Sem1 += grade
+                Next
+                If Sem1Grades.Count > 0 Then
+                    Sem1 = Sem1 / Sem1Grades.Count
+                End If
 
-                para = Row.Cells(4).AddParagraph
-                para.AddText(Sem1.ToString("N2"))
+                para = Row.Cells(Sem1Col).AddParagraph
+                If Sem1 > 0 Then
+                    para.AddText(Sem1.ToString("N2"))
+                Else
+                    para.AddText(" ")
+                End If
 
                 'Calculate second semester average
                 Dim Sem2 As New Decimal
-                Sem2 = CalcGrade(Sem2Grades)
+                For Each grade In Sem2Grades
+                    Sem2 += grade
+                Next
+                If Sem2Grades.Count > 0 Then
+                    Sem2 = Sem2 / Sem2Grades.Count
+                End If
 
-                para = Row.Cells(8).AddParagraph
-                para.AddText(Sem2.ToString("N2"))
+                para = Row.Cells(Sem2Col).AddParagraph
+                If Sem2 > 0 Then
+                    para.AddText(Sem2.ToString("N2"))
+                Else
+                    para.AddText(" ")
+                End If
 
                 'Calculate Final grade
                 Dim overall As New Decimal
                 For Each grade In AllGrades
                     overall += grade
                 Next
-                overall = overall / AllGrades.Count
 
-                para = Row.Cells(9).AddParagraph
-                para.AddText(overall.ToString("N2"))
+                If AllGrades.Count > 0 Then
+                    overall = overall / AllGrades.Count
+                End If
+
+                para = Row.Cells(OverallCol).AddParagraph
+                If overall > 0 Then
+                    para.AddText(overall.ToString("N2"))
+                Else
+                    para.AddText(" ")
+                End If
 
             End If
 
@@ -426,31 +458,31 @@ Public Class PrintReportCard
         Next
 
         AGrade = AGrade / ACount
-            QGrade = QGrade / QCount
-            TGrade = TGrade / TCount
-            PGrade = PGrade / PCount
-            EGrade = EGrade / ECount
+        QGrade = QGrade / QCount
+        TGrade = TGrade / TCount
+        PGrade = PGrade / PCount
+        EGrade = EGrade / ECount
 
-            If ACount > 0 Then
-                grade += (AGrade * AssignTypes.Assignment)
-                Weights += AssignTypes.Assignment
-            End If
-            If QCount > 0 Then
-                grade += (QGrade * AssignTypes.Quiz)
-                Weights += AssignTypes.Quiz
-            End If
-            If TCount > 0 Then
-                grade += (TGrade * AssignTypes.Test)
-                Weights += AssignTypes.Test
-            End If
-            If PCount > 0 Then
-                grade += (PGrade * AssignTypes.Project)
-                Weights += AssignTypes.Project
-            End If
-            If ECount > 0 Then
-                grade += (EGrade * AssignTypes.Exam)
-                Weights += AssignTypes.Exam
-            End If
+        If ACount > 0 Then
+            grade += (AGrade * AssignTypes.Assignment)
+            Weights += AssignTypes.Assignment
+        End If
+        If QCount > 0 Then
+            grade += (QGrade * AssignTypes.Quiz)
+            Weights += AssignTypes.Quiz
+        End If
+        If TCount > 0 Then
+            grade += (TGrade * AssignTypes.Test)
+            Weights += AssignTypes.Test
+        End If
+        If PCount > 0 Then
+            grade += (PGrade * AssignTypes.Project)
+            Weights += AssignTypes.Project
+        End If
+        If ECount > 0 Then
+            grade += (EGrade * AssignTypes.Exam)
+            Weights += AssignTypes.Exam
+        End If
 
         If (grade > 0) Then
             Return ((grade / Weights).ToString("N2"))
