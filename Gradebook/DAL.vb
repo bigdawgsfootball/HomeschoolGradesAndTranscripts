@@ -9,27 +9,27 @@ Module DAL
         Dim FStream As Stream
         Dim JSONString As String = ""
 
+        If GBFile = "" Then
 #If DEBUG Then
-        'GBFile = ".\gradebook.json"
-        Using dialog As New OpenFileDialog
-            dialog.Filter = "JSON Files (*.json) | *.json"
-            dialog.Title = "Select Gradebook file to open"
-            dialog.InitialDirectory = "C:\Users\Kurt\Downloads"
-            If dialog.ShowDialog() <> DialogResult.OK Then Return
-            GBFile = dialog.FileName
-        End Using
+            Using dialog As New OpenFileDialog
+                dialog.Filter = "JSON Files (*.json) | *.json"
+                dialog.Title = "Select Gradebook file to open"
+                dialog.InitialDirectory = "C:\Users\Kurt\Downloads"
+                If dialog.ShowDialog() <> DialogResult.OK Then Return
+                GBFile = dialog.FileName
+            End Using
 #Else
-        'GBFile = ApplicationDeployment.CurrentDeployment.DataDirectory & "\gradebook.json"
-        Using dialog As New OpenFileDialog
-            dialog.Filter = "JSON Files (*.json) | *.json"
-            dialog.Title = "Select Gradebook file to open"
-            dialog.InitialDirectory = "ApplicationDeployment.CurrentDeployment.DataDirectory"
-            dialog.RestoreDirectory = True
-            If dialog.ShowDialog() <> DialogResult.OK Then Return
-            GBFile = dialog.FileName
-        End Using
+            'GBFile = ApplicationDeployment.CurrentDeployment.DataDirectory & "\gradebook.json"
+            Using dialog As New OpenFileDialog
+                dialog.Filter = "JSON Files (*.json) | *.json"
+                dialog.Title = "Select Gradebook file to open"
+                dialog.InitialDirectory = ApplicationDeployment.CurrentDeployment.DataDirectory
+                If dialog.ShowDialog() <> DialogResult.OK Then Return
+                GBFile = dialog.FileName
+            End Using
 
 #End If
+        End If
 
         If File.Exists(GBFile) Then
             FStream = File.OpenRead(GBFile)
@@ -37,11 +37,15 @@ Module DAL
             JSONString = reader.ReadToEnd
             reader.Close()
             FStream.Close()
+        Else
+            MsgBox(GBFile & " does not exist." & vbCrLf & "Please select a new file", vbOKOnly)
         End If
 
         If Not IsNothing(JSONString) Then
             GB = JsonConvert.DeserializeObject(Of Gradebook)(JSONString)
             MsgBox("Gradebook Opened!", vbOKOnly, "Success!")
+        Else
+            MsgBox("JSON string invalid.", vbOKOnly)
         End If
 
     End Sub

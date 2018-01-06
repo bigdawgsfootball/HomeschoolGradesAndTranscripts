@@ -164,6 +164,12 @@
     <Compile Include="frmSelectReportCard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSetFileLocations.Designer.vb">
+      <DependentUpon>frmSetFileLocations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetFileLocations.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmViewGradebook.Designer.vb">
       <DependentUpon>frmViewGradebook.vb</DependentUpon>
     </Compile>
@@ -214,6 +220,9 @@
     <EmbeddedResource Include="frmSelectReportCard.resx">
       <DependentUpon>frmSelectReportCard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSetFileLocations.resx">
+      <DependentUpon>frmSetFileLocations.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmViewGradebook.resx">
       <DependentUpon>frmViewGradebook.vb</DependentUpon>
     </EmbeddedResource>
@@ -225,6 +234,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="edit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="gradebook.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

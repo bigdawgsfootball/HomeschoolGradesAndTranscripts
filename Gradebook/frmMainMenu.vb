@@ -73,17 +73,8 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub btnSetLocations_Click(sender As Object, e As EventArgs) Handles btnSetLocations.Click
-        Dim GDrivePath As String = System.Environment.GetEnvironmentVariable("GBSYNCPATH", EnvironmentVariableTarget.User)
 
-        Dim fd As FolderBrowserDialog = New FolderBrowserDialog()
-
-        fd.Description = "Select location of Google Drive or One Drive synced folder"
-        fd.ShowNewFolderButton = True
-        fd.RootFolder = Environment.SpecialFolder.MyComputer
-
-        If fd.ShowDialog() = DialogResult.OK Then
-            System.Environment.SetEnvironmentVariable("GBSYNCPATH", fd.SelectedPath, EnvironmentVariableTarget.User)
-        End If
+        frmSetFileLocations.Show()
 
     End Sub
 
@@ -112,5 +103,11 @@ Public Class frmMainMenu
             End Using
         End If
 
+    End Sub
+
+    Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If GBFile = "" Then
+            btnOpenGB.Enabled = False
+        End If
     End Sub
 End Class
