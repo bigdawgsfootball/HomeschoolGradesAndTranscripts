@@ -44,6 +44,7 @@ Public Class frmSetFileLocations
             System.Environment.SetEnvironmentVariable("GBLOCATION", dialog.FileName, EnvironmentVariableTarget.User)
             txtGradeLoc.Text = dialog.FileName
             frmMainMenu.btnOpenGB.Enabled = True
+            GBFile = dialog.FileName
         End Using
 
     End Sub

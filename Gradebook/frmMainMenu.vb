@@ -1,5 +1,6 @@
 ﻿Imports System.Deployment.Application
 
+
 Public Class frmMainMenu
 
     Private Sub btnOpenGB_Click(sender As Object, e As EventArgs) Handles btnOpenGB.Click
@@ -8,7 +9,7 @@ Public Class frmMainMenu
         If GBFile <> "" Then
             btnAddAssignment.Enabled = True
             btnAddCourse.Enabled = True
-            'btnAddExtra.Enabled = True
+            btnGenTranscript.Enabled = True
             btnAddStudent.Enabled = True
             btnCalcGrade.Enabled = True
             btnReportCard.Enabled = True
@@ -27,8 +28,8 @@ Public Class frmMainMenu
         frmAddCourse.Show()
     End Sub
 
-    Private Sub btnAddExtra_Click(sender As Object, e As EventArgs) Handles btnAddExtra.Click
-
+    Private Sub btnAddExtra_Click(sender As Object, e As EventArgs) Handles btnGenTranscript.Click
+        frmPrintTranscript.Show()
     End Sub
 
     Private Sub btnAddAssignment_Click(sender As Object, e As EventArgs) Handles btnAddAssignment.Click

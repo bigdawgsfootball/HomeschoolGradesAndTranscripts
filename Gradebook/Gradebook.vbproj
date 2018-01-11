@@ -32,7 +32,7 @@
     <UpdateUrl>https://bigdawgsfootball.blob.core.windows.net/gradebook/</UpdateUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -158,6 +158,12 @@
     <Compile Include="frmCalcGrade.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPrintTranscript.Designer.vb">
+      <DependentUpon>frmPrintTranscript.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrintTranscript.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSelectReportCard.Designer.vb">
       <DependentUpon>frmSelectReportCard.vb</DependentUpon>
     </Compile>
@@ -184,6 +190,7 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Mapping.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -216,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintTranscript.resx">
+      <DependentUpon>frmPrintTranscript.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSelectReportCard.resx">
       <DependentUpon>frmSelectReportCard.vb</DependentUpon>

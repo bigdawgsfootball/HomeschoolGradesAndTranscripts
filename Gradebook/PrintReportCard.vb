@@ -27,6 +27,7 @@ Public Class PrintReportCard
             ' Save the document...
             Dim SaveDlg As New SaveFileDialog
             SaveDlg.Filter = "PDF Files (*.pdf)|*.pdf"
+            SaveDlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
             If SaveDlg.ShowDialog = System.Windows.Forms.DialogResult.OK Then
                 Renderer.PdfDocument.Save(SaveDlg.FileName)
                 Process.Start(SaveDlg.FileName)
@@ -37,88 +38,88 @@ Public Class PrintReportCard
 
     End Sub
 
-    Function printBook() As Document
-        Dim pdf As New Document
-        Dim para As New Paragraph
+    'Function printBook() As Document
+    '    Dim pdf As New Document
+    '    Dim para As New Paragraph
 
-        Cursor.Current = Cursors.WaitCursor
+    '    Cursor.Current = Cursors.WaitCursor
 
-        DefineStyles(pdf)
-        DefineContentSection(pdf)
+    '    DefineStyles(pdf)
+    '    DefineContentSection(pdf)
 
-        'Adds a section to the document
-        Dim sect As Section = pdf.LastSection
-        sect.AddParagraph()
+    '    'Adds a section to the document
+    '    Dim sect As Section = pdf.LastSection
+    '    sect.AddParagraph()
 
-        'Add content to the document
-        para = sect.AddParagraph()
-        para.Style = "Header2"
-        para.Format.ClearAll()
-        para.AddText("Student: " & GB.Students(Me.Student).Name.ToString)
-        para.AddLineBreak()
-        para.AddText("Grade Level: " & Me.GradeLevel)
-        para.AddLineBreak()
-        para.AddText("Rating Period: " & Me.RatingPeriod)
+    '    'Add content to the document
+    '    para = sect.AddParagraph()
+    '    para.Style = "Header2"
+    '    para.Format.ClearAll()
+    '    para.AddText("Student: " & GB.Students(Me.Student).Name.ToString)
+    '    para.AddLineBreak()
+    '    para.AddText("Grade Level: " & Me.GradeLevel)
+    '    para.AddLineBreak()
+    '    para.AddText("Rating Period: " & Me.RatingPeriod)
 
-        Dim RepCourses = GB.Students(Me.Student).Courses
-        Dim PrintCourses As New List(Of Course)
-        Dim AllGrades As New List(Of Decimal)
+    '    Dim RepCourses = GB.Students(Me.Student).Courses
+    '    Dim PrintCourses As New List(Of Course)
+    '    Dim AllGrades As New List(Of Decimal)
 
-        For Each course In RepCourses
-            Dim PrintAssignments As New List(Of Assignment)
+    '    For Each course In RepCourses
+    '        Dim PrintAssignments As New List(Of Assignment)
 
-            If course.Gradelevel = Me.GradeLevel Then
-                For Each assignment In course.Assignments
-                    If assignment.RatingPeriod = Me.RatingPeriod Then
-                        PrintAssignments.Add(assignment)
-                    End If
-                Next
-                Dim copyassignments As New List(Of Assignment)
-                copyassignments = PrintAssignments
+    '        If course.Gradelevel = Me.GradeLevel Then
+    '            For Each assignment In course.Assignments
+    '                If assignment.RatingPeriod = Me.RatingPeriod Then
+    '                    PrintAssignments.Add(assignment)
+    '                End If
+    '            Next
+    '            Dim copyassignments As New List(Of Assignment)
+    '            copyassignments = PrintAssignments
 
-                If PrintAssignments.Count > 0 Then
-                    Dim PrintCourse As New Course
-                    PrintCourse = course
-                    PrintCourse.Assignments = copyassignments
-                    PrintCourses.Add(PrintCourse)
-                End If
-            End If
-        Next
+    '            If PrintAssignments.Count > 0 Then
+    '                Dim PrintCourse As New Course
+    '                PrintCourse = course
+    '                PrintCourse.Assignments = copyassignments
+    '                PrintCourses.Add(PrintCourse)
+    '            End If
+    '        End If
+    '    Next
 
-        For Each course In PrintCourses
-            para = sect.AddParagraph()
+    '    For Each course In PrintCourses
+    '        para = sect.AddParagraph()
 
-            para.Style = "Heading3"
-            para.AddSpace(10)
-            para.AddText(course.Title)
-            para.Format.ClearAll()
-            para.Format.AddTabStop("6.0in", TabAlignment.Right)
-            para.AddTab()
+    '        para.Style = "Heading3"
+    '        para.AddSpace(10)
+    '        para.AddText(course.Title)
+    '        para.Format.ClearAll()
+    '        para.Format.AddTabStop("6.0in", TabAlignment.Right)
+    '        para.AddTab()
 
-            para.AddText(CalcGrade(course.Assignments).ToString)
-            AllGrades.Add(CalcGrade(course.Assignments))
-        Next
+    '        para.AddText(CalcGrade(course.Assignments).ToString)
+    '        AllGrades.Add(CalcGrade(course.Assignments))
+    '    Next
 
-        Dim overall As New Decimal
-        For Each grade In AllGrades
-            overall += grade
-        Next
-        overall = overall / AllGrades.Count
+    '    Dim overall As New Decimal
+    '    For Each grade In AllGrades
+    '        overall += grade
+    '    Next
+    '    overall = overall / AllGrades.Count
 
-        para = sect.AddParagraph
-        para.Style = "Heading2"
-        para.AddText("Overall Average")
-        para.Format.ClearAll()
-        para.Format.AddTabStop("6.0in", TabAlignment.Right)
-        para.AddTab()
+    '    para = sect.AddParagraph
+    '    para.Style = "Heading2"
+    '    para.AddText("Overall Average")
+    '    para.Format.ClearAll()
+    '    para.Format.AddTabStop("6.0in", TabAlignment.Right)
+    '    para.AddTab()
 
-        para.AddText(overall.ToString("N2"))
+    '    para.AddText(overall.ToString("N2"))
 
-        Return pdf
+    '    Return pdf
 
-        Cursor.Current = Cursors.Default
+    '    Cursor.Current = Cursors.Default
 
-    End Function
+    'End Function
 
     Function printReportCard() As Document
         Dim pdf As New Document
@@ -419,7 +420,7 @@ Public Class PrintReportCard
         Sect.Footers.Primary.Add(para.Clone())
     End Sub
 
-    Function CalcGrade(Assignments As List(Of Assignment)) As Decimal
+    Friend Function CalcGrade(Assignments As List(Of Assignment)) As Decimal
 
         'calculate grade
         Dim grade As Double = 0

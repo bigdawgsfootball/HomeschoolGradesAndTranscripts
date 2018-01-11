@@ -1,5 +1,4 @@
 ﻿Imports Newtonsoft.Json
-Imports Newtonsoft.Json.Schema
 Imports System.IO
 Imports System.Deployment.Application
 
@@ -10,25 +9,17 @@ Module DAL
         Dim JSONString As String = ""
 
         If GBFile = "" Then
+            Using dialog As New OpenFileDialog
+                dialog.Filter = "JSON Files (*.json) | *.json"
+                dialog.Title = "Select Gradebook file to open"
 #If DEBUG Then
-            Using dialog As New OpenFileDialog
-                dialog.Filter = "JSON Files (*.json) | *.json"
-                dialog.Title = "Select Gradebook file to open"
-                dialog.InitialDirectory = "C:\Users\Kurt\Downloads"
-                If dialog.ShowDialog() <> DialogResult.OK Then Return
-                GBFile = dialog.FileName
-            End Using
+               dialog.InitialDirectory = "C:\Users\Kurt\Downloads"
 #Else
-            'GBFile = ApplicationDeployment.CurrentDeployment.DataDirectory & "\gradebook.json"
-            Using dialog As New OpenFileDialog
-                dialog.Filter = "JSON Files (*.json) | *.json"
-                dialog.Title = "Select Gradebook file to open"
                 dialog.InitialDirectory = ApplicationDeployment.CurrentDeployment.DataDirectory
+#End If
                 If dialog.ShowDialog() <> DialogResult.OK Then Return
                 GBFile = dialog.FileName
             End Using
-
-#End If
         End If
 
         If File.Exists(GBFile) Then
