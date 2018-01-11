@@ -3,11 +3,12 @@
 
     Sub LoadFields()
 
+        fields.Clear()
         fields.Add("StudentName", {"untitled1", "untitled2", "untitled300"})
         fields.Add("SSN", {"untitled24", "untitled3", "untitled301"})
-        fields.Add("StudentDOB", {"untitled04"})
+        fields.Add("StudentDOB", {"untitled4"})
         fields.Add("GradDate", {"untitled25"})
-        fields.Add("SchoolName", {"untitled06", "untitled07", "untitled08"})
+        fields.Add("SchoolName", {"untitled6", "untitled7", "untitled8"})
 
         fields.Add("9SchoolYear", {"untitled85"})
         fields.Add("9Course1", {"untitled10", "untitled26", "untitled28", "untitled29", "untitled30"})

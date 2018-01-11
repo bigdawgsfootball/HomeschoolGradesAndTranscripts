@@ -1,85 +1,51 @@
-﻿Imports System.Deployment.Application
-
-
-Public Class frmMainMenu
+﻿Public Class frmMainMenu
 
     Private Sub btnOpenGB_Click(sender As Object, e As EventArgs) Handles btnOpenGB.Click
         OpenGradebook()
 
         If GBFile <> "" Then
-            btnAddAssignment.Enabled = True
-            btnAddCourse.Enabled = True
-            btnGenTranscript.Enabled = True
-            btnAddStudent.Enabled = True
-            btnCalcGrade.Enabled = True
-            btnReportCard.Enabled = True
             btnViewGradebook.Enabled = True
-            btnEditJSON.Enabled = True
             btnBackUp.Enabled = True
+            EditJSONToolStripMenuItem.Enabled = True
+            BackupToolStripMenuItem.Enabled = True
+            AddStudentToolStripMenuItem.Enabled = True
+            AddCourseToolStripMenuItem.Enabled = True
+            AddAssignmentToolStripMenuItem.Enabled = True
+            ViewGradebookToolStripMenuItem.Enabled = True
+            CalcGradeToolStripMenuItem.Enabled = True
+            GenReportCardToolStripMenuItem.Enabled = True
+            GenerateTranscriptToolStripMenuItem.Enabled = True
         End If
 
-    End Sub
-
-    Private Sub btnAddStudent_Click(sender As Object, e As EventArgs) Handles btnAddStudent.Click
-        frmAddStudent.Show()
-    End Sub
-
-    Private Sub btnAddCourse_Click(sender As Object, e As EventArgs) Handles btnAddCourse.Click
-        frmAddCourse.Show()
-    End Sub
-
-    Private Sub btnAddExtra_Click(sender As Object, e As EventArgs) Handles btnGenTranscript.Click
-        frmPrintTranscript.Show()
-    End Sub
-
-    Private Sub btnAddAssignment_Click(sender As Object, e As EventArgs) Handles btnAddAssignment.Click
-        frmAddAssignment.Show()
     End Sub
 
     Private Sub btnViewGradebook_Click(sender As Object, e As EventArgs) Handles btnViewGradebook.Click
         frmViewGradebook.Show()
     End Sub
 
-    Private Sub btnCalcGrade_Click(sender As Object, e As EventArgs) Handles btnCalcGrade.Click
-        frmCalcGrade.Show()
-    End Sub
-
-    Private Sub btnEditJSON_Click(sender As Object, e As EventArgs) Handles btnEditJSON.Click
-        System.Diagnostics.Process.Start("notepad.exe", GBFile)
-    End Sub
-
-    Private Sub btnReportCard_Click(sender As Object, e As EventArgs) Handles btnReportCard.Click
-        frmSelectReportCard.Show()
-    End Sub
-
     Private Sub btnBackUp_Click(sender As Object, e As EventArgs) Handles btnBackUp.Click
-        Dim GDrivePath As String = System.Environment.GetEnvironmentVariable("GBSYNCPATH", EnvironmentVariableTarget.User)
+        BackUp()
+    End Sub
 
-        If GDrivePath = "" Then
-            btnSetLocations_Click(sender, e)
-        End If
+    Private Sub LoadSchoolInfo()
+        Dim stringSeparators() As String = {"``"}
 
-        If FileIO.FileSystem.DirectoryExists(GDrivePath) Then
+        Dim Info As String = Environment.GetEnvironmentVariable("GBSCHOOLINFO", EnvironmentVariableTarget.User)
+        Dim Pieces() As String = Info.Split(stringSeparators, StringSplitOptions.None)
+        lblSchoolName.Text = Pieces(0)
+        lblAddr1.Text = Pieces(1)
+        lblAddr2.Text = Pieces(2)
+    End Sub
 
-            If FileIO.FileSystem.FileExists(GBFile) Then
-                FileIO.FileSystem.CopyFile(GBFile, GDrivePath & "\Gradebook\gradebook.json", True)
-                MsgBox(GBFile & " backed up to synched folder")
-            Else
-                MsgBox("Could not locate " & GBFile & " to copy")
-            End If
+    Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles Me.Load
+        LoadSchoolInfo()
 
-        Else
-            MsgBox("Could not determine synched folder location")
+        If GBFile = "" Then
+            btnOpenGB.Enabled = False
         End If
     End Sub
 
-    Private Sub btnSetLocations_Click(sender As Object, e As EventArgs) Handles btnSetLocations.Click
-
-        frmSetFileLocations.Show()
-
-    End Sub
-
-    Private Sub btnCreateNew_Click(sender As Object, e As EventArgs) Handles btnCreateNew.Click
+    Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
         Dim fd As FolderBrowserDialog = New FolderBrowserDialog()
 
         fd.Description = "Select folder location for new Gradebook file"
@@ -106,9 +72,69 @@ Public Class frmMainMenu
 
     End Sub
 
-    Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If GBFile = "" Then
-            btnOpenGB.Enabled = False
+    Private Sub EditJSONToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        System.Diagnostics.Process.Start("notepad.exe", GBFile)
+    End Sub
+
+    Private Sub AddStudentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddStudentToolStripMenuItem.Click
+        frmAddStudent.Show()
+    End Sub
+
+    Private Sub AddCourseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddCourseToolStripMenuItem.Click
+        frmAddCourse.Show()
+    End Sub
+
+    Private Sub GenerateTranscriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerateTranscriptToolStripMenuItem.Click
+        frmPrintTranscript.Show()
+    End Sub
+
+    Private Sub AddAssignmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddAssignmentToolStripMenuItem.Click
+        frmAddAssignment.Show()
+    End Sub
+
+    Private Sub ViewGradebookToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewGradebookToolStripMenuItem.Click
+        frmViewGradebook.Show()
+    End Sub
+
+    Private Sub CalcGradeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalcGradeToolStripMenuItem.Click
+        frmCalcGrade.Show()
+    End Sub
+
+    Private Sub GenReportCardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenReportCardToolStripMenuItem.Click
+        frmSelectReportCard.Show()
+    End Sub
+
+    Private Sub BackupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BackupToolStripMenuItem.Click
+        BackUp()
+    End Sub
+
+    Private Sub BackUp()
+        Dim GDrivePath As String = System.Environment.GetEnvironmentVariable("GBSYNCPATH", EnvironmentVariableTarget.User)
+
+        If GDrivePath = "" Then
+            frmSetFileLocations.Show()
         End If
+
+        If FileIO.FileSystem.DirectoryExists(GDrivePath) Then
+
+            If FileIO.FileSystem.FileExists(GBFile) Then
+                FileIO.FileSystem.CopyFile(GBFile, GDrivePath & "\Gradebook\gradebook.json", True)
+                MsgBox(GBFile & " backed up to synched folder")
+            Else
+                MsgBox("Could not locate " & GBFile & " to copy")
+            End If
+
+        Else
+            MsgBox("Could not determine synched folder location")
+        End If
+    End Sub
+
+    Private Sub SetFileLocationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetFileLocationsToolStripMenuItem.Click
+        frmSetFileLocations.Show()
+    End Sub
+
+    Private Sub EditSchoolInfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditSchoolInfoToolStripMenuItem.Click
+        frmSchoolInfo.ShowDialog()
+        LoadSchoolInfo()
     End Sub
 End Class

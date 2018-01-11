@@ -16,24 +16,50 @@ Public Class frmPrintTranscript
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         Dim PrintStudent As Student = cboStudents.SelectedItem
 
+#If DEBUG Then
         Dim template As String = "C:\Users\Kurt\Documents\TranscriptTemplate.pdf"
-        Dim fileN4 As String = "C:\Users\Kurt\Documents\OfficialTranscript.pdf"
+#Else
+        Dim template As String = Application.CommonAppDataPath & "\TranscriptTemplate.pdf"
+#End If
+        Dim transcriptfilepath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+        Dim transcriptfilename As String = ""
 
-        System.IO.File.Copy(template, fileN4, True)
+        Do
+            transcriptfilename = InputBox("Input name for transcript file." & vbCrLf & "Must end in .pdf", "File Name?", PrintStudent.Name & " Transcript.pdf")
+        Loop Until transcriptfilename.Contains(".pdf")
+        Dim transcriptfile As String = transcriptfilepath & "\" & transcriptfilename
+
+        Dim stringSeparators() As String = {"``"}
+
+        Dim Info As String = Environment.GetEnvironmentVariable("GBSCHOOLINFO", EnvironmentVariableTarget.User)
+        Dim Pieces() As String = Info.Split(stringSeparators, StringSplitOptions.None)
+
+        System.IO.File.Copy(template, transcriptfile, True)
         LoadFields()
 
         ' Open the file
-        Dim doc As PdfDocument = PdfReader.Open(fileN4, PdfDocumentOpenMode.Modify)
+        Dim doc As PdfDocument = PdfReader.Open(transcriptfile, PdfDocumentOpenMode.Modify)
 
         Dim name As String
+        Dim currentField As PdfTextField
+        Dim caseNamePdfStr As PdfString
         For Each name In fields("StudentName")
-            Dim currentField As PdfTextField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
-            '//const 
-            Dim caseNamePdfStr As PdfString = New PdfString(PrintStudent.Name)
-
+            currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+            caseNamePdfStr = New PdfString(PrintStudent.Name)
             'set the value of this field
             currentField.Value = caseNamePdfStr
         Next
+
+        'fill in school info
+        currentField = TryCast(doc.AcroForm.Fields(fields("SchoolName")(0)), PdfTextField)
+        caseNamePdfStr = New PdfString(Pieces(0))
+        currentField.Value = caseNamePdfStr
+        currentField = TryCast(doc.AcroForm.Fields(fields("SchoolName")(1)), PdfTextField)
+        caseNamePdfStr = New PdfString(Pieces(1))
+        currentField.Value = caseNamePdfStr
+        currentField = TryCast(doc.AcroForm.Fields(fields("SchoolName")(2)), PdfTextField)
+        caseNamePdfStr = New PdfString(Pieces(2))
+        currentField.Value = caseNamePdfStr
 
         Dim Courses9 As New List(Of Course)
         Dim Courses10 As New List(Of Course)
@@ -64,7 +90,6 @@ Public Class frmPrintTranscript
             Dim BlankName As String = "9Course"
             Dim sem1, sem2, final, credits As Double
             Dim fieldcnt As Integer
-            Dim caseNamePdfStr As PdfString
             Dim sem1Assigns, sem2Assigns As List(Of Assignment)
 
             For Each course In Courses9
@@ -99,7 +124,7 @@ Public Class frmPrintTranscript
 
                 'populate each semester, final and credits earned per course
                 For Each name In fields(FieldName)
-                    Dim currentField As PdfTextField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+                    currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
                     Select Case fieldcnt
                         Case 0
                             caseNamePdfStr = New PdfString(course.Title)
@@ -124,7 +149,7 @@ Public Class frmPrintTranscript
             overall = overall / coursecnt
             fieldcnt = 0
             For Each name In fields("9Cumulative")
-                Dim currentField As PdfTextField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+                currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
                 Select Case fieldcnt
                     Case 0
                         caseNamePdfStr = New PdfString(overall.ToString("N2"))
@@ -148,7 +173,6 @@ Public Class frmPrintTranscript
             Dim BlankName As String = "10Course"
             Dim sem1, sem2, final, credits As Double
             Dim fieldcnt As Integer
-            Dim caseNamePdfStr As PdfString
             Dim sem1Assigns, sem2Assigns As List(Of Assignment)
 
             For Each course In Courses10
@@ -183,7 +207,7 @@ Public Class frmPrintTranscript
 
                 'populate each semester, final and credits earned per course
                 For Each name In fields(FieldName)
-                    Dim currentField As PdfTextField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+                    currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
                     Select Case fieldcnt
                         Case 0
                             caseNamePdfStr = New PdfString(course.Title)
@@ -208,7 +232,7 @@ Public Class frmPrintTranscript
             overall = overall / coursecnt
             fieldcnt = 0
             For Each name In fields("10Cumulative")
-                Dim currentField As PdfTextField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+                currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
                 Select Case fieldcnt
                     Case 0
                         caseNamePdfStr = New PdfString(overall.ToString("N2"))
@@ -232,7 +256,6 @@ Public Class frmPrintTranscript
             Dim BlankName As String = "11Course"
             Dim sem1, sem2, final, credits As Double
             Dim fieldcnt As Integer
-            Dim caseNamePdfStr As PdfString
             Dim sem1Assigns, sem2Assigns As List(Of Assignment)
 
             For Each course In Courses11
@@ -267,7 +290,7 @@ Public Class frmPrintTranscript
 
                 'populate each semester, final and credits earned per course
                 For Each name In fields(FieldName)
-                    Dim currentField As PdfTextField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+                    currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
                     Select Case fieldcnt
                         Case 0
                             caseNamePdfStr = New PdfString(course.Title)
@@ -292,7 +315,7 @@ Public Class frmPrintTranscript
             overall = overall / coursecnt
             fieldcnt = 0
             For Each name In fields("11Cumulative")
-                Dim currentField As PdfTextField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+                currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
                 Select Case fieldcnt
                     Case 0
                         caseNamePdfStr = New PdfString(overall.ToString("N2"))
@@ -316,7 +339,6 @@ Public Class frmPrintTranscript
             Dim BlankName As String = "12Course"
             Dim sem1, sem2, final, credits As Double
             Dim fieldcnt As Integer
-            Dim caseNamePdfStr As PdfString
             Dim sem1Assigns, sem2Assigns As List(Of Assignment)
 
             For Each course In Courses12
@@ -351,7 +373,7 @@ Public Class frmPrintTranscript
 
                 'populate each semester, final and credits earned per course
                 For Each name In fields(FieldName)
-                    Dim currentField As PdfTextField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+                    currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
                     Select Case fieldcnt
                         Case 0
                             caseNamePdfStr = New PdfString(course.Title)
@@ -376,7 +398,7 @@ Public Class frmPrintTranscript
             overall = overall / coursecnt
             fieldcnt = 0
             For Each name In fields("12Cumulative")
-                Dim currentField As PdfTextField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+                 currentField  = TryCast(doc.AcroForm.Fields(name), PdfTextField)
                 Select Case fieldcnt
                     Case 0
                         caseNamePdfStr = New PdfString(overall.ToString("N2"))
@@ -394,9 +416,9 @@ Public Class frmPrintTranscript
         End If
 
         ' Save the document...
-        doc.Save(fileN4)
+        doc.Save(transcriptfile)
 
-        Process.Start(fileN4)
+        Process.Start(transcriptfile)
 
         Me.Dispose()
     End Sub
