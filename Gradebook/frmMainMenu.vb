@@ -31,10 +31,16 @@
         Dim stringSeparators() As String = {"``"}
 
         Dim Info As String = Environment.GetEnvironmentVariable("GBSCHOOLINFO", EnvironmentVariableTarget.User)
-        Dim Pieces() As String = Info.Split(stringSeparators, StringSplitOptions.None)
-        lblSchoolName.Text = Pieces(0)
-        lblAddr1.Text = Pieces(1)
-        lblAddr2.Text = Pieces(2)
+        If Info <> "" Then
+            Dim Pieces() As String = Info.Split(stringSeparators, StringSplitOptions.None)
+            lblSchoolName.Text = Pieces(0)
+            lblAddr1.Text = Pieces(1)
+            lblAddr2.Text = Pieces(2)
+        Else
+            lblSchoolName.Text = "Don't forget to include your"
+            lblAddr1.Text = "school info for transcripts"
+            lblAddr2.Text = "Menu Edit -> Edit School Info"
+        End If
     End Sub
 
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles Me.Load
