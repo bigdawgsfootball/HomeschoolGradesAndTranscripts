@@ -78,7 +78,7 @@
 
     End Sub
 
-    Private Sub EditJSONToolStripMenuItem_Click(sender As Object, e As EventArgs)
+    Private Sub EditJSONToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditJSONToolStripMenuItem.Click
         System.Diagnostics.Process.Start("notepad.exe", GBFile)
     End Sub
 

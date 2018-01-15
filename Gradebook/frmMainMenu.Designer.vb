@@ -175,7 +175,6 @@ Partial Class frmMainMenu
         'AddAssignmentToolStripMenuItem
         '
         Me.AddAssignmentToolStripMenuItem.Enabled = False
-        Me.AddAssignmentToolStripMenuItem.Image = CType(resources.GetObject("AddAssignmentToolStripMenuItem.Image"), System.Drawing.Image)
         Me.AddAssignmentToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.AddAssignmentToolStripMenuItem.Name = "AddAssignmentToolStripMenuItem"
         Me.AddAssignmentToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
@@ -185,7 +184,6 @@ Partial Class frmMainMenu
         'ViewGradebookToolStripMenuItem
         '
         Me.ViewGradebookToolStripMenuItem.Enabled = False
-        Me.ViewGradebookToolStripMenuItem.Image = CType(resources.GetObject("ViewGradebookToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ViewGradebookToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ViewGradebookToolStripMenuItem.Name = "ViewGradebookToolStripMenuItem"
         Me.ViewGradebookToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
@@ -242,30 +240,30 @@ Partial Class frmMainMenu
         'ContentsToolStripMenuItem
         '
         Me.ContentsToolStripMenuItem.Name = "ContentsToolStripMenuItem"
-        Me.ContentsToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.ContentsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ContentsToolStripMenuItem.Text = "&Contents"
         '
         'IndexToolStripMenuItem
         '
         Me.IndexToolStripMenuItem.Name = "IndexToolStripMenuItem"
-        Me.IndexToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.IndexToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.IndexToolStripMenuItem.Text = "&Index"
         '
         'SearchToolStripMenuItem
         '
         Me.SearchToolStripMenuItem.Name = "SearchToolStripMenuItem"
-        Me.SearchToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.SearchToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SearchToolStripMenuItem.Text = "&Search"
         '
         'toolStripSeparator5
         '
         Me.toolStripSeparator5.Name = "toolStripSeparator5"
-        Me.toolStripSeparator5.Size = New System.Drawing.Size(119, 6)
+        Me.toolStripSeparator5.Size = New System.Drawing.Size(149, 6)
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AboutToolStripMenuItem.Text = "&About..."
         '
         'btnBackUp
