@@ -25,7 +25,7 @@
         fields.Add("9Course12", {"untitled21", "untitled74", "untitled73", "untitled72", "untitled71"})
         fields.Add("9Course13", {"untitled22", "untitled78", "untitled77", "untitled76", "untitled75"})
         fields.Add("9Course14", {"untitled23", "untitled82", "untitled81", "untitled80", "untitled79"})
-        fields.Add("9Cumulative", {"untitled84", "untitled83"})
+        fields.Add("9Cumulative", {"untitled84", "untitled83", "untitled414"})
 
         fields.Add("10SchoolYear", {"untitled100"})
         fields.Add("10Course1", {"untitled86", "untitled101", "untitled102", "untitled103", "untitled104"})
@@ -42,7 +42,7 @@
         fields.Add("10Course12", {"untitled97", "untitled152", "untitled156", "untitled147", "untitled142"})
         fields.Add("10Course13", {"untitled98", "untitled153", "untitled157", "untitled148", "untitled143"})
         fields.Add("10Course14", {"untitled99", "untitled154", "untitled158", "untitled149", "untitled144"})
-        fields.Add("10Cumulative", {"untitled150", "untitled145"})
+        fields.Add("10Cumulative", {"untitled150", "untitled145", "untitled415"})
 
         fields.Add("11SchoolYear", {"untitled420"})
         fields.Add("11Course1", {"untitled5", "untitled170", "untitled171", "untitled172", "untitled213"})
@@ -59,7 +59,7 @@
         fields.Add("11Course12", {"untitled167", "untitled203", "untitled204", "untitled205", "untitled224"})
         fields.Add("11Course13", {"untitled168", "untitled206", "untitled207", "untitled208", "untitled225"})
         fields.Add("11Course14", {"untitled169", "untitled209", "untitled210", "untitled211", "untitled226"})
-        fields.Add("11Cumulative", {"untitled212", "untitled227"})
+        fields.Add("11Cumulative", {"untitled212", "untitled227", "untitled416"})
 
         fields.Add("12SchoolYear", {"untitled419"})
         fields.Add("12Course1", {"untitled228", "untitled242", "untitled243", "untitled244", "untitled285"})
@@ -76,7 +76,7 @@
         fields.Add("12Course12", {"untitled239", "untitled275", "untitled276", "untitled277", "untitled296"})
         fields.Add("12Course13", {"untitled240", "untitled280", "untitled279", "untitled278", "untitled297"})
         fields.Add("12Course14", {"untitled241", "untitled281", "untitled282", "untitled283", "untitled298"})
-        fields.Add("12Cumulative", {"untitled284", "untitled299"})
+        fields.Add("12Cumulative", {"untitled284", "untitled299", "untitled417"})
 
         fields.Add("CAT1", {"untitled302", "untitled317", "untitled318", "untitled319", "untitled365", "untitled366", "untitled367"})
         fields.Add("CAT2", {"untitled303", "untitled320", "untitled321", "untitled322", "untitled368", "untitled369", "untitled370"})
@@ -95,7 +95,7 @@
         fields.Add("CAT15", {"untitled316", "untitled357", "untitled361", "untitled363", "untitled407", "untitled408", "untitled409"})
         fields.Add("CATTotals", {"untitled358", "untitled362", "untitled364", "untitled410", "untitled411", "untitled412"})
 
-        fields.Add("GPA", {"untitled413", "untitled414", "untitled415", "untitled416", "untitled417", "untitled418"})
+        fields.Add("GPA", {"untitled418"})
 
     End Sub
 

@@ -3,6 +3,12 @@
 Public Class frmViewGradebook
     Private studentsbindingsource As New BindingSource
     Private GradebookBindingSource As New BindingSource
+    Private HasChanges As Boolean = False
+    Private PrevCourse As Course
+    Private PrevStudent As Student
+    Private PrevGradeLevel As String
+    Private Skip As Boolean = False
+
 
     Private Sub frmViewGradebook_Load(sender As Object, e As EventArgs) Handles Me.Load
         studentsbindingsource.DataSource = GB.Students
@@ -31,84 +37,145 @@ Public Class frmViewGradebook
     End Sub
 
     Private Sub cboStudents_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboStudents.SelectedIndexChanged
-        cboGradeLevel.Items.Clear()
-        cboCourses.Items.Clear()
+        Dim Response As DialogResult = DialogResult.OK
 
-        cboGradeLevel.Text = ""
-        cboCourses.Text = ""
+        If Skip Then
+            Skip = False
+        Else
 
-        If cboStudents.Items.Count > 0 And cboStudents.SelectedIndex > -1 Then
+            If HasChanges Then
+                Response = MessageBox.Show("You have unsaved changes. Are you sure you want to leave without saving?" & vbCrLf & vbCrLf & "OK to leave without saving, Cancel to return", "Warning! Uncommited Changes!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
+            End If
 
-            For Each course In cboStudents.SelectedItem.courses
-                If Not cboGradeLevel.Items.Contains(course.gradelevel) Then
-                    cboGradeLevel.Items.Add(course.gradelevel)
+            If Response = DialogResult.OK Then
+                HasChanges = False
+
+                PrevStudent = cboStudents.SelectedItem
+
+                dgvGradebook.DataSource = Nothing
+
+                cboGradeLevel.Items.Clear()
+                cboCourses.Items.Clear()
+
+                cboGradeLevel.Text = ""
+                cboCourses.Text = ""
+
+                If cboStudents.Items.Count > 0 And cboStudents.SelectedIndex > -1 Then
+
+                    For Each course In cboStudents.SelectedItem.courses
+                        If Not cboGradeLevel.Items.Contains(course.gradelevel) Then
+                            cboGradeLevel.Items.Add(course.gradelevel)
+                        End If
+                    Next
                 End If
-            Next
+
+            Else
+                Skip = True
+                cboStudents.SelectedItem = PrevStudent
+            End If
         End If
 
     End Sub
 
     Private Sub cboGradeLevel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGradeLevel.SelectedIndexChanged
-        cboCourses.Items.Clear()
-        cboCourses.Text = ""
+        Dim Response As DialogResult = DialogResult.OK
 
-        For Each course In cboStudents.SelectedItem.courses
-            If course.gradelevel = cboGradeLevel.SelectedItem Then
-                cboCourses.Items.Add(course)
-                cboCourses.DisplayMember = "Title"
+        If Skip Then
+            Skip = False
+        Else
+
+            If HasChanges Then
+                Response = MessageBox.Show("You have unsaved changes. Are you sure you want to leave without saving?" & vbCrLf & vbCrLf & "OK to leave without saving, Cancel to return", "Warning! Uncommited Changes!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
             End If
-        Next
+
+            If Response = DialogResult.OK Then
+                HasChanges = False
+
+                PrevGradeLevel = cboGradeLevel.SelectedItem
+
+                dgvGradebook.DataSource = Nothing
+
+                cboCourses.Items.Clear()
+                cboCourses.Text = ""
+
+                For Each course In cboStudents.SelectedItem.courses
+                    If course.gradelevel = cboGradeLevel.SelectedItem Then
+                        cboCourses.Items.Add(course)
+                        cboCourses.DisplayMember = "Title"
+                    End If
+                Next
+            Else
+                Skip = True
+                cboGradeLevel.SelectedItem = PrevGradeLevel
+            End If
+        End If
 
     End Sub
 
     Private Sub cboCourses_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboCourses.SelectedIndexChanged
         Dim dt As New DataTable
         Dim CurCourse As New Course
+        Dim Response As DialogResult = DialogResult.OK
 
-        Try
+        If Skip Then
+            Skip = False
+        Else
 
-            CurCourse = cboCourses.SelectedItem
-
-            If CurCourse.Assignments.Count > 0 Then
-                dt = ConvertToDataTable(Of Assignment)(CurCourse.Assignments)
-
-                Dim cmb As New DataGridViewComboBoxColumn()
-                cmb.HeaderText = "AssignmentType"
-                cmb.Name = "Type"
-                cmb.DataPropertyName = "Type"
-
-                Dim items As Array
-                items = System.Enum.GetValues(GetType(AssignTypes))
-                For Each item In items
-                    cmb.Items.Add(item)
-                Next
-
-                dgvGradebook.DataSource = dt
-
-                Dim TypeIndex As Integer = dgvGradebook.Columns.IndexOf(dgvGradebook.Columns.Item("Type"))
-                dgvGradebook.Columns.Remove("Type")
-                dgvGradebook.Columns.Insert(TypeIndex, cmb)
-
-                dgvGradebook.DataSource = dt
-
-                cboRatingPeriod.Items.Clear()
-                cboRatingPeriod.Text = ""
-                cboRatingPeriod.Items.Add("All")
-                For Each assign In CurCourse.Assignments
-                    If Not cboRatingPeriod.Items.Contains(assign.RatingPeriod) Then
-                        cboRatingPeriod.Items.Add(assign.RatingPeriod)
-                        cboRatingPeriod.DisplayMember = "RatingPeriod"
-                    End If
-                Next
-
+            If HasChanges Then
+                Response = MessageBox.Show("You have unsaved changes. Are you sure you want to leave without saving?" & vbCrLf & vbCrLf & "OK to leave without saving, Cancel to return", "Warning! Uncommited Changes!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
             End If
 
-            dgvGradebook.Refresh()
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+            If Response = DialogResult.OK Then
+                HasChanges = False
 
+                Try
 
+                    CurCourse = cboCourses.SelectedItem
+                    PrevCourse = CurCourse
+
+                    If CurCourse.Assignments.Count > 0 Then
+                        dt = ConvertToDataTable(Of Assignment)(CurCourse.Assignments)
+
+                        Dim cmb As New DataGridViewComboBoxColumn()
+                        cmb.HeaderText = "AssignmentType"
+                        cmb.Name = "Type"
+                        cmb.DataPropertyName = "Type"
+
+                        Dim items As Array
+                        items = System.Enum.GetValues(GetType(AssignTypes))
+                        For Each item In items
+                            cmb.Items.Add(item)
+                        Next
+
+                        dgvGradebook.DataSource = dt
+
+                        Dim TypeIndex As Integer = dgvGradebook.Columns.IndexOf(dgvGradebook.Columns.Item("Type"))
+                        dgvGradebook.Columns.Remove("Type")
+                        dgvGradebook.Columns.Insert(TypeIndex, cmb)
+
+                        dgvGradebook.DataSource = dt
+
+                        cboRatingPeriod.Items.Clear()
+                        cboRatingPeriod.Text = ""
+                        cboRatingPeriod.Items.Add("All")
+                        For Each assign In CurCourse.Assignments
+                            If Not cboRatingPeriod.Items.Contains(assign.RatingPeriod) Then
+                                cboRatingPeriod.Items.Add(assign.RatingPeriod)
+                                cboRatingPeriod.DisplayMember = "RatingPeriod"
+                            End If
+                        Next
+
+                    End If
+
+                    dgvGradebook.Refresh()
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
+            Else
+                Skip = True
+                cboCourses.SelectedItem = PrevCourse
+            End If
+        End If
     End Sub
 
     Public Shared Function ConvertToDataTable(Of T)(ByVal list As IList(Of T)) As DataTable
@@ -165,6 +232,8 @@ Public Class frmViewGradebook
 
             SaveGradebook()
 
+            HasChanges = False
+
             MsgBox("Save Successful", vbOKOnly)
 
         Catch ex As Exception
@@ -195,7 +264,7 @@ Public Class frmViewGradebook
                     expression = ""
                 End If
             Else
-                    expression = ""
+                expression = ""
             End If
 
             Dim cmb As New DataGridViewComboBoxColumn()
@@ -233,4 +302,9 @@ Public Class frmViewGradebook
             MsgBox(e.Exception.Message)
         End If
     End Sub
+
+    Private Sub dgvGradebook_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles dgvGradebook.CurrentCellDirtyStateChanged
+        HasChanges = True
+    End Sub
+
 End Class

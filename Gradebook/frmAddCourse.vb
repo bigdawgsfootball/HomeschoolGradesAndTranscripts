@@ -36,6 +36,14 @@
             ErrorMsg = ErrorMsg & "Please include a Publisher for this Course" & vbCrLf
         End If
 
+        If txtCredits.Text = "" Then
+            ErrorMsg = ErrorMsg & "Please include the number of credits earned for this course" & vbCrLf
+        End If
+
+        If Not IsNumeric(txtCredits.Text) Then
+            ErrorMsg = ErrorMsg & "The number of credits earned needs to be a number" & vbCrLf
+        End If
+
         If txtTitle.Text = "" Then
             ErrorMsg = ErrorMsg & "Please include a Title for this Course" & vbCrLf
         End If
@@ -47,6 +55,7 @@
             NewCourse.Publisher = txtPublisher.Text
             NewCourse.Title = txtTitle.Text
             NewCourse.NumRatingPeriods = txtNumRatings.Text
+            NewCourse.Credits = txtCredits.Text
 
             If Not cboStudents.SelectedItem.courses.contains(NewCourse) Then
                 cboStudents.SelectedItem.Courses.Add(NewCourse)

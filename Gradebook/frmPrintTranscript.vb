@@ -82,6 +82,7 @@ Public Class frmPrintTranscript
         Next
 
         Dim FieldName As String
+        Dim OverallCredits As Double = 0
 
         If Courses9.Count > 0 Then
             Dim coursecnt As Integer = 0
@@ -113,7 +114,7 @@ Public Class frmPrintTranscript
                 sem1 = course.CalcGrade(sem1Assigns)
                 sem2 = course.CalcGrade(sem2Assigns)
                 'final = (sem1 + sem2) / 2
-                credits = 1
+                credits = course.Credits
                 overall += final
                 creds += credits
                 'done with calculations
@@ -153,7 +154,7 @@ Public Class frmPrintTranscript
                 Select Case fieldcnt
                     Case 0
                         caseNamePdfStr = New PdfString(overall.ToString("N2"))
-                    Case 1
+                    Case 1, 2
                         caseNamePdfStr = New PdfString(creds)
                     Case Else
                         caseNamePdfStr = New PdfString("oops")
@@ -163,6 +164,8 @@ Public Class frmPrintTranscript
                 fieldcnt += 1
 
             Next
+
+            OverallCredits += creds
 
         End If
 
@@ -236,7 +239,7 @@ Public Class frmPrintTranscript
                 Select Case fieldcnt
                     Case 0
                         caseNamePdfStr = New PdfString(overall.ToString("N2"))
-                    Case 1
+                    Case 1, 2
                         caseNamePdfStr = New PdfString(creds)
                     Case Else
                         caseNamePdfStr = New PdfString("oops")
@@ -246,6 +249,8 @@ Public Class frmPrintTranscript
                 fieldcnt += 1
 
             Next
+
+            OverallCredits += creds
 
         End If
 
@@ -319,7 +324,7 @@ Public Class frmPrintTranscript
                 Select Case fieldcnt
                     Case 0
                         caseNamePdfStr = New PdfString(overall.ToString("N2"))
-                    Case 1
+                    Case 1, 2
                         caseNamePdfStr = New PdfString(creds)
                     Case Else
                         caseNamePdfStr = New PdfString("oops")
@@ -329,6 +334,8 @@ Public Class frmPrintTranscript
                 fieldcnt += 1
 
             Next
+
+            OverallCredits += creds
 
         End If
 
@@ -402,7 +409,7 @@ Public Class frmPrintTranscript
                 Select Case fieldcnt
                     Case 0
                         caseNamePdfStr = New PdfString(overall.ToString("N2"))
-                    Case 1
+                    Case 1, 2
                         caseNamePdfStr = New PdfString(creds)
                     Case Else
                         caseNamePdfStr = New PdfString("oops")
@@ -413,7 +420,15 @@ Public Class frmPrintTranscript
 
             Next
 
+            OverallCredits += creds
+
         End If
+
+        For Each name In fields("GPA")
+            currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+            caseNamePdfStr = New PdfString(OverallCredits.ToString("N2"))
+            currentField.Value = caseNamePdfStr
+        Next
 
         ' Save the document...
         doc.Save(transcriptfile)

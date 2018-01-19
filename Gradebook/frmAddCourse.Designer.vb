@@ -36,6 +36,8 @@ Partial Class frmAddCourse
         Me.btnAddCourse = New System.Windows.Forms.Button()
         Me.dgvCourses = New System.Windows.Forms.DataGridView()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtCredits = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvCourses, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -59,6 +61,8 @@ Partial Class frmAddCourse
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label7)
+        Me.GroupBox1.Controls.Add(Me.txtCredits)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.txtNumRatings)
         Me.GroupBox1.Controls.Add(Me.Label4)
@@ -77,7 +81,7 @@ Partial Class frmAddCourse
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(234, 22)
+        Me.Label6.Location = New System.Drawing.Point(246, 24)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(128, 13)
         Me.Label6.TabIndex = 7
@@ -85,7 +89,7 @@ Partial Class frmAddCourse
         '
         'txtNumRatings
         '
-        Me.txtNumRatings.Location = New System.Drawing.Point(364, 19)
+        Me.txtNumRatings.Location = New System.Drawing.Point(376, 21)
         Me.txtNumRatings.Name = "txtNumRatings"
         Me.txtNumRatings.Size = New System.Drawing.Size(35, 20)
         Me.txtNumRatings.TabIndex = 1
@@ -164,6 +168,22 @@ Partial Class frmAddCourse
         Me.Label5.TabIndex = 6
         Me.Label5.Text = "Existing Courses"
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(148, 23)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(39, 13)
+        Me.Label7.TabIndex = 9
+        Me.Label7.Text = "Credits"
+        '
+        'txtCredits
+        '
+        Me.txtCredits.Location = New System.Drawing.Point(193, 20)
+        Me.txtCredits.Name = "txtCredits"
+        Me.txtCredits.Size = New System.Drawing.Size(42, 20)
+        Me.txtCredits.TabIndex = 8
+        '
         'frmAddCourse
         '
         Me.AcceptButton = Me.btnAddCourse
@@ -200,4 +220,6 @@ Partial Class frmAddCourse
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents txtNumRatings As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents txtCredits As TextBox
 End Class

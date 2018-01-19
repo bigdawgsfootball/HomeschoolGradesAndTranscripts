@@ -36,6 +36,7 @@ Public Class Course
     Public Property Gradelevel As String
     Public Property Publisher As String
     Public Property NumRatingPeriods As Integer
+    Public Property Credits As Double
     Public Property Assignments() As New List(Of Assignment)
 
     Public Function CalcGrade(Assignments As List(Of Assignment)) As Double
