@@ -1,4 +1,7 @@
-﻿Public Class frmAddCourse
+﻿Imports Newtonsoft.Json
+Imports System.IO
+
+Public Class frmAddCourse
     Private studentsbindingsource As New BindingSource
     Private coursesbindingsource As New BindingSource
 
@@ -10,6 +13,38 @@
 
         coursesbindingsource.DataSource = cboStudents.SelectedItem.courses
         dgvCourses.DataSource = coursesbindingsource
+
+#If DEBUG Then
+        Dim CatFile As String = "C:\Users\Kurt\documents\visual studio 2017\Projects\Gradebook\Gradebook\AppData.json"
+#Else
+        Dim CatFile As String = Application.CommonAppDataPath & "\AppData.json"
+#End If
+
+        Dim FStream As Stream
+        Dim JSONString As String = ""
+        Dim Cats As New AppData
+
+        If File.Exists(CatFile) Then
+            FStream = File.OpenRead(CatFile)
+            Dim reader As New StreamReader(FStream)
+            JSONString = reader.ReadToEnd
+            reader.Close()
+            FStream.Close()
+        Else
+            MsgBox(CatFile & " does not exist.", vbOKOnly)
+        End If
+
+        If Not IsNothing(JSONString) Then
+            Cats = JsonConvert.DeserializeObject(Of AppData)(JSONString)
+            cboCategories.Items.Clear()
+
+            For Each cat In Cats.Categories
+                cboCategories.Items.Add(cat)
+            Next
+        Else
+            MsgBox("JSON string invalid.", vbOKOnly)
+        End If
+
 
     End Sub
 
@@ -48,6 +83,10 @@
             ErrorMsg = ErrorMsg & "Please include a Title for this Course" & vbCrLf
         End If
 
+        If cboCategories.SelectedIndex < 0 Then
+            ErrorMsg = ErrorMsg & "Please select a category for this course" & vbCrLf
+        End If
+
         If ErrorMsg = "" Then
             Dim NewCourse As New Course
 
@@ -56,6 +95,7 @@
             NewCourse.Title = txtTitle.Text
             NewCourse.NumRatingPeriods = txtNumRatings.Text
             NewCourse.Credits = txtCredits.Text
+            NewCourse.Category = cboCategories.SelectedItem
 
             If Not cboStudents.SelectedItem.courses.contains(NewCourse) Then
                 cboStudents.SelectedItem.Courses.Add(NewCourse)
@@ -67,7 +107,7 @@
             End If
 
         Else
-                MsgBox(ErrorMsg, vbOKOnly, "Validation Errors - Please correct")
+            MsgBox(ErrorMsg, vbOKOnly, "Validation Errors - Please correct")
         End If
     End Sub
 

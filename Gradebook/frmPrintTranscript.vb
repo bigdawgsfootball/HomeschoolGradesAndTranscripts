@@ -83,6 +83,11 @@ Public Class frmPrintTranscript
 
         Dim FieldName As String
         Dim OverallCredits As Double = 0
+        Dim Cats As New Dictionary(Of String, Double)
+        Dim Cats9 As New Dictionary(Of String, Double)
+        Dim Cats10 As New Dictionary(Of String, Double)
+        Dim Cats11 As New Dictionary(Of String, Double)
+        Dim Cats12 As New Dictionary(Of String, Double)
 
         If Courses9.Count > 0 Then
             Dim coursecnt As Integer = 0
@@ -113,7 +118,6 @@ Public Class frmPrintTranscript
                 final = course.CalcGrade(course.Assignments)
                 sem1 = course.CalcGrade(sem1Assigns)
                 sem2 = course.CalcGrade(sem2Assigns)
-                'final = (sem1 + sem2) / 2
                 credits = course.Credits
                 overall += final
                 creds += credits
@@ -144,6 +148,20 @@ Public Class frmPrintTranscript
                     currentField.Value = caseNamePdfStr
                     fieldcnt += 1
                 Next
+
+                'generate counts of course types for overall numbers
+                If Cats.ContainsKey(course.Category) Then
+                    Cats.Item(course.Category) += course.Credits
+                Else
+                    Cats.Add(course.Category, course.Credits)
+                End If
+
+                If Cats9.ContainsKey(course.Category) Then
+                    Cats9.Item(course.Category) += course.Credits
+                Else
+                    Cats9.Add(course.Category, course.Credits)
+                End If
+
             Next
 
             'populate overall average and credits earned
@@ -198,8 +216,7 @@ Public Class frmPrintTranscript
                 final = course.CalcGrade(course.Assignments)
                 sem1 = course.CalcGrade(sem1Assigns)
                 sem2 = course.CalcGrade(sem2Assigns)
-                'final = (sem1 + sem2) / 2
-                credits = 1
+                credits = course.Credits
                 overall += final
                 creds += credits
                 'done with calculations
@@ -229,6 +246,20 @@ Public Class frmPrintTranscript
                     currentField.Value = caseNamePdfStr
                     fieldcnt += 1
                 Next
+
+                'generate counts of course types for overall numbers
+                If Cats.ContainsKey(course.Category) Then
+                    Cats.Item(course.Category) += course.Credits
+                Else
+                    Cats.Add(course.Category, course.Credits)
+                End If
+
+                If Cats10.ContainsKey(course.Category) Then
+                    Cats10.Item(course.Category) += course.Credits
+                Else
+                    Cats10.Add(course.Category, course.Credits)
+                End If
+
             Next
 
             'populate overall average and credits earned
@@ -283,8 +314,7 @@ Public Class frmPrintTranscript
                 final = course.CalcGrade(course.Assignments)
                 sem1 = course.CalcGrade(sem1Assigns)
                 sem2 = course.CalcGrade(sem2Assigns)
-                'final = (sem1 + sem2) / 2
-                credits = 1
+                credits = course.Credits
                 overall += final
                 creds += credits
                 'done with calculations
@@ -314,6 +344,20 @@ Public Class frmPrintTranscript
                     currentField.Value = caseNamePdfStr
                     fieldcnt += 1
                 Next
+
+                'generate counts of course types for overall numbers
+                If Cats.ContainsKey(course.Category) Then
+                    Cats.Item(course.Category) += course.Credits
+                Else
+                    Cats.Add(course.Category, course.Credits)
+                End If
+
+                If Cats11.ContainsKey(course.Category) Then
+                    Cats11.Item(course.Category) += course.Credits
+                Else
+                    Cats11.Add(course.Category, course.Credits)
+                End If
+
             Next
 
             'populate overall average and credits earned
@@ -368,8 +412,7 @@ Public Class frmPrintTranscript
                 final = course.CalcGrade(course.Assignments)
                 sem1 = course.CalcGrade(sem1Assigns)
                 sem2 = course.CalcGrade(sem2Assigns)
-                'final = (sem1 + sem2) / 2
-                credits = 1
+                credits = course.Credits
                 overall += final
                 creds += credits
                 'done with calculations
@@ -399,6 +442,20 @@ Public Class frmPrintTranscript
                     currentField.Value = caseNamePdfStr
                     fieldcnt += 1
                 Next
+
+                'generate counts of course types for overall numbers
+                If Cats.ContainsKey(course.Category) Then
+                    Cats.Item(course.Category) += course.Credits
+                Else
+                    Cats.Add(course.Category, course.Credits)
+                End If
+
+                If Cats12.ContainsKey(course.Category) Then
+                    Cats12.Item(course.Category) += course.Credits
+                Else
+                    Cats12.Add(course.Category, course.Credits)
+                End If
+
             Next
 
             'populate overall average and credits earned
@@ -423,6 +480,59 @@ Public Class frmPrintTranscript
             OverallCredits += creds
 
         End If
+
+        'print out overall credit counts
+        Dim i As Integer = 1
+
+        For Each cat In Cats
+            Dim fname As String = "CAT" & i.ToString
+            'Category title
+            name = fields(fname)(0)
+            currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+            caseNamePdfStr = New PdfString(cat.Key)
+            currentField.Value = caseNamePdfStr
+
+            '9th grade
+            name = fields(fname)(2)
+            currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+            If Cats9.ContainsKey(cat.Key) Then
+                caseNamePdfStr = New PdfString(Cats9.Item(cat.Key))
+                currentField.Value = caseNamePdfStr
+            End If
+
+
+            '10th grade
+            name = fields(fname)(3)
+            currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+            If Cats10.ContainsKey(cat.Key) Then
+                caseNamePdfStr = New PdfString(Cats10.Item(cat.Key))
+                currentField.Value = caseNamePdfStr
+            End If
+
+            '11th grade
+            name = fields(fname)(4)
+            currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+            If Cats11.ContainsKey(cat.Key) Then
+                caseNamePdfStr = New PdfString(Cats11.Item(cat.Key))
+                currentField.Value = caseNamePdfStr
+            End If
+
+            '12th grade
+            name = fields(fname)(5)
+            currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+            If Cats12.ContainsKey(cat.Key) Then
+                caseNamePdfStr = New PdfString(Cats12.Item(cat.Key))
+                currentField.Value = caseNamePdfStr
+            End If
+
+            'total column
+            name = fields(fname)(6)
+            currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+            caseNamePdfStr = New PdfString(cat.Value)
+            currentField.Value = caseNamePdfStr
+
+            i += 1
+        Next
 
         For Each name In fields("GPA")
             currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)

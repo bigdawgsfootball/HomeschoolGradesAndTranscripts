@@ -6,6 +6,10 @@
     Exam = 5
 End Enum
 
+Public Class AppData
+    Public Property Categories As String()
+End Class
+
 Public Class Gradebook
 
     Public Property Students() As New List(Of Student)
@@ -37,6 +41,7 @@ Public Class Course
     Public Property Publisher As String
     Public Property NumRatingPeriods As Integer
     Public Property Credits As Double
+    Public Property Category As String
     Public Property Assignments() As New List(Of Assignment)
 
     Public Function CalcGrade(Assignments As List(Of Assignment)) As Double
