@@ -65,6 +65,11 @@ Public Class frmPrintTranscript
         Dim Courses10 As New List(Of Course)
         Dim Courses11 As New List(Of Course)
         Dim Courses12 As New List(Of Course)
+        Dim GPA9 As New Double
+        Dim GPA10 As New Double
+        Dim GPA11 As New Double
+        Dim GPA12 As New Double
+        Dim OverallGPA As New Double
 
         For Each course In PrintStudent.Courses
             Select Case course.Gradelevel
@@ -166,6 +171,18 @@ Public Class frmPrintTranscript
 
             'populate overall average and credits earned
             overall = overall / coursecnt
+
+            Select Case overall
+                Case Is >= 90
+                    GPA9 = 4
+                Case 80 To 89
+                    GPA9 = 3
+                Case 70 To 79
+                    GPA9 = 2
+                Case Is < 70
+                    GPA9 = 1
+            End Select
+
             fieldcnt = 0
             For Each name In fields("9Cumulative")
                 currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
@@ -264,6 +281,18 @@ Public Class frmPrintTranscript
 
             'populate overall average and credits earned
             overall = overall / coursecnt
+
+            Select Case overall
+                Case Is >= 90
+                    GPA10 = 4
+                Case 80 To 89
+                    GPA10 = 3
+                Case 70 To 79
+                    GPA10 = 2
+                Case Is < 70
+                    GPA10 = 1
+            End Select
+
             fieldcnt = 0
             For Each name In fields("10Cumulative")
                 currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
@@ -362,6 +391,18 @@ Public Class frmPrintTranscript
 
             'populate overall average and credits earned
             overall = overall / coursecnt
+
+            Select Case overall
+                Case Is >= 90
+                    GPA11 = 4
+                Case 80 To 89
+                    GPA11 = 3
+                Case 70 To 79
+                    GPA11 = 2
+                Case Is < 70
+                    GPA11 = 1
+            End Select
+
             fieldcnt = 0
             For Each name In fields("11Cumulative")
                 currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
@@ -460,6 +501,18 @@ Public Class frmPrintTranscript
 
             'populate overall average and credits earned
             overall = overall / coursecnt
+
+            Select Case overall
+                Case Is >= 90
+                    GPA12 = 4
+                Case 80 To 89
+                    GPA12 = 3
+                Case 70 To 79
+                    GPA12 = 2
+                Case Is < 70
+                    GPA12 = 1
+            End Select
+
             fieldcnt = 0
             For Each name In fields("12Cumulative")
                  currentField  = TryCast(doc.AcroForm.Fields(name), PdfTextField)
@@ -534,10 +587,33 @@ Public Class frmPrintTranscript
             i += 1
         Next
 
-        For Each name In fields("GPA")
+        For Each name In fields("AllCreds")
             currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
             caseNamePdfStr = New PdfString(OverallCredits.ToString("N2"))
             currentField.Value = caseNamePdfStr
+        Next
+
+        'Print out GPA for each year and total
+        OverallGPA = (GPA9 + GPA10 + GPA11 + GPA12) / 4
+        i = 0
+        For Each name In fields("GPA")
+            currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+            Select Case i
+                Case 0
+                    caseNamePdfStr = New PdfString(GPA9.ToString("N2"))
+                Case 1
+                    caseNamePdfStr = New PdfString(GPA10.ToString("N2"))
+                Case 2
+                    caseNamePdfStr = New PdfString(GPA11.ToString("N2"))
+                Case 3
+                    caseNamePdfStr = New PdfString(GPA12.ToString("N2"))
+                Case 4
+                    caseNamePdfStr = New PdfString(OverallGPA.ToString("N2"))
+                Case Else
+                    caseNamePdfStr = New PdfString("oops")
+            End Select
+            currentField.Value = caseNamePdfStr
+            i += 1
         Next
 
         ' Save the document...
