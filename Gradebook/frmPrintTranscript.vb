@@ -82,11 +82,10 @@ Public Class frmPrintTranscript
                 Case 12
                     Courses12.Add(course)
                 Case Else
-                    MsgBox("Too many years")
+                    MsgBox("Ignoring " & course.Title & " since " & course.Gradelevel & " isn't between 9 and 12." & vbCrLf & "Please type the info you need into the transcript manually after it is generated")
             End Select
         Next
 
-        Dim FieldName As String
         Dim OverallCredits As Double = 0
         Dim Cats As New Dictionary(Of String, Double)
         Dim Cats9 As New Dictionary(Of String, Double)
@@ -95,443 +94,19 @@ Public Class frmPrintTranscript
         Dim Cats12 As New Dictionary(Of String, Double)
 
         If Courses9.Count > 0 Then
-            Dim coursecnt As Integer = 0
-            Dim overall As Double = 0
-            Dim creds As Double = 0
-            Dim BlankName As String = "9Course"
-            Dim sem1, sem2, final, credits As Double
-            Dim fieldcnt As Integer
-            Dim sem1Assigns, sem2Assigns As List(Of Assignment)
-
-            For Each course In Courses9
-                sem1 = 0
-                sem2 = 0
-                final = 0
-                credits = 0
-                sem1Assigns = New List(Of Assignment)
-                sem2Assigns = New List(Of Assignment)
-
-                'calculate sem1, sem2, final grades and #credits earned
-                For Each assign In course.Assignments
-                    If assign.RatingPeriod < 4 Then
-                        sem1Assigns.Add(assign)
-                    Else
-                        sem2Assigns.Add(assign)
-                    End If
-                Next
-
-                final = course.CalcGrade(course.Assignments)
-                sem1 = course.CalcGrade(sem1Assigns)
-                sem2 = course.CalcGrade(sem2Assigns)
-                credits = course.Credits
-                overall += final
-                creds += credits
-                'done with calculations
-
-                coursecnt += 1
-                fieldcnt = 0
-                FieldName = BlankName & coursecnt.ToString
-
-                'populate each semester, final and credits earned per course
-                For Each name In fields(FieldName)
-                    currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
-                    Select Case fieldcnt
-                        Case 0
-                            caseNamePdfStr = New PdfString(course.Title)
-                        Case 1
-                            caseNamePdfStr = New PdfString(sem1)
-                        Case 2
-                            caseNamePdfStr = New PdfString(sem2)
-                        Case 3
-                            caseNamePdfStr = New PdfString(final)
-                        Case 4
-                            caseNamePdfStr = New PdfString(credits)
-                        Case Else
-                            caseNamePdfStr = New PdfString(95)
-                    End Select
-
-                    currentField.Value = caseNamePdfStr
-                    fieldcnt += 1
-                Next
-
-                'generate counts of course types for overall numbers
-                If Cats.ContainsKey(course.Category) Then
-                    Cats.Item(course.Category) += course.Credits
-                Else
-                    Cats.Add(course.Category, course.Credits)
-                End If
-
-                If Cats9.ContainsKey(course.Category) Then
-                    Cats9.Item(course.Category) += course.Credits
-                Else
-                    Cats9.Add(course.Category, course.Credits)
-                End If
-
-            Next
-
-            'populate overall average and credits earned
-            overall = overall / coursecnt
-
-            Select Case overall
-                Case Is >= 90
-                    GPA9 = 4
-                Case 80 To 89
-                    GPA9 = 3
-                Case 70 To 79
-                    GPA9 = 2
-                Case Is < 70
-                    GPA9 = 1
-            End Select
-
-            fieldcnt = 0
-            For Each name In fields("9Cumulative")
-                currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
-                Select Case fieldcnt
-                    Case 0
-                        caseNamePdfStr = New PdfString(overall.ToString("N2"))
-                    Case 1, 2
-                        caseNamePdfStr = New PdfString(creds)
-                    Case Else
-                        caseNamePdfStr = New PdfString("oops")
-                End Select
-
-                currentField.Value = caseNamePdfStr
-                fieldcnt += 1
-
-            Next
-
-            OverallCredits += creds
-
+            YearlyDetails("9Course", Courses9, Cats, Cats9, GPA9, "9Cumulative", OverallCredits, doc)
         End If
 
         If Courses10.Count > 0 Then
-            Dim coursecnt As Integer = 0
-            Dim overall As Double = 0
-            Dim creds As Double = 0
-            Dim BlankName As String = "10Course"
-            Dim sem1, sem2, final, credits As Double
-            Dim fieldcnt As Integer
-            Dim sem1Assigns, sem2Assigns As List(Of Assignment)
-
-            For Each course In Courses10
-                sem1 = 0
-                sem2 = 0
-                final = 0
-                credits = 0
-                sem1Assigns = New List(Of Assignment)
-                sem2Assigns = New List(Of Assignment)
-
-                'calculate sem1, sem2, final grades and #credits earned
-                For Each assign In course.Assignments
-                    If assign.RatingPeriod < 4 Then
-                        sem1Assigns.Add(assign)
-                    Else
-                        sem2Assigns.Add(assign)
-                    End If
-                Next
-
-                final = course.CalcGrade(course.Assignments)
-                sem1 = course.CalcGrade(sem1Assigns)
-                sem2 = course.CalcGrade(sem2Assigns)
-                credits = course.Credits
-                overall += final
-                creds += credits
-                'done with calculations
-
-                coursecnt += 1
-                fieldcnt = 0
-                FieldName = BlankName & coursecnt.ToString
-
-                'populate each semester, final and credits earned per course
-                For Each name In fields(FieldName)
-                    currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
-                    Select Case fieldcnt
-                        Case 0
-                            caseNamePdfStr = New PdfString(course.Title)
-                        Case 1
-                            caseNamePdfStr = New PdfString(sem1)
-                        Case 2
-                            caseNamePdfStr = New PdfString(sem2)
-                        Case 3
-                            caseNamePdfStr = New PdfString(final)
-                        Case 4
-                            caseNamePdfStr = New PdfString(credits)
-                        Case Else
-                            caseNamePdfStr = New PdfString(95)
-                    End Select
-
-                    currentField.Value = caseNamePdfStr
-                    fieldcnt += 1
-                Next
-
-                'generate counts of course types for overall numbers
-                If Cats.ContainsKey(course.Category) Then
-                    Cats.Item(course.Category) += course.Credits
-                Else
-                    Cats.Add(course.Category, course.Credits)
-                End If
-
-                If Cats10.ContainsKey(course.Category) Then
-                    Cats10.Item(course.Category) += course.Credits
-                Else
-                    Cats10.Add(course.Category, course.Credits)
-                End If
-
-            Next
-
-            'populate overall average and credits earned
-            overall = overall / coursecnt
-
-            Select Case overall
-                Case Is >= 90
-                    GPA10 = 4
-                Case 80 To 89
-                    GPA10 = 3
-                Case 70 To 79
-                    GPA10 = 2
-                Case Is < 70
-                    GPA10 = 1
-            End Select
-
-            fieldcnt = 0
-            For Each name In fields("10Cumulative")
-                currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
-                Select Case fieldcnt
-                    Case 0
-                        caseNamePdfStr = New PdfString(overall.ToString("N2"))
-                    Case 1, 2
-                        caseNamePdfStr = New PdfString(creds)
-                    Case Else
-                        caseNamePdfStr = New PdfString("oops")
-                End Select
-
-                currentField.Value = caseNamePdfStr
-                fieldcnt += 1
-
-            Next
-
-            OverallCredits += creds
-
+            YearlyDetails("10Course", Courses10, Cats, Cats10, GPA10, "10Cumulative", OverallCredits, doc)
         End If
 
         If Courses11.Count > 0 Then
-            Dim coursecnt As Integer = 0
-            Dim overall As Double = 0
-            Dim creds As Double = 0
-            Dim BlankName As String = "11Course"
-            Dim sem1, sem2, final, credits As Double
-            Dim fieldcnt As Integer
-            Dim sem1Assigns, sem2Assigns As List(Of Assignment)
-
-            For Each course In Courses11
-                sem1 = 0
-                sem2 = 0
-                final = 0
-                credits = 0
-                sem1Assigns = New List(Of Assignment)
-                sem2Assigns = New List(Of Assignment)
-
-                'calculate sem1, sem2, final grades and #credits earned
-                For Each assign In course.Assignments
-                    If assign.RatingPeriod < 4 Then
-                        sem1Assigns.Add(assign)
-                    Else
-                        sem2Assigns.Add(assign)
-                    End If
-                Next
-
-                final = course.CalcGrade(course.Assignments)
-                sem1 = course.CalcGrade(sem1Assigns)
-                sem2 = course.CalcGrade(sem2Assigns)
-                credits = course.Credits
-                overall += final
-                creds += credits
-                'done with calculations
-
-                coursecnt += 1
-                fieldcnt = 0
-                FieldName = BlankName & coursecnt.ToString
-
-                'populate each semester, final and credits earned per course
-                For Each name In fields(FieldName)
-                    currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
-                    Select Case fieldcnt
-                        Case 0
-                            caseNamePdfStr = New PdfString(course.Title)
-                        Case 1
-                            caseNamePdfStr = New PdfString(sem1)
-                        Case 2
-                            caseNamePdfStr = New PdfString(sem2)
-                        Case 3
-                            caseNamePdfStr = New PdfString(final)
-                        Case 4
-                            caseNamePdfStr = New PdfString(credits)
-                        Case Else
-                            caseNamePdfStr = New PdfString("oops")
-                    End Select
-
-                    currentField.Value = caseNamePdfStr
-                    fieldcnt += 1
-                Next
-
-                'generate counts of course types for overall numbers
-                If Cats.ContainsKey(course.Category) Then
-                    Cats.Item(course.Category) += course.Credits
-                Else
-                    Cats.Add(course.Category, course.Credits)
-                End If
-
-                If Cats11.ContainsKey(course.Category) Then
-                    Cats11.Item(course.Category) += course.Credits
-                Else
-                    Cats11.Add(course.Category, course.Credits)
-                End If
-
-            Next
-
-            'populate overall average and credits earned
-            overall = overall / coursecnt
-
-            Select Case overall
-                Case Is >= 90
-                    GPA11 = 4
-                Case 80 To 89
-                    GPA11 = 3
-                Case 70 To 79
-                    GPA11 = 2
-                Case Is < 70
-                    GPA11 = 1
-            End Select
-
-            fieldcnt = 0
-            For Each name In fields("11Cumulative")
-                currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
-                Select Case fieldcnt
-                    Case 0
-                        caseNamePdfStr = New PdfString(overall.ToString("N2"))
-                    Case 1, 2
-                        caseNamePdfStr = New PdfString(creds)
-                    Case Else
-                        caseNamePdfStr = New PdfString("oops")
-                End Select
-
-                currentField.Value = caseNamePdfStr
-                fieldcnt += 1
-
-            Next
-
-            OverallCredits += creds
-
+            YearlyDetails("11Course", Courses11, Cats, Cats11, GPA11, "11Cumulative", OverallCredits, doc)
         End If
 
         If Courses12.Count > 0 Then
-            Dim coursecnt As Integer = 0
-            Dim overall As Double = 0
-            Dim creds As Double = 0
-            Dim BlankName As String = "12Course"
-            Dim sem1, sem2, final, credits As Double
-            Dim fieldcnt As Integer
-            Dim sem1Assigns, sem2Assigns As List(Of Assignment)
-
-            For Each course In Courses12
-                sem1 = 0
-                sem2 = 0
-                final = 0
-                credits = 0
-                sem1Assigns = New List(Of Assignment)
-                sem2Assigns = New List(Of Assignment)
-
-                'calculate sem1, sem2, final grades and #credits earned
-                For Each assign In course.Assignments
-                    If assign.RatingPeriod < 4 Then
-                        sem1Assigns.Add(assign)
-                    Else
-                        sem2Assigns.Add(assign)
-                    End If
-                Next
-
-                final = course.CalcGrade(course.Assignments)
-                sem1 = course.CalcGrade(sem1Assigns)
-                sem2 = course.CalcGrade(sem2Assigns)
-                credits = course.Credits
-                overall += final
-                creds += credits
-                'done with calculations
-
-                coursecnt += 1
-                fieldcnt = 0
-                FieldName = BlankName & coursecnt.ToString
-
-                'populate each semester, final and credits earned per course
-                For Each name In fields(FieldName)
-                    currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
-                    Select Case fieldcnt
-                        Case 0
-                            caseNamePdfStr = New PdfString(course.Title)
-                        Case 1
-                            caseNamePdfStr = New PdfString(sem1)
-                        Case 2
-                            caseNamePdfStr = New PdfString(sem2)
-                        Case 3
-                            caseNamePdfStr = New PdfString(final)
-                        Case 4
-                            caseNamePdfStr = New PdfString(credits)
-                        Case Else
-                            caseNamePdfStr = New PdfString("oops")
-                    End Select
-
-                    currentField.Value = caseNamePdfStr
-                    fieldcnt += 1
-                Next
-
-                'generate counts of course types for overall numbers
-                If Cats.ContainsKey(course.Category) Then
-                    Cats.Item(course.Category) += course.Credits
-                Else
-                    Cats.Add(course.Category, course.Credits)
-                End If
-
-                If Cats12.ContainsKey(course.Category) Then
-                    Cats12.Item(course.Category) += course.Credits
-                Else
-                    Cats12.Add(course.Category, course.Credits)
-                End If
-
-            Next
-
-            'populate overall average and credits earned
-            overall = overall / coursecnt
-
-            Select Case overall
-                Case Is >= 90
-                    GPA12 = 4
-                Case 80 To 89
-                    GPA12 = 3
-                Case 70 To 79
-                    GPA12 = 2
-                Case Is < 70
-                    GPA12 = 1
-            End Select
-
-            fieldcnt = 0
-            For Each name In fields("12Cumulative")
-                 currentField  = TryCast(doc.AcroForm.Fields(name), PdfTextField)
-                Select Case fieldcnt
-                    Case 0
-                        caseNamePdfStr = New PdfString(overall.ToString("N2"))
-                    Case 1, 2
-                        caseNamePdfStr = New PdfString(creds)
-                    Case Else
-                        caseNamePdfStr = New PdfString("oops")
-                End Select
-
-                currentField.Value = caseNamePdfStr
-                fieldcnt += 1
-
-            Next
-
-            OverallCredits += creds
-
+            YearlyDetails("12Course", Courses12, Cats, Cats12, GPA12, "12Cumulative", OverallCredits, doc)
         End If
 
         'print out overall credit counts
@@ -622,5 +197,139 @@ Public Class frmPrintTranscript
         Process.Start(transcriptfile)
 
         Me.Dispose()
+    End Sub
+
+    Private Function CalcGPA(average) As Double
+
+        Select Case average
+            Case Is >= 90
+                Return 4
+            Case 80 To 89
+                Return 3
+            Case 70 To 79
+                Return 2
+            Case Else
+                Return 1
+        End Select
+
+    End Function
+
+    Private Sub FillOutGradeFields(FieldName As String, course As Course, sem1 As Double, sem2 As Double, final As Double, credits As Double, doc As PdfDocument)
+        Dim name As String
+        Dim currentField As PdfTextField
+        Dim fieldcnt As Integer = 0
+        Dim PdfStr As PdfString
+
+        'populate semester and final grades and credits earned per course
+        For Each name In fields(FieldName)
+            currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+            Select Case fieldcnt
+                Case 0
+                    PdfStr = New PdfString(course.Title)
+                Case 1
+                    PdfStr = New PdfString(sem1)
+                Case 2
+                    PdfStr = New PdfString(sem2)
+                Case 3
+                    PdfStr = New PdfString(final)
+                Case 4
+                    PdfStr = New PdfString(credits)
+                Case Else
+                    PdfStr = New PdfString("oops")
+            End Select
+
+            currentField.Value = PdfStr
+            fieldcnt += 1
+        Next
+
+    End Sub
+
+    Private Sub FillOutCumulativeFields(FieldName As String, Overall As Double, creds As Double, doc As PdfDocument)
+        Dim name As String
+        Dim fieldcnt As Integer = 0
+        Dim currentField As PdfTextField
+        Dim PdfStr As PdfString
+
+        For Each name In fields(FieldName)
+            currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
+            Select Case fieldcnt
+                Case 0
+                    PdfStr = New PdfString(Overall.ToString("N2"))
+                Case 1, 2
+                    PdfStr = New PdfString(creds)
+                Case Else
+                    PdfStr = New PdfString("oops")
+            End Select
+
+            currentField.Value = PdfStr
+            fieldcnt += 1
+
+        Next
+
+    End Sub
+
+    Private Sub YearlyDetails(BlankName As String, courses As List(Of Course), ByRef AllCats As Dictionary(Of String, Double), ByRef YearCats As Dictionary(Of String, Double), ByRef YearGPA As Double, CumFieldName As String, ByRef OverallCredits As Double, doc As PdfDocument)
+        Dim coursecnt As Integer = 0
+        Dim overall As Double = 0
+        Dim creds As Double = 0
+        Dim sem1, sem2, final, credits As Double
+        Dim fieldcnt As Integer
+        Dim sem1Assigns, sem2Assigns As List(Of Assignment)
+        Dim FieldName As String
+
+        For Each course In courses
+            sem1 = 0
+            sem2 = 0
+            final = 0
+            credits = 0
+            sem1Assigns = New List(Of Assignment)
+            sem2Assigns = New List(Of Assignment)
+
+            'calculate sem1, sem2, final grades and #credits earned
+            For Each assign In course.Assignments
+                If assign.RatingPeriod < 4 Then
+                    sem1Assigns.Add(assign)
+                Else
+                    sem2Assigns.Add(assign)
+                End If
+            Next
+
+            final = course.CalcGrade(course.Assignments)
+            sem1 = course.CalcGrade(sem1Assigns)
+            sem2 = course.CalcGrade(sem2Assigns)
+            credits = course.Credits
+            overall += final
+            creds += credits
+            'done with calculations
+
+            coursecnt += 1
+            fieldcnt = 0
+            FieldName = BlankName & coursecnt.ToString
+
+            FillOutGradeFields(FieldName, course, sem1, sem2, final, credits, doc)
+
+            'generate counts of course types for overall numbers
+            If AllCats.ContainsKey(course.Category) Then
+                AllCats.Item(course.Category) += course.Credits
+            Else
+                AllCats.Add(course.Category, course.Credits)
+            End If
+
+            If YearCats.ContainsKey(course.Category) Then
+                YearCats.Item(course.Category) += course.Credits
+            Else
+                YearCats.Add(course.Category, course.Credits)
+            End If
+
+        Next
+
+        'populate overall average and credits earned
+        overall = overall / coursecnt
+
+        YearGPA = CalcGPA(overall)
+
+        FillOutCumulativeFields(CumFieldName, overall, creds, doc)
+
+        OverallCredits += creds
     End Sub
 End Class
