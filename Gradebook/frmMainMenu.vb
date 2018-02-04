@@ -143,4 +143,8 @@
         frmSchoolInfo.ShowDialog()
         LoadSchoolInfo()
     End Sub
+
+    Private Sub EditCourseCategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditCourseCategoriesToolStripMenuItem.Click
+        frmEditCategories.show()
+    End Sub
 End Class

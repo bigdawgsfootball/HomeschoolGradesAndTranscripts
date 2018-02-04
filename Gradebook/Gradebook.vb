@@ -6,8 +6,12 @@
     Exam = 5
 End Enum
 
+Public Class Category
+    Public Property Name As String
+End Class
+
 Public Class AppData
-    Public Property Categories As String()
+    Public Property Categories As List(Of Category)
 End Class
 
 Public Class Gradebook

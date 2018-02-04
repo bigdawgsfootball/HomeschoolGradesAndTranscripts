@@ -47,7 +47,8 @@ Module DAL
 
         If File.Exists(GBFile) Then
             If IsValidJSON(json) Then
-                FStream = File.OpenWrite(GBFile)
+                FStream = New FileStream(GBFile, FileMode.Create, FileAccess.Write, FileShare.Read)
+                'FStream = File.OpenWrite(GBFile)
                 Dim writer As New StreamWriter(FStream)
                 writer.Write(json)
 

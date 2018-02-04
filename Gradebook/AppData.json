@@ -1,11 +1,25 @@
 ﻿{
   "Categories": [
-    "Math",
-    "Science",
-    "Social Studies",
-    "Language Arts",
-    "Foreign Language",
-    "Health & PE",
-    "Elective"
+    {
+      "Name": "Math" 
+    },
+    {
+      "Name": "Science"
+    },
+    {
+      "Name": "Social Studies"
+    },
+    {
+      "Name": "Language Arts"
+    },
+    {
+      "Name": "Foreign Language"
+    },
+    {
+      "Name": "Health & PE"
+    },
+    {
+      "Name": "Elective"
+    }
   ]
 }

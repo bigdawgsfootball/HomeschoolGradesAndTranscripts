@@ -32,7 +32,6 @@ Partial Class frmMainMenu
         Me.SetFileLocationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.toolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditSchoolInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -57,6 +56,7 @@ Partial Class frmMainMenu
         Me.lblSchoolName = New System.Windows.Forms.Label()
         Me.lblAddr1 = New System.Windows.Forms.Label()
         Me.lblAddr2 = New System.Windows.Forms.Label()
+        Me.EditCourseCategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuMain.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -90,7 +90,7 @@ Partial Class frmMainMenu
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.toolStripSeparator, Me.SetFileLocationsToolStripMenuItem, Me.BackupToolStripMenuItem, Me.toolStripSeparator1, Me.toolStripSeparator2, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.toolStripSeparator, Me.SetFileLocationsToolStripMenuItem, Me.BackupToolStripMenuItem, Me.toolStripSeparator1, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
@@ -127,11 +127,6 @@ Partial Class frmMainMenu
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
         Me.toolStripSeparator1.Size = New System.Drawing.Size(199, 6)
         '
-        'toolStripSeparator2
-        '
-        Me.toolStripSeparator2.Name = "toolStripSeparator2"
-        Me.toolStripSeparator2.Size = New System.Drawing.Size(199, 6)
-        '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
@@ -140,7 +135,7 @@ Partial Class frmMainMenu
         '
         'EditToolStripMenuItem
         '
-        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditSchoolInfoToolStripMenuItem, Me.ToolStripSeparator3, Me.AddStudentToolStripMenuItem, Me.AddCourseToolStripMenuItem, Me.AddAssignmentToolStripMenuItem, Me.ViewGradebookToolStripMenuItem, Me.toolStripSeparator4, Me.EditJSONToolStripMenuItem})
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditSchoolInfoToolStripMenuItem, Me.ToolStripSeparator3, Me.AddStudentToolStripMenuItem, Me.AddCourseToolStripMenuItem, Me.AddAssignmentToolStripMenuItem, Me.ViewGradebookToolStripMenuItem, Me.toolStripSeparator4, Me.EditJSONToolStripMenuItem, Me.EditCourseCategoriesToolStripMenuItem})
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
         Me.EditToolStripMenuItem.Text = "&Edit"
@@ -240,30 +235,30 @@ Partial Class frmMainMenu
         'ContentsToolStripMenuItem
         '
         Me.ContentsToolStripMenuItem.Name = "ContentsToolStripMenuItem"
-        Me.ContentsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ContentsToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
         Me.ContentsToolStripMenuItem.Text = "&Contents"
         '
         'IndexToolStripMenuItem
         '
         Me.IndexToolStripMenuItem.Name = "IndexToolStripMenuItem"
-        Me.IndexToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.IndexToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
         Me.IndexToolStripMenuItem.Text = "&Index"
         '
         'SearchToolStripMenuItem
         '
         Me.SearchToolStripMenuItem.Name = "SearchToolStripMenuItem"
-        Me.SearchToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SearchToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
         Me.SearchToolStripMenuItem.Text = "&Search"
         '
         'toolStripSeparator5
         '
         Me.toolStripSeparator5.Name = "toolStripSeparator5"
-        Me.toolStripSeparator5.Size = New System.Drawing.Size(149, 6)
+        Me.toolStripSeparator5.Size = New System.Drawing.Size(119, 6)
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
         Me.AboutToolStripMenuItem.Text = "&About..."
         '
         'btnBackUp
@@ -300,6 +295,12 @@ Partial Class frmMainMenu
         Me.lblAddr2.Size = New System.Drawing.Size(0, 13)
         Me.lblAddr2.TabIndex = 16
         '
+        'EditCourseCategoriesToolStripMenuItem
+        '
+        Me.EditCourseCategoriesToolStripMenuItem.Name = "EditCourseCategoriesToolStripMenuItem"
+        Me.EditCourseCategoriesToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.EditCourseCategoriesToolStripMenuItem.Text = "Edit Course Categories"
+        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -330,7 +331,6 @@ Partial Class frmMainMenu
     Friend WithEvents toolStripSeparator As ToolStripSeparator
     Friend WithEvents BackupToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents toolStripSeparator1 As ToolStripSeparator
-    Friend WithEvents toolStripSeparator2 As ToolStripSeparator
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AddStudentToolStripMenuItem As ToolStripMenuItem
@@ -356,4 +356,5 @@ Partial Class frmMainMenu
     Friend WithEvents lblSchoolName As Label
     Friend WithEvents lblAddr1 As Label
     Friend WithEvents lblAddr2 As Label
+    Friend WithEvents EditCourseCategoriesToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -72,18 +72,20 @@ Public Class frmPrintTranscript
         Dim OverallGPA As New Double
 
         For Each course In PrintStudent.Courses
-            Select Case course.Gradelevel
-                Case 9
-                    Courses9.Add(course)
-                Case 10
-                    Courses10.Add(course)
-                Case 11
-                    Courses11.Add(course)
-                Case 12
-                    Courses12.Add(course)
-                Case Else
-                    MsgBox("Ignoring " & course.Title & " since " & course.Gradelevel & " isn't between 9 and 12." & vbCrLf & "Please type the info you need into the transcript manually after it is generated")
-            End Select
+            If course.Assignments.Count > 0 Then
+                Select Case course.Gradelevel
+                    Case 9
+                        Courses9.Add(course)
+                    Case 10
+                        Courses10.Add(course)
+                    Case 11
+                        Courses11.Add(course)
+                    Case 12
+                        Courses12.Add(course)
+                    Case Else
+                        MsgBox("Ignoring " & course.Title & " since " & course.Gradelevel & " isn't between 9 and 12." & vbCrLf & "Please type the info you need into the transcript manually after it is generated")
+                End Select
+            End If
         Next
 
         Dim OverallCredits As Double = 0

@@ -33,7 +33,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.3.1.%2a</ApplicationVersion>
+    <ApplicationVersion>1.4.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -158,6 +158,12 @@
     <Compile Include="frmCalcGrade.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmEditCategories.Designer.vb">
+      <DependentUpon>frmEditCategories.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditCategories.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPrintTranscript.Designer.vb">
       <DependentUpon>frmPrintTranscript.vb</DependentUpon>
     </Compile>
@@ -226,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCalcGrade.resx">
       <DependentUpon>frmCalcGrade.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditCategories.resx">
+      <DependentUpon>frmEditCategories.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
