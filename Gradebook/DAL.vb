@@ -46,7 +46,7 @@ Module DAL
         Dim FStream As Stream
 
         If File.Exists(GBFile) Then
-            If IsValidJSON(json) Then
+            If IsValidGBJSON(json) Then
                 FStream = New FileStream(GBFile, FileMode.Create, FileAccess.Write, FileShare.Read)
                 'FStream = File.OpenWrite(GBFile)
                 Dim writer As New StreamWriter(FStream)
@@ -60,10 +60,22 @@ Module DAL
 
     End Sub
 
-    Friend Function IsValidJSON(json As String)
+    Friend Function IsValidGBJSON(json As String)
 
         Try
             GB = JsonConvert.DeserializeObject(Of Gradebook)(json)
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+
+    End Function
+
+    Friend Function IsValidADJSON(json As String)
+
+        Try
+            AD = JsonConvert.DeserializeObject(Of AppData)(json)
             Return True
         Catch ex As Exception
             MsgBox(ex.Message)

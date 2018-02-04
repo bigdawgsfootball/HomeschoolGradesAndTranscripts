@@ -3,12 +3,15 @@ Imports System.IO
 Imports System.Deployment.Application
 
 Public Class frmEditCategories
-    Private AD As AppData
 
     Private Sub frmEditCategories_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim bsCategories As New BindingSource
 
+#If DEBUG Then
+        Dim FileName As String = "C:\Users\Kurt\documents\visual studio 2017\Projects\Gradebook\Gradebook\bin\Debug\AppData.json"
+#Else
         Dim FileName As String = Path.Combine(ApplicationDeployment.CurrentDeployment.DataDirectory, "AppData.json")
+#End If
         Dim content As String = File.ReadAllText(FileName)
         AD = JsonConvert.DeserializeObject(content, GetType(AppData))
 
@@ -23,10 +26,15 @@ Public Class frmEditCategories
 
         Dim json As String = JsonConvert.SerializeObject(AD, Formatting.Indented)
         Dim FStream As Stream
+
+#If DEBUG Then
+        Dim FileName As String = "C:\Users\Kurt\documents\visual studio 2017\Projects\Gradebook\Gradebook\bin\Debug\AppData.json"
+#Else
         Dim FileName As String = Path.Combine(ApplicationDeployment.CurrentDeployment.DataDirectory, "AppData.json")
+#End If
 
         If File.Exists(FileName) Then
-            If IsValidJSON(json) Then
+            If IsValidADJSON(json) Then
                 FStream = New FileStream(FileName, FileMode.Create, FileAccess.Write, FileShare.Read)
                 Dim writer As New StreamWriter(FStream)
                 writer.Write(json)
