@@ -28,6 +28,9 @@
         Next
 
         cboWeight.DataSource = System.Enum.GetValues(GetType(AssignTypes))
+        'cboWeight.DataSource = AD.AssignmentTypes
+        'cboWeight.DisplayMember = "Name"
+
         dgvAssignments.ReadOnly = True
         dgvAssignments.AllowUserToAddRows = False
 
@@ -108,6 +111,8 @@
                 MsgBox("This assignment has alrteady been added to this course", vbOKOnly, "Validation Errors")
             Else
                 cboCourses.SelectedItem.assignments.add(NewAssignment)
+                GB.Students(cboStudents.SelectedIndex).Courses(GB.Students(cboStudents.SelectedIndex).Courses.IndexOf(cboCourses.SelectedItem)).Assignments.Add(NewAssignment)
+
                 SaveGradebook()
 
                 studentsbindingsource.ResetBindings(True)

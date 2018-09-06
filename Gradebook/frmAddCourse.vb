@@ -39,7 +39,7 @@ Public Class frmAddCourse
             cboCategories.Items.Clear()
 
             For Each cat In Cats.Categories
-                cboCategories.Items.Add(cat)
+                cboCategories.Items.Add(cat.Name)
             Next
         Else
             MsgBox("JSON string invalid.", vbOKOnly)
@@ -99,9 +99,11 @@ Public Class frmAddCourse
 
             If Not cboStudents.SelectedItem.courses.contains(NewCourse) Then
                 cboStudents.SelectedItem.Courses.Add(NewCourse)
-                SaveGradebook()
+                GB.Students(cboStudents.SelectedIndex).Courses.Add(NewCourse)
 
+                SaveGradebook()
                 coursesbindingsource.ResetBindings(True)
+
             Else
                 MsgBox("That course has already been added", vbOKOnly, "Course Exists")
             End If
