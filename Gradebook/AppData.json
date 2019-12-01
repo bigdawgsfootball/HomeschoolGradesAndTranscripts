@@ -1,7 +1,7 @@
 ﻿{
   "Categories": [
     {
-      "Name": "Math" 
+      "Name": "Math"
     },
     {
       "Name": "Science"
@@ -20,6 +20,28 @@
     },
     {
       "Name": "Elective"
+    }
+  ],
+  "AssignmentTypes": [
+    {
+      "Name": "Assignment",
+      "Weight": 1.0
+    },
+    {
+      "Name": "Quiz",
+        "Weight": 2.0
+    },
+    {
+      "Name": "Project",
+      "Weight": 3.0
+    },
+    {
+      "Name": "Test",
+      "Weight": 4.0
+    },
+    {
+      "Name": "Exam",
+      "Weight": 5.0
     }
   ]
 }

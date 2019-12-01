@@ -25,8 +25,6 @@ Partial Class frmAddCourse
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cboStudents = New System.Windows.Forms.ComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.cboCategories = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtCredits = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -40,6 +38,8 @@ Partial Class frmAddCourse
         Me.btnAddCourse = New System.Windows.Forms.Button()
         Me.dgvCourses = New System.Windows.Forms.DataGridView()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.cboCategories = New System.Windows.Forms.ComboBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvCourses, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -82,23 +82,6 @@ Partial Class frmAddCourse
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "New Course Info"
         '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(8, 125)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(85, 13)
-        Me.Label8.TabIndex = 11
-        Me.Label8.Text = "Course Category"
-        '
-        'cboCategories
-        '
-        Me.cboCategories.FormattingEnabled = True
-        Me.cboCategories.Location = New System.Drawing.Point(99, 121)
-        Me.cboCategories.Name = "cboCategories"
-        Me.cboCategories.Size = New System.Drawing.Size(426, 21)
-        Me.cboCategories.TabIndex = 6
-        '
         'Label7
         '
         Me.Label7.AutoSize = True
@@ -113,7 +96,7 @@ Partial Class frmAddCourse
         Me.txtCredits.Location = New System.Drawing.Point(193, 20)
         Me.txtCredits.Name = "txtCredits"
         Me.txtCredits.Size = New System.Drawing.Size(42, 20)
-        Me.txtCredits.TabIndex = 1
+        Me.txtCredits.TabIndex = 8
         '
         'Label6
         '
@@ -129,7 +112,7 @@ Partial Class frmAddCourse
         Me.txtNumRatings.Location = New System.Drawing.Point(376, 21)
         Me.txtNumRatings.Name = "txtNumRatings"
         Me.txtNumRatings.Size = New System.Drawing.Size(35, 20)
-        Me.txtNumRatings.TabIndex = 2
+        Me.txtNumRatings.TabIndex = 1
         '
         'Label4
         '
@@ -145,7 +128,7 @@ Partial Class frmAddCourse
         Me.txtPublisher.Location = New System.Drawing.Point(5, 93)
         Me.txtPublisher.Name = "txtPublisher"
         Me.txtPublisher.Size = New System.Drawing.Size(523, 20)
-        Me.txtPublisher.TabIndex = 5
+        Me.txtPublisher.TabIndex = 4
         '
         'Label3
         '
@@ -161,7 +144,7 @@ Partial Class frmAddCourse
         Me.txtGradeLevel.Location = New System.Drawing.Point(484, 20)
         Me.txtGradeLevel.Name = "txtGradeLevel"
         Me.txtGradeLevel.Size = New System.Drawing.Size(42, 20)
-        Me.txtGradeLevel.TabIndex = 3
+        Me.txtGradeLevel.TabIndex = 2
         '
         'Label2
         '
@@ -177,14 +160,14 @@ Partial Class frmAddCourse
         Me.txtTitle.Location = New System.Drawing.Point(4, 46)
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.Size = New System.Drawing.Size(523, 20)
-        Me.txtTitle.TabIndex = 4
+        Me.txtTitle.TabIndex = 3
         '
         'btnAddCourse
         '
         Me.btnAddCourse.Location = New System.Drawing.Point(462, 22)
         Me.btnAddCourse.Name = "btnAddCourse"
         Me.btnAddCourse.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddCourse.TabIndex = 7
+        Me.btnAddCourse.TabIndex = 5
         Me.btnAddCourse.Text = "Add Course"
         Me.btnAddCourse.UseVisualStyleBackColor = True
         '
@@ -204,6 +187,23 @@ Partial Class frmAddCourse
         Me.Label5.Size = New System.Drawing.Size(84, 13)
         Me.Label5.TabIndex = 6
         Me.Label5.Text = "Existing Courses"
+        '
+        'cboCategories
+        '
+        Me.cboCategories.FormattingEnabled = True
+        Me.cboCategories.Location = New System.Drawing.Point(99, 121)
+        Me.cboCategories.Name = "cboCategories"
+        Me.cboCategories.Size = New System.Drawing.Size(426, 21)
+        Me.cboCategories.TabIndex = 10
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(8, 125)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(85, 13)
+        Me.Label8.TabIndex = 11
+        Me.Label8.Text = "Course Category"
         '
         'frmAddCourse
         '

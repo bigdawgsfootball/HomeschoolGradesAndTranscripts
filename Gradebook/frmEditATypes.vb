@@ -2,15 +2,14 @@
 Imports System.IO
 Imports System.Deployment.Application
 
-Public Class frmEditCategories
-
+Public Class frmEditATypes
     Private Sub frmEditCategories_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim bsCategories As New BindingSource
+        Dim bsAssignTypes As New BindingSource
 
-        bsCategories.DataSource = AD.Categories
-        dgvCategories.DataSource = bsCategories
+        bsAssignTypes.DataSource = AD.AssignmentTypes
+        dgvAssignTypes.DataSource = bsAssignTypes
 
-        dgvCategories.Refresh()
+        dgvAssignTypes.Refresh()
 
     End Sub
 

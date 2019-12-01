@@ -10,8 +10,14 @@ Public Class Category
     Public Property Name As String
 End Class
 
+Public Class AssignmentType
+    Public Property Name As String
+    Public Property Weight As Double
+End Class
+
 Public Class AppData
     Public Property Categories As List(Of Category)
+    Public Property AssignmentTypes As List(Of AssignmentType)
 End Class
 
 Public Class Gradebook
@@ -137,6 +143,7 @@ Public Class Assignment
 
     Public Property Title As String
     Public Property Type As AssignTypes
+    'Public Property Type As AssignmentType
     Public Property Description As String
     Public Property RatingPeriod As String
     Public Property Grade As String

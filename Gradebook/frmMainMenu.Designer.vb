@@ -42,6 +42,7 @@ Partial Class frmMainMenu
         Me.ViewGradebookToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.EditJSONToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditCourseCategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcGradeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GenReportCardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -56,7 +57,7 @@ Partial Class frmMainMenu
         Me.lblSchoolName = New System.Windows.Forms.Label()
         Me.lblAddr1 = New System.Windows.Forms.Label()
         Me.lblAddr2 = New System.Windows.Forms.Label()
-        Me.EditCourseCategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditAssignmentTypesWeightsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuMain.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -135,7 +136,7 @@ Partial Class frmMainMenu
         '
         'EditToolStripMenuItem
         '
-        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditSchoolInfoToolStripMenuItem, Me.ToolStripSeparator3, Me.AddStudentToolStripMenuItem, Me.AddCourseToolStripMenuItem, Me.AddAssignmentToolStripMenuItem, Me.ViewGradebookToolStripMenuItem, Me.toolStripSeparator4, Me.EditJSONToolStripMenuItem, Me.EditCourseCategoriesToolStripMenuItem})
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditSchoolInfoToolStripMenuItem, Me.ToolStripSeparator3, Me.AddStudentToolStripMenuItem, Me.AddCourseToolStripMenuItem, Me.AddAssignmentToolStripMenuItem, Me.ViewGradebookToolStripMenuItem, Me.toolStripSeparator4, Me.EditJSONToolStripMenuItem, Me.EditCourseCategoriesToolStripMenuItem, Me.EditAssignmentTypesWeightsToolStripMenuItem})
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
         Me.EditToolStripMenuItem.Text = "&Edit"
@@ -143,20 +144,20 @@ Partial Class frmMainMenu
         'EditSchoolInfoToolStripMenuItem
         '
         Me.EditSchoolInfoToolStripMenuItem.Name = "EditSchoolInfoToolStripMenuItem"
-        Me.EditSchoolInfoToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.EditSchoolInfoToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.EditSchoolInfoToolStripMenuItem.Text = "Edit School Info"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(200, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(238, 6)
         '
         'AddStudentToolStripMenuItem
         '
         Me.AddStudentToolStripMenuItem.Enabled = False
         Me.AddStudentToolStripMenuItem.Name = "AddStudentToolStripMenuItem"
         Me.AddStudentToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.AddStudentToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.AddStudentToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.AddStudentToolStripMenuItem.Text = "Add Student"
         '
         'AddCourseToolStripMenuItem
@@ -164,7 +165,7 @@ Partial Class frmMainMenu
         Me.AddCourseToolStripMenuItem.Enabled = False
         Me.AddCourseToolStripMenuItem.Name = "AddCourseToolStripMenuItem"
         Me.AddCourseToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
-        Me.AddCourseToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.AddCourseToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.AddCourseToolStripMenuItem.Text = "Add Course"
         '
         'AddAssignmentToolStripMenuItem
@@ -173,7 +174,7 @@ Partial Class frmMainMenu
         Me.AddAssignmentToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.AddAssignmentToolStripMenuItem.Name = "AddAssignmentToolStripMenuItem"
         Me.AddAssignmentToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.AddAssignmentToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.AddAssignmentToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.AddAssignmentToolStripMenuItem.Text = "Add Assignment"
         '
         'ViewGradebookToolStripMenuItem
@@ -182,20 +183,26 @@ Partial Class frmMainMenu
         Me.ViewGradebookToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ViewGradebookToolStripMenuItem.Name = "ViewGradebookToolStripMenuItem"
         Me.ViewGradebookToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.ViewGradebookToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.ViewGradebookToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.ViewGradebookToolStripMenuItem.Text = "View Gradebook"
         '
         'toolStripSeparator4
         '
         Me.toolStripSeparator4.Name = "toolStripSeparator4"
-        Me.toolStripSeparator4.Size = New System.Drawing.Size(200, 6)
+        Me.toolStripSeparator4.Size = New System.Drawing.Size(238, 6)
         '
         'EditJSONToolStripMenuItem
         '
         Me.EditJSONToolStripMenuItem.Enabled = False
         Me.EditJSONToolStripMenuItem.Name = "EditJSONToolStripMenuItem"
-        Me.EditJSONToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.EditJSONToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.EditJSONToolStripMenuItem.Text = "Edit JSON"
+        '
+        'EditCourseCategoriesToolStripMenuItem
+        '
+        Me.EditCourseCategoriesToolStripMenuItem.Name = "EditCourseCategoriesToolStripMenuItem"
+        Me.EditCourseCategoriesToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
+        Me.EditCourseCategoriesToolStripMenuItem.Text = "Edit Course Categories"
         '
         'ToolsToolStripMenuItem
         '
@@ -295,11 +302,11 @@ Partial Class frmMainMenu
         Me.lblAddr2.Size = New System.Drawing.Size(0, 13)
         Me.lblAddr2.TabIndex = 16
         '
-        'EditCourseCategoriesToolStripMenuItem
+        'EditAssignmentTypesWeightsToolStripMenuItem
         '
-        Me.EditCourseCategoriesToolStripMenuItem.Name = "EditCourseCategoriesToolStripMenuItem"
-        Me.EditCourseCategoriesToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
-        Me.EditCourseCategoriesToolStripMenuItem.Text = "Edit Course Categories"
+        Me.EditAssignmentTypesWeightsToolStripMenuItem.Name = "EditAssignmentTypesWeightsToolStripMenuItem"
+        Me.EditAssignmentTypesWeightsToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
+        Me.EditAssignmentTypesWeightsToolStripMenuItem.Text = "Edit Assignment Types/Weights"
         '
         'frmMainMenu
         '
@@ -357,4 +364,5 @@ Partial Class frmMainMenu
     Friend WithEvents lblAddr1 As Label
     Friend WithEvents lblAddr2 As Label
     Friend WithEvents EditCourseCategoriesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EditAssignmentTypesWeightsToolStripMenuItem As ToolStripMenuItem
 End Class

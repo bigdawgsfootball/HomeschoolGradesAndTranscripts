@@ -38,89 +38,6 @@ Public Class PrintReportCard
 
     End Sub
 
-    'Function printBook() As Document
-    '    Dim pdf As New Document
-    '    Dim para As New Paragraph
-
-    '    Cursor.Current = Cursors.WaitCursor
-
-    '    DefineStyles(pdf)
-    '    DefineContentSection(pdf)
-
-    '    'Adds a section to the document
-    '    Dim sect As Section = pdf.LastSection
-    '    sect.AddParagraph()
-
-    '    'Add content to the document
-    '    para = sect.AddParagraph()
-    '    para.Style = "Header2"
-    '    para.Format.ClearAll()
-    '    para.AddText("Student: " & GB.Students(Me.Student).Name.ToString)
-    '    para.AddLineBreak()
-    '    para.AddText("Grade Level: " & Me.GradeLevel)
-    '    para.AddLineBreak()
-    '    para.AddText("Rating Period: " & Me.RatingPeriod)
-
-    '    Dim RepCourses = GB.Students(Me.Student).Courses
-    '    Dim PrintCourses As New List(Of Course)
-    '    Dim AllGrades As New List(Of Decimal)
-
-    '    For Each course In RepCourses
-    '        Dim PrintAssignments As New List(Of Assignment)
-
-    '        If course.Gradelevel = Me.GradeLevel Then
-    '            For Each assignment In course.Assignments
-    '                If assignment.RatingPeriod = Me.RatingPeriod Then
-    '                    PrintAssignments.Add(assignment)
-    '                End If
-    '            Next
-    '            Dim copyassignments As New List(Of Assignment)
-    '            copyassignments = PrintAssignments
-
-    '            If PrintAssignments.Count > 0 Then
-    '                Dim PrintCourse As New Course
-    '                PrintCourse = course
-    '                PrintCourse.Assignments = copyassignments
-    '                PrintCourses.Add(PrintCourse)
-    '            End If
-    '        End If
-    '    Next
-
-    '    For Each course In PrintCourses
-    '        para = sect.AddParagraph()
-
-    '        para.Style = "Heading3"
-    '        para.AddSpace(10)
-    '        para.AddText(course.Title)
-    '        para.Format.ClearAll()
-    '        para.Format.AddTabStop("6.0in", TabAlignment.Right)
-    '        para.AddTab()
-
-    '        para.AddText(CalcGrade(course.Assignments).ToString)
-    '        AllGrades.Add(CalcGrade(course.Assignments))
-    '    Next
-
-    '    Dim overall As New Decimal
-    '    For Each grade In AllGrades
-    '        overall += grade
-    '    Next
-    '    overall = overall / AllGrades.Count
-
-    '    para = sect.AddParagraph
-    '    para.Style = "Heading2"
-    '    para.AddText("Overall Average")
-    '    para.Format.ClearAll()
-    '    para.Format.AddTabStop("6.0in", TabAlignment.Right)
-    '    para.AddTab()
-
-    '    para.AddText(overall.ToString("N2"))
-
-    '    Return pdf
-
-    '    Cursor.Current = Cursors.Default
-
-    'End Function
-
     Function printReportCard() As Document
         Dim pdf As New Document
         Dim para As New Paragraph
@@ -248,7 +165,12 @@ Public Class PrintReportCard
                 para.AddText(course.Title)
 
                 For i As Integer = 1 To Me.RatingPeriod
-                    para = Row.Cells(i).AddParagraph()
+                    If i >= Sem1Col Then
+                        para = Row.Cells(i + 1).AddParagraph()
+                    Else
+                        para = Row.Cells(i).AddParagraph()
+                    End If
+
                     Dim RAssigns As New List(Of Assignment)
 
                     For Each assign In course.Assignments

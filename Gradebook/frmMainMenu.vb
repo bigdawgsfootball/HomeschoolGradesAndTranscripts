@@ -1,4 +1,8 @@
-﻿Public Class frmMainMenu
+﻿Imports Newtonsoft.Json
+Imports System.IO
+Imports System.Deployment.Application
+
+Public Class frmMainMenu
 
     Private Sub btnOpenGB_Click(sender As Object, e As EventArgs) Handles btnOpenGB.Click
         OpenGradebook()
@@ -49,6 +53,16 @@
         If GBFile = "" Then
             btnOpenGB.Enabled = False
         End If
+
+#If DEBUG Then
+        Dim FileName As String = "C:\Users\Kurt\documents\visual studio 2017\Projects\Gradebook\Gradebook\bin\Debug\AppData.json"
+#Else
+        Dim FileName As String = Path.Combine(ApplicationDeployment.CurrentDeployment.DataDirectory, "AppData.json")
+#End If
+        Dim content As String = File.ReadAllText(FileName)
+        AD = JsonConvert.DeserializeObject(content, GetType(AppData))
+
+
     End Sub
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
@@ -145,6 +159,10 @@
     End Sub
 
     Private Sub EditCourseCategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditCourseCategoriesToolStripMenuItem.Click
-        frmEditCategories.show()
+        frmEditCategories.Show()
+    End Sub
+
+    Private Sub EditAssignmentTypesWeightsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAssignmentTypesWeightsToolStripMenuItem.Click
+        frmEditATypes.Show()
     End Sub
 End Class
