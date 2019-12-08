@@ -111,10 +111,13 @@
                 MsgBox("This assignment has alrteady been added to this course", vbOKOnly, "Validation Errors")
             Else
                 cboCourses.SelectedItem.assignments.add(NewAssignment)
+                GB.Students(cboStudents.SelectedIndex).Courses(GB.Students(cboStudents.SelectedIndex).Courses.IndexOf(cboCourses.SelectedItem)).Assignments = cboCourses.SelectedItem.assignments
+
                 SaveGradebook()
 
                 studentsbindingsource.ResetBindings(True)
                 assignmentsbindingsource.ResetBindings(True)
+                dgvAssignments.DataSource = assignmentsbindingsource
 
                 txtTitle.Text = ""
                 rtbDescription.Text = ""

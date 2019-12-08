@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmViewGradebook
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmViewGradebook
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.cboStudents = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -39,52 +39,58 @@ Partial Class frmViewGradebook
         'cboStudents
         '
         Me.cboStudents.FormattingEnabled = True
-        Me.cboStudents.Location = New System.Drawing.Point(13, 32)
+        Me.cboStudents.Location = New System.Drawing.Point(17, 39)
+        Me.cboStudents.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cboStudents.Name = "cboStudents"
-        Me.cboStudents.Size = New System.Drawing.Size(121, 21)
+        Me.cboStudents.Size = New System.Drawing.Size(160, 24)
         Me.cboStudents.TabIndex = 0
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(13, 13)
+        Me.Label1.Location = New System.Drawing.Point(17, 16)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(77, 13)
+        Me.Label1.Size = New System.Drawing.Size(100, 17)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Select Student"
         '
         'cboGradeLevel
         '
         Me.cboGradeLevel.FormattingEnabled = True
-        Me.cboGradeLevel.Location = New System.Drawing.Point(150, 31)
+        Me.cboGradeLevel.Location = New System.Drawing.Point(200, 38)
+        Me.cboGradeLevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cboGradeLevel.Name = "cboGradeLevel"
-        Me.cboGradeLevel.Size = New System.Drawing.Size(90, 21)
+        Me.cboGradeLevel.Size = New System.Drawing.Size(119, 24)
         Me.cboGradeLevel.TabIndex = 2
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(150, 12)
+        Me.Label2.Location = New System.Drawing.Point(200, 15)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(98, 13)
+        Me.Label2.Size = New System.Drawing.Size(129, 17)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Select Grade Level"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(257, 12)
+        Me.Label3.Location = New System.Drawing.Point(343, 15)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(73, 13)
+        Me.Label3.Size = New System.Drawing.Size(96, 17)
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "Select Course"
         '
         'cboCourses
         '
         Me.cboCourses.FormattingEnabled = True
-        Me.cboCourses.Location = New System.Drawing.Point(257, 31)
+        Me.cboCourses.Location = New System.Drawing.Point(343, 38)
+        Me.cboCourses.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cboCourses.Name = "cboCourses"
-        Me.cboCourses.Size = New System.Drawing.Size(228, 21)
+        Me.cboCourses.Size = New System.Drawing.Size(303, 24)
         Me.cboCourses.TabIndex = 4
         '
         'dgvGradebook
@@ -94,25 +100,28 @@ Partial Class frmViewGradebook
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvGradebook.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.dgvGradebook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvGradebook.Location = New System.Drawing.Point(16, 84)
+        Me.dgvGradebook.Location = New System.Drawing.Point(21, 103)
+        Me.dgvGradebook.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dgvGradebook.Name = "dgvGradebook"
-        Me.dgvGradebook.Size = New System.Drawing.Size(867, 394)
+        Me.dgvGradebook.Size = New System.Drawing.Size(1156, 485)
         Me.dgvGradebook.TabIndex = 6
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(797, 31)
+        Me.btnSave.Location = New System.Drawing.Point(1063, 38)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(86, 23)
+        Me.btnSave.Size = New System.Drawing.Size(115, 28)
         Me.btnSave.TabIndex = 7
         Me.btnSave.Text = "Save Changes"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnCalc
         '
-        Me.btnCalc.Location = New System.Drawing.Point(693, 32)
+        Me.btnCalc.Location = New System.Drawing.Point(924, 39)
+        Me.btnCalc.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnCalc.Name = "btnCalc"
-        Me.btnCalc.Size = New System.Drawing.Size(75, 23)
+        Me.btnCalc.Size = New System.Drawing.Size(100, 28)
         Me.btnCalc.TabIndex = 8
         Me.btnCalc.Text = "Calculator"
         Me.btnCalc.UseVisualStyleBackColor = True
@@ -121,25 +130,27 @@ Partial Class frmViewGradebook
         '
         Me.cboRatingPeriod.FormattingEnabled = True
         Me.cboRatingPeriod.Items.AddRange(New Object() {"All"})
-        Me.cboRatingPeriod.Location = New System.Drawing.Point(503, 32)
+        Me.cboRatingPeriod.Location = New System.Drawing.Point(671, 39)
+        Me.cboRatingPeriod.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cboRatingPeriod.Name = "cboRatingPeriod"
-        Me.cboRatingPeriod.Size = New System.Drawing.Size(104, 21)
+        Me.cboRatingPeriod.Size = New System.Drawing.Size(137, 24)
         Me.cboRatingPeriod.TabIndex = 9
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(503, 13)
+        Me.Label4.Location = New System.Drawing.Point(671, 16)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(104, 13)
+        Me.Label4.Size = New System.Drawing.Size(137, 17)
         Me.Label4.TabIndex = 10
         Me.Label4.Text = "Select Rating Period"
         '
         'frmViewGradebook
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(895, 490)
+        Me.ClientSize = New System.Drawing.Size(1193, 603)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.cboRatingPeriod)
         Me.Controls.Add(Me.btnCalc)
@@ -151,6 +162,7 @@ Partial Class frmViewGradebook
         Me.Controls.Add(Me.cboGradeLevel)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cboStudents)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "frmViewGradebook"
         Me.Text = "Gradebook"
         CType(Me.dgvGradebook, System.ComponentModel.ISupportInitialize).EndInit()

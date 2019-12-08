@@ -69,7 +69,7 @@ Public Class Course
         Dim ECount As Double = 0
         Dim Weights As Integer = 0
 
-        For Each assignment In Me.Assignments
+        For Each assignment In Assignments
             If assignment.Grade <> "" Then
                 Select Case assignment.Type
                     Case AssignTypes.Assignment

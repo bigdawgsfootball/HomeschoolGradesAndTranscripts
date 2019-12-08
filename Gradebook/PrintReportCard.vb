@@ -181,7 +181,7 @@ Public Class PrintReportCard
                     Next
 
                     If RAssigns.Count > 0 Then
-                        para.AddText(CalcGrade(RAssigns).ToString)
+                        para.AddText(CalcGrade(RAssigns).ToString("N0"))
                         AllGrades.Add(CalcGrade(RAssigns))
 
                         If i < 4 Then
@@ -206,7 +206,7 @@ Public Class PrintReportCard
 
                 para = Row.Cells(Sem1Col).AddParagraph
                 If Sem1 > 0 Then
-                    para.AddText(Sem1.ToString("N2"))
+                    para.AddText(Sem1.ToString("N0"))
                 Else
                     para.AddText(" ")
                 End If
@@ -222,7 +222,7 @@ Public Class PrintReportCard
 
                 para = Row.Cells(Sem2Col).AddParagraph
                 If Sem2 > 0 Then
-                    para.AddText(Sem2.ToString("N2"))
+                    para.AddText(Sem2.ToString("N0"))
                 Else
                     para.AddText(" ")
                 End If
@@ -239,7 +239,7 @@ Public Class PrintReportCard
 
                 para = Row.Cells(OverallCol).AddParagraph
                 If overall > 0 Then
-                    para.AddText(overall.ToString("N2"))
+                    para.AddText(overall.ToString("N0"))
                 Else
                     para.AddText(" ")
                 End If
@@ -408,9 +408,9 @@ Public Class PrintReportCard
         End If
 
         If (grade > 0) Then
-            Return ((grade / Weights).ToString("N2"))
+            Return ((grade / Weights).ToString("N0"))
         Else
-            Return 0.ToString("N2")
+            Return 0.ToString("N0")
         End If
 
     End Function

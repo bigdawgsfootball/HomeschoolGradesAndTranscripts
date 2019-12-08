@@ -40,6 +40,10 @@ Public Class frmPrintTranscript
         ' Open the file
         Dim doc As PdfDocument = PdfReader.Open(transcriptfile, PdfDocumentOpenMode.Modify)
 
+        doc.SecuritySettings.PermitFormsFill = True
+        doc.SecuritySettings.PermitModifyDocument = True
+        doc.SecuritySettings.PermitFullQualityPrint = True
+
         Dim name As String
         Dim currentField As PdfTextField
         Dim caseNamePdfStr As PdfString
@@ -48,6 +52,7 @@ Public Class frmPrintTranscript
             caseNamePdfStr = New PdfString(PrintStudent.Name)
             'set the value of this field
             currentField.Value = caseNamePdfStr
+
         Next
 
         'fill in school info
@@ -126,7 +131,7 @@ Public Class frmPrintTranscript
             name = fields(fname)(2)
             currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
             If Cats9.ContainsKey(cat.Key) Then
-                caseNamePdfStr = New PdfString(Cats9.Item(cat.Key))
+                caseNamePdfStr = New PdfString(Math.Round(Cats9.Item(cat.Key), 1))
                 currentField.Value = caseNamePdfStr
             End If
 
@@ -135,7 +140,7 @@ Public Class frmPrintTranscript
             name = fields(fname)(3)
             currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
             If Cats10.ContainsKey(cat.Key) Then
-                caseNamePdfStr = New PdfString(Cats10.Item(cat.Key))
+                caseNamePdfStr = New PdfString(Math.Round(Cats10.Item(cat.Key), 1))
                 currentField.Value = caseNamePdfStr
             End If
 
@@ -143,7 +148,7 @@ Public Class frmPrintTranscript
             name = fields(fname)(4)
             currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
             If Cats11.ContainsKey(cat.Key) Then
-                caseNamePdfStr = New PdfString(Cats11.Item(cat.Key))
+                caseNamePdfStr = New PdfString(Math.Round(Cats11.Item(cat.Key), 1))
                 currentField.Value = caseNamePdfStr
             End If
 
@@ -151,14 +156,14 @@ Public Class frmPrintTranscript
             name = fields(fname)(5)
             currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
             If Cats12.ContainsKey(cat.Key) Then
-                caseNamePdfStr = New PdfString(Cats12.Item(cat.Key))
+                caseNamePdfStr = New PdfString(Math.Round(Cats12.Item(cat.Key), 1))
                 currentField.Value = caseNamePdfStr
             End If
 
             'total column
             name = fields(fname)(6)
             currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
-            caseNamePdfStr = New PdfString(cat.Value)
+            caseNamePdfStr = New PdfString(Math.Round(cat.Value, 1))
             currentField.Value = caseNamePdfStr
 
             i += 1
@@ -166,12 +171,26 @@ Public Class frmPrintTranscript
 
         For Each name In fields("AllCreds")
             currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
-            caseNamePdfStr = New PdfString(OverallCredits.ToString("N2"))
+            caseNamePdfStr = New PdfString(Math.Round(OverallCredits, 1).ToString("N2"))
             currentField.Value = caseNamePdfStr
         Next
 
         'Print out GPA for each year and total
-        OverallGPA = (GPA9 + GPA10 + GPA11 + GPA12) / 4
+        Dim numYears = 0
+        If GPA9 > 0 Then
+            numYears += 1
+        End If
+        If GPA10 > 0 Then
+            numYears += 1
+        End If
+        If GPA11 > 0 Then
+            numYears += 1
+        End If
+        If GPA12 > 0 Then
+            numYears += 1
+        End If
+
+        OverallGPA = (GPA9 + GPA10 + GPA11 + GPA12) / numYears
         i = 0
         For Each name In fields("GPA")
             currentField = TryCast(doc.AcroForm.Fields(name), PdfTextField)
@@ -229,9 +248,17 @@ Public Class frmPrintTranscript
                 Case 0
                     PdfStr = New PdfString(course.Title)
                 Case 1
-                    PdfStr = New PdfString(sem1)
+                    If sem1 <> -1 Then
+                        PdfStr = New PdfString(sem1)
+                    Else
+                        PdfStr = New PdfString("")
+                    End If
                 Case 2
-                    PdfStr = New PdfString(sem2)
+                    If sem2 <> -1 Then
+                        PdfStr = New PdfString(sem2)
+                    Else
+                        PdfStr = New PdfString("")
+                    End If
                 Case 3
                     PdfStr = New PdfString(final)
                 Case 4
@@ -289,7 +316,8 @@ Public Class frmPrintTranscript
 
             'calculate sem1, sem2, final grades and #credits earned
             For Each assign In course.Assignments
-                If assign.RatingPeriod < 4 Then
+                'If assign.RatingPeriod < 4 Then
+                If assign.RatingPeriod <= course.NumRatingPeriods / 2 Then
                     sem1Assigns.Add(assign)
                 Else
                     sem2Assigns.Add(assign)
@@ -297,8 +325,17 @@ Public Class frmPrintTranscript
             Next
 
             final = course.CalcGrade(course.Assignments)
-            sem1 = course.CalcGrade(sem1Assigns)
-            sem2 = course.CalcGrade(sem2Assigns)
+            If sem1Assigns.Count > 0 Then
+                sem1 = course.CalcGrade(sem1Assigns)
+            Else
+                sem1 = -1
+            End If
+            If sem2Assigns.Count > 0 Then
+                sem2 = course.CalcGrade(sem2Assigns)
+            Else
+                sem2 = -1
+            End If
+
             credits = course.Credits
             overall += final
             creds += credits
@@ -308,7 +345,7 @@ Public Class frmPrintTranscript
             fieldcnt = 0
             FieldName = BlankName & coursecnt.ToString
 
-            FillOutGradeFields(FieldName, course, sem1, sem2, final, credits, doc)
+            FillOutGradeFields(FieldName, course, sem1, sem2, final, Math.Round(credits, 1), doc)
 
             'generate counts of course types for overall numbers
             If AllCats.ContainsKey(course.Category) Then
@@ -330,8 +367,8 @@ Public Class frmPrintTranscript
 
         YearGPA = CalcGPA(overall)
 
-        FillOutCumulativeFields(CumFieldName, overall, creds, doc)
+        FillOutCumulativeFields(CumFieldName, overall, Math.Round(creds, 1), doc)
 
-        OverallCredits += creds
+        OverallCredits += Math.Round(creds, 1)
     End Sub
 End Class

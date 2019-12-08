@@ -164,7 +164,42 @@ Public Class frmViewGradebook
                                 cboRatingPeriod.DisplayMember = "RatingPeriod"
                             End If
                         Next
+                    Else
+                        dt.Columns.Add("Title")
+                        dt.Columns.Add("Type")
+                        dt.Columns.Add("Description")
+                        dt.Columns.Add("RatingPeriod")
+                        dt.Columns.Add("Grade")
 
+                        Dim cmb As New DataGridViewComboBoxColumn()
+                        cmb.HeaderText = "AssignmentType"
+                        cmb.Name = "Type"
+                        cmb.DisplayMember = "Key"
+                        cmb.DataPropertyName = "Type"
+                        cmb.ValueType = GetType(AssignTypes)
+
+                        Dim DictAssign As New Dictionary(Of String, Integer)
+
+                        For Each eValue In System.Enum.GetValues(GetType(AssignTypes))
+                            DictAssign.Add(System.Enum.GetName(GetType(AssignTypes), eValue), eValue)
+                        Next
+
+                        cmb.DisplayMember = "Key"
+                        cmb.ValueMember = "Value"
+                        cmb.DataSource = New BindingSource(DictAssign, Nothing)
+
+                        dgvGradebook.DataSource = dt
+
+                        Dim TypeIndex As Integer = dgvGradebook.Columns.IndexOf(dgvGradebook.Columns.Item("Type"))
+                        dgvGradebook.Columns.Remove("Type")
+                        dgvGradebook.Columns.Insert(TypeIndex, cmb)
+
+                        dt = dgvGradebook.DataSource
+                        dgvGradebook.DataSource = dt
+
+                        cboRatingPeriod.Items.Clear()
+                        cboRatingPeriod.Text = ""
+                        cboRatingPeriod.Items.Add("All")
                     End If
 
                     dgvGradebook.Refresh()
