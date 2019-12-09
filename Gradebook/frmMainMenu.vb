@@ -12,6 +12,7 @@ Public Class frmMainMenu
             btnBackUp.Enabled = True
             EditJSONToolStripMenuItem.Enabled = True
             BackupToolStripMenuItem.Enabled = True
+            RestoreFromBackupToolStripMenuItem.Enabled = True
             AddStudentToolStripMenuItem.Enabled = True
             AddCourseToolStripMenuItem.Enabled = True
             AddAssignmentToolStripMenuItem.Enabled = True
@@ -55,7 +56,7 @@ Public Class frmMainMenu
         End If
 
 #If DEBUG Then
-        Dim FileName As String = "C:\Users\Kurt\documents\visual studio 2017\Projects\Gradebook\Gradebook\bin\Debug\AppData.json"
+        Dim FileName As String = "C:\Users\Kurt\Source\Workspaces\Gradebook\Gradebook\Gradebook\bin\Debug\AppData.json"
 #Else
         Dim FileName As String = Path.Combine(ApplicationDeployment.CurrentDeployment.DataDirectory, "AppData.json")
 #End If
@@ -164,5 +165,31 @@ Public Class frmMainMenu
 
     Private Sub EditAssignmentTypesWeightsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAssignmentTypesWeightsToolStripMenuItem.Click
         frmEditATypes.Show()
+    End Sub
+
+    Private Sub RestoreFromBackupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestoreFromBackupToolStripMenuItem.Click
+        Dim GDrivePath As String = System.Environment.GetEnvironmentVariable("GBSYNCPATH", EnvironmentVariableTarget.User)
+
+        If GDrivePath = "" Then
+            MsgBox("No backup location set!")
+        Else
+            If FileIO.FileSystem.DirectoryExists(GDrivePath) Then
+
+                If FileIO.FileSystem.FileExists(GBFile) Then
+                    FileIO.FileSystem.CopyFile(GDrivePath & "\Gradebook\gradebook.json", GBFile, True)
+                    MsgBox(GBFile & " restored to working location. Re-open the Gradebook file.")
+                Else
+                    MsgBox("Could not locate " & GBFile & " to restore")
+                End If
+
+            Else
+                MsgBox("Could not determine synched folder location")
+            End If
+        End If
+
+    End Sub
+
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+        Me.Close()
     End Sub
 End Class

@@ -41,10 +41,17 @@
         cboReportPeriod.Items.Clear()
         cboReportPeriod.Text = ""
 
+        Dim courseList As New List(Of Course)
         For Each courses In cboStudents.SelectedItem.courses
-            For Each assignment In courses.assignments
+            If courses.GradeLevel.Equals(cboGrade.SelectedItem.ToString) Then
+                courseList.Add(courses)
+            End If
+        Next
+
+        For Each courses In courseList
+            For Each assignment In courses.Assignments
                 If Not cboReportPeriod.Items.Contains(assignment.RatingPeriod) Then
-                    cboReportPeriod.Items.Add(assignment.ratingperiod)
+                    cboReportPeriod.Items.Add(assignment.RatingPeriod)
                     cboReportPeriod.DisplayMember = "RatingPeriod"
                 End If
             Next
@@ -55,19 +62,21 @@
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         Dim Report As New PrintReportCard
 
-        If cboStudents.SelectedIndex > -1 And cboGrade.SelectedIndex > -1 And cboReportPeriod.SelectedIndex > -1 Then
+        If cboStudents.SelectedIndex > -1 And cboGrade.SelectedIndex > -1 And cboReportPeriod.SelectedIndex > -1 And (IsNumeric(txtNumPeriods.Text)) Then
             Report.Student = cboStudents.SelectedIndex
 
             Report.GradeLevel = cboGrade.Text
 
             Report.RatingPeriod = cboReportPeriod.Text
 
+            Report.NumPeriods = txtNumPeriods.Text
+
             Report.doPrint()
 
             Me.Close()
 
         Else
-            MsgBox("You need to select a Student, Grade Level, and a Rating Period", vbOK)
+            MsgBox("You need to select a Student, Grade Level, and a Rating Period, and use a valid number for Number of Rating Periods", vbOK)
         End If
 
     End Sub
@@ -75,4 +84,5 @@
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
+
 End Class

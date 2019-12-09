@@ -8,6 +8,7 @@ Public Class PrintReportCard
     Public Property Student As String
     Public Property GradeLevel As String
     Public Property RatingPeriod As String
+    Public Property NumPeriods As Integer
 
     Sub doPrint()
         ' Create a MigraDoc document
@@ -41,9 +42,6 @@ Public Class PrintReportCard
     Function printReportCard() As Document
         Dim pdf As New Document
         Dim para As New Paragraph
-        Dim Sem1Col As Integer = 4
-        Dim Sem2Col As Integer = 8
-        Dim OverallCol As Integer = 9
 
         Cursor.Current = Cursors.WaitCursor
 
@@ -68,34 +66,38 @@ Public Class PrintReportCard
 
         RptTable.Style = "Table"
         RptTable.Borders.Color = Colors.Red
-        RptTable.Borders.Width = 0.25
-        RptTable.Borders.Left.Width = 0.25
-        RptTable.Borders.Right.Width = 0.25
+        RptTable.Borders.Width = 0.5
+        RptTable.Borders.Left.Width = 0.5
+        RptTable.Borders.Right.Width = 0.5
         RptTable.Rows.LeftIndent = 0
+
+        Dim sectionWidth As Double = pdf.DefaultPageSetup.PageWidth.Centimeter - pdf.DefaultPageSetup.LeftMargin.Centimeter - pdf.DefaultPageSetup.RightMargin.Centimeter
+
+        'Dim numPeriods As Integer = InputBox("How many reporting periods total for your courses?", "Number of reporting periods", "6")
+        Dim numPeriods As Integer = Me.NumPeriods
+        Dim colWidth As Double = (sectionWidth - 10) / (numPeriods + 3)
+
+        Dim sem1Col As Integer = Math.Round(numPeriods / 2) + 1
+        Dim sem2Col As Integer = numPeriods + 2
+        Dim overallCol As Integer = numPeriods + 3
+
         ' Before you can add a row, you must define the columns
-        Dim Column As Column = RptTable.AddColumn("6cm")
+        'Course Name
+        Dim Column As Column = RptTable.AddColumn("10cm")
         Column.Format.Alignment = ParagraphAlignment.Center
-        Column = RptTable.AddColumn("1.5cm")
-        Column.Format.Alignment = ParagraphAlignment.Center
-        Column = RptTable.AddColumn("1.5cm")
-        Column.Format.Alignment = ParagraphAlignment.Center
-        Column = RptTable.AddColumn("1.5cm")
-        Column.Format.Alignment = ParagraphAlignment.Center
-        Column = RptTable.AddColumn("1.5cm")
-        Column.Format.Alignment = ParagraphAlignment.Center
+        Column.Format.Font.Size = 12
         Column.Format.Font.Bold = True
-        Column = RptTable.AddColumn("1.5cm")
-        Column.Format.Alignment = ParagraphAlignment.Center
-        Column = RptTable.AddColumn("1.5cm")
-        Column.Format.Alignment = ParagraphAlignment.Center
-        Column = RptTable.AddColumn("1.5cm")
-        Column.Format.Alignment = ParagraphAlignment.Center
-        Column = RptTable.AddColumn("1.5cm")
-        Column.Format.Alignment = ParagraphAlignment.Center
-        Column.Format.Font.Bold = True
-        Column = RptTable.AddColumn("1.5cm")
-        Column.Format.Alignment = ParagraphAlignment.Center
-        Column.Format.Font.Bold = True
+
+        'define columns for all periods, 1st semester, 2nd semester and final grades
+        Dim numCols As Integer = numPeriods + 3
+        For i = 0 To numCols - 1
+            Column = RptTable.AddColumn(colWidth.ToString + "cm")
+            Column.Format.Alignment = ParagraphAlignment.Center
+
+            If ((i = sem1Col - 1) Or (i = sem2Col - 1) Or (i = overallCol - 1)) Then
+                Column.Format.Font.Bold = True
+            End If
+        Next
 
         ' Create the header of the table
         Dim Row As Row = RptTable.AddRow()
@@ -103,26 +105,27 @@ Public Class PrintReportCard
         Row.Format.Alignment = ParagraphAlignment.Center
         Row.Format.Font.Bold = True
         Row.Shading.Color = Colors.LightBlue
+
         Row.Cells(0).AddParagraph("Course")
         Row.Cells(0).Format.Alignment = ParagraphAlignment.Left
-        Row.Cells(1).AddParagraph("1")
-        Row.Cells(1).Format.Alignment = ParagraphAlignment.Center
-        Row.Cells(2).AddParagraph("2")
-        Row.Cells(2).Format.Alignment = ParagraphAlignment.Center
-        Row.Cells(3).AddParagraph("3")
-        Row.Cells(3).Format.Alignment = ParagraphAlignment.Center
-        Row.Cells(Sem1Col).AddParagraph("Sem 1")
-        Row.Cells(Sem1Col).Format.Alignment = ParagraphAlignment.Center
-        Row.Cells(5).AddParagraph("4")
-        Row.Cells(5).Format.Alignment = ParagraphAlignment.Center
-        Row.Cells(6).AddParagraph("5")
-        Row.Cells(6).Format.Alignment = ParagraphAlignment.Center
-        Row.Cells(7).AddParagraph("6")
-        Row.Cells(7).Format.Alignment = ParagraphAlignment.Center
-        Row.Cells(Sem2Col).AddParagraph("Sem 2")
-        Row.Cells(Sem2Col).Format.Alignment = ParagraphAlignment.Center
-        Row.Cells(OverallCol).AddParagraph("Final")
-        Row.Cells(OverallCol).Format.Alignment = ParagraphAlignment.Center
+
+        For i = 1 To numCols
+            Select Case i
+                Case sem1Col
+                    Row.Cells(sem1Col).AddParagraph("Sem 1")
+                Case sem2Col
+                    Row.Cells(sem2Col).AddParagraph("Sem 2")
+                Case overallCol
+                    Row.Cells(overallCol).AddParagraph("Final")
+                Case Else
+                    If (i < sem1Col) Then
+                        Row.Cells(i).AddParagraph(i.ToString)
+                    Else
+                        Row.Cells(i).AddParagraph((i - 1).ToString)
+                    End If
+            End Select
+            Row.Cells(i).Format.Alignment = ParagraphAlignment.Center
+        Next
 
         Dim RepCourses = GB.Students(Me.Student).Courses
         Dim PrintCourses As New List(Of Course)
@@ -160,7 +163,7 @@ Public Class PrintReportCard
 
                 para = Row.Cells(0).AddParagraph()
 
-                para.Style = "Heading3"
+                para.Style = "Heading2"
                 para.AddSpace(10)
                 para.AddText(course.Title)
 
@@ -184,7 +187,7 @@ Public Class PrintReportCard
                         para.AddText(CalcGrade(RAssigns).ToString("N0"))
                         AllGrades.Add(CalcGrade(RAssigns))
 
-                        If i < 4 Then
+                        If i < sem1Col Then
                             Sem1Grades.Add(CalcGrade(RAssigns))
                         Else
                             Sem2Grades.Add(CalcGrade(RAssigns))
@@ -265,47 +268,13 @@ Public Class PrintReportCard
 
         style.Font.Name = "Tahoma"
 
-        ' Heading1 to Heading9 are predefined styles with an outline level. An outline level
-        ' other than OutlineLevel.BodyText automatically creates the outline (Or bookmarks)
-        ' in PDF.
-
-        style = Doc.Styles("Heading1") 'Field
-        style.Font.Size = 10
-        style.Font.Bold = True
-        style.Font.Color = Colors.Black
-        style.ParagraphFormat.PageBreakBefore = True
-        style.ParagraphFormat.SpaceAfter = 6
-
-        style = Doc.Styles("Heading2") 'Church
+        style = Doc.Styles("Heading2") 'Course name
         style.Font.Size = 9
         style.Font.Bold = True
         style.ParagraphFormat.PageBreakBefore = False
         style.ParagraphFormat.SpaceBefore = 6
         style.ParagraphFormat.SpaceAfter = 6
 
-        style = Doc.Styles("Heading3") 'entry
-        style.Font.Size = 8
-        style.Font.Bold = False
-        style.ParagraphFormat.SpaceBefore = 3
-        style.ParagraphFormat.SpaceAfter = 3
-        style.ParagraphFormat.LeftIndent = ".5in" 'this will put wrapped lines indented
-        style.ParagraphFormat.FirstLineIndent = "-.5in" 'this makes sure the first line is not indented
-        style.ParagraphFormat.TabStops.ClearAll()
-        style.ParagraphFormat.AddTabStop("1in")
-        style.ParagraphFormat.KeepTogether = True
-
-        style = Doc.Styles(StyleNames.Header)
-        style.ParagraphFormat.TabStops.ClearAll()
-        style.ParagraphFormat.AddTabStop("2.25in", TabAlignment.Center)
-        style.ParagraphFormat.AddTabStop("4.25in", TabAlignment.Right)
-        style.Font.Size = 6
-        style.Font.Bold = True
-
-        style = Doc.Styles(StyleNames.Footer)
-        style.ParagraphFormat.TabStops.ClearAll()
-        style.ParagraphFormat.AddTabStop(Unit.FromInch((8.5) / 2), TabAlignment.Center)
-        style.Font.Size = 6
-        style.Font.Bold = True
 
     End Sub
 
@@ -314,8 +283,6 @@ Public Class PrintReportCard
         Dim Height As String
         Dim Width As String
 
-        'Height = "11in"
-        'Width = "8.5in"
         Height = "8.5in"
         Width = "11in"
 
