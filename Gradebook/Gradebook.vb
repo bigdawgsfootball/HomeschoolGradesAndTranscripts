@@ -1,4 +1,6 @@
-﻿Public Enum AssignTypes
+﻿Imports Gradebook
+
+Public Enum AssignTypes
     Assignment = 1
     Quiz = 2
     Project = 3
@@ -136,10 +138,21 @@ Public Class Course
         Return (testval.Equals(otherval))
     End Function
 
+    'Public Function Max(them As List(Of Assignment)) As String
+    '    Dim cDT As New DataTable
+    '    cDT. = them
+
+
+    'End Function
+
 End Class
 
 Public Class Assignment
     Implements IEquatable(Of Assignment)
+
+    Private Shared NextID As Integer = 0
+
+    Public Property ID As Integer
 
     Public Property Title As String
     Public Property Type As AssignTypes
@@ -148,13 +161,32 @@ Public Class Assignment
     Public Property RatingPeriod As String
     Public Property Grade As String
 
+    'Public Sub New()
+    '    ID = NextID
+    '    NextID += 1
+    'End Sub
+    Public Shared Function FindPredicate(ByVal Assign As Assignment) _
+       As Predicate(Of Assignment)
+
+        Return Function(Assign2 As Assignment) Assign.ID = Assign2.ID
+
+    End Function
+
+    Public Shared Function FindPredicateById(ByVal AssignID As String) _
+       As Predicate(Of Assignment)
+
+        Return Function(Assign2 As Assignment) AssignID = Assign2.ID
+
+    End Function
+
     Public Overloads Function Equals(other As Assignment) As Boolean _
         Implements IEquatable(Of Assignment).Equals
         If other Is Nothing Then
             Return False
         End If
 
-        Return (Me.Title.Equals(other.Title))
+        'Return (Me.Title.Equals(other.Title))
+        Return (Me.ID.Equals(other.ID))
     End Function
 
 End Class

@@ -136,6 +136,11 @@ Public Class frmViewGradebook
                     If CurCourse.Assignments.Count > 0 Then
                         dt = ConvertToDataTable(Of Assignment)(CurCourse.Assignments)
 
+                        dt.Columns("ID").AutoIncrement = True
+                        dt.Columns("ID").AutoIncrementStep = 1
+                        dt.Columns("ID").ReadOnly = True
+                        dt.Columns("ID").Unique = True
+
                         Dim cmb As New DataGridViewComboBoxColumn()
                         cmb.HeaderText = "AssignmentType"
                         cmb.Name = "Type"
@@ -165,11 +170,17 @@ Public Class frmViewGradebook
                             End If
                         Next
                     Else
+                        dt.Columns.Add("ID")
                         dt.Columns.Add("Title")
                         dt.Columns.Add("Type")
                         dt.Columns.Add("Description")
                         dt.Columns.Add("RatingPeriod")
                         dt.Columns.Add("Grade")
+
+                        dt.Columns("ID").AutoIncrement = True
+                        dt.Columns("ID").AutoIncrementStep = 1
+                        dt.Columns("ID").ReadOnly = True
+                        dt.Columns("ID").Unique = True
 
                         Dim cmb As New DataGridViewComboBoxColumn()
                         cmb.HeaderText = "AssignmentType"
@@ -201,6 +212,8 @@ Public Class frmViewGradebook
                         cboRatingPeriod.Text = ""
                         cboRatingPeriod.Items.Add("All")
                     End If
+
+                    dgvGradebook.Columns("ID").Visible = False
 
                     dgvGradebook.Refresh()
                 Catch ex As Exception
@@ -237,6 +250,7 @@ Public Class frmViewGradebook
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim CurCourse As New Course
         Dim dt As New DataTable
+        Dim maxValue As Integer = 0
 
         CurCourse = cboCourses.SelectedItem
         dt = dgvGradebook.DataSource
@@ -249,6 +263,23 @@ Public Class frmViewGradebook
                 CurAssignment.Type = row("Type").ToString
                 CurAssignment.Grade = row("Grade").ToString
                 CurAssignment.RatingPeriod = row("RatingPeriod").ToString
+                If Not (row("ID").ToString = "") Then
+                    CurAssignment.ID = row("ID")
+                Else
+                    Dim curValue As Integer = 0
+                    Dim allAssigns As New DataTable
+
+                    For Each thisCourse In GB.Students(cboStudents.SelectedIndex).Courses
+                        allAssigns = ConvertToDataTable(Of Assignment)(thisCourse.Assignments)
+                        If allAssigns.Rows.Count > 0 Then
+                            curValue = allAssigns.Compute("MAX(ID)", "")
+                            If maxValue < curValue Then maxValue = curValue
+                        End If
+                    Next
+
+                    maxValue += 1
+                    CurAssignment.ID = maxValue
+                End If
 
                 If CurCourse.Assignments.Contains(CurAssignment) Then
                     'make sure values are correct
@@ -342,4 +373,22 @@ Public Class frmViewGradebook
         HasChanges = True
     End Sub
 
+    Private Sub dgvGradebook_UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgvGradebook.UserDeletingRow
+
+        For Each item In sender.selectedrows
+            Dim DelAssign As New Assignment
+            Dim thisCourse As Integer = 0
+            Dim thisAssign As Integer = 0
+
+            thisCourse = GB.Students(cboStudents.SelectedIndex).Courses.IndexOf(cboCourses.SelectedItem)
+            thisAssign = item.cells(0).value
+            DelAssign = (From Assignments In GB.Students(cboStudents.SelectedIndex).Courses(thisCourse).Assignments
+                         Where Assignments.ID.Equals(thisAssign)
+                         Select Assignments).FirstOrDefault
+            GB.Students(cboStudents.SelectedIndex).Courses(thisCourse).Assignments.Remove(DelAssign)
+        Next
+
+        HasChanges = True
+
+    End Sub
 End Class
