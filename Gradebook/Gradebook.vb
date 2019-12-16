@@ -161,10 +161,11 @@ Public Class Assignment
     Public Property RatingPeriod As String
     Public Property Grade As String
 
-    'Public Sub New()
-    '    ID = NextID
-    '    NextID += 1
-    'End Sub
+    Public Sub New()
+        ID = NextID
+        NextID += 1
+    End Sub
+
     Public Shared Function FindPredicate(ByVal Assign As Assignment) _
        As Predicate(Of Assignment)
 
