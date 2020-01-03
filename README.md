@@ -13,3 +13,5 @@ The data format is a json file. I am working to allow for multiple files, but ri
 
 There is a rudimentary feature for backup and version control of your gradebook data file using whatever backup features you already have (Google Backup and Sync, OneDrive, etc). 
 <b>* 12/16/2019 UPDATE - </b>you can now select which folder is synched for backup. The program will copy your gradebook file to the backup folder, leaving your backup software to sync it. You can also restore from this backup location.
+
+<b>If you want to try out the executable without compiling from the code, just let me know. I'll send you a link to install</b>
