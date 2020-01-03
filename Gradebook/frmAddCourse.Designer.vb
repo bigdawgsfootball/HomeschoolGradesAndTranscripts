@@ -22,6 +22,7 @@ Partial Class frmAddCourse
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAddCourse))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cboStudents = New System.Windows.Forms.ComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -47,18 +48,20 @@ Partial Class frmAddCourse
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(13, 6)
+        Me.Label1.Location = New System.Drawing.Point(17, 7)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(158, 13)
+        Me.Label1.Size = New System.Drawing.Size(209, 17)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Select Student to add Course to"
         '
         'cboStudents
         '
         Me.cboStudents.FormattingEnabled = True
-        Me.cboStudents.Location = New System.Drawing.Point(12, 22)
+        Me.cboStudents.Location = New System.Drawing.Point(16, 27)
+        Me.cboStudents.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cboStudents.Name = "cboStudents"
-        Me.cboStudents.Size = New System.Drawing.Size(256, 21)
+        Me.cboStudents.Size = New System.Drawing.Size(340, 24)
         Me.cboStudents.TabIndex = 0
         '
         'GroupBox1
@@ -75,9 +78,11 @@ Partial Class frmAddCourse
         Me.GroupBox1.Controls.Add(Me.txtGradeLevel)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.txtTitle)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 51)
+        Me.GroupBox1.Location = New System.Drawing.Point(16, 63)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(533, 150)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Size = New System.Drawing.Size(711, 185)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "New Course Info"
@@ -85,105 +90,118 @@ Partial Class frmAddCourse
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(8, 125)
+        Me.Label8.Location = New System.Drawing.Point(11, 154)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(85, 13)
+        Me.Label8.Size = New System.Drawing.Size(114, 17)
         Me.Label8.TabIndex = 11
         Me.Label8.Text = "Course Category"
         '
         'cboCategories
         '
         Me.cboCategories.FormattingEnabled = True
-        Me.cboCategories.Location = New System.Drawing.Point(99, 121)
+        Me.cboCategories.Location = New System.Drawing.Point(132, 149)
+        Me.cboCategories.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cboCategories.Name = "cboCategories"
-        Me.cboCategories.Size = New System.Drawing.Size(426, 21)
+        Me.cboCategories.Size = New System.Drawing.Size(567, 24)
         Me.cboCategories.TabIndex = 6
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(148, 23)
+        Me.Label7.Location = New System.Drawing.Point(197, 28)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(39, 13)
+        Me.Label7.Size = New System.Drawing.Size(52, 17)
         Me.Label7.TabIndex = 9
         Me.Label7.Text = "Credits"
         '
         'txtCredits
         '
-        Me.txtCredits.Location = New System.Drawing.Point(193, 20)
+        Me.txtCredits.Location = New System.Drawing.Point(257, 25)
+        Me.txtCredits.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtCredits.Name = "txtCredits"
-        Me.txtCredits.Size = New System.Drawing.Size(42, 20)
+        Me.txtCredits.Size = New System.Drawing.Size(55, 22)
         Me.txtCredits.TabIndex = 1
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(246, 24)
+        Me.Label6.Location = New System.Drawing.Point(328, 30)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(128, 13)
+        Me.Label6.Size = New System.Drawing.Size(171, 17)
         Me.Label6.TabIndex = 7
         Me.Label6.Text = "Number of Rating Periods"
         '
         'txtNumRatings
         '
-        Me.txtNumRatings.Location = New System.Drawing.Point(376, 21)
+        Me.txtNumRatings.Location = New System.Drawing.Point(501, 26)
+        Me.txtNumRatings.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtNumRatings.Name = "txtNumRatings"
-        Me.txtNumRatings.Size = New System.Drawing.Size(35, 20)
+        Me.txtNumRatings.Size = New System.Drawing.Size(45, 22)
         Me.txtNumRatings.TabIndex = 2
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(5, 74)
+        Me.Label4.Location = New System.Drawing.Point(7, 91)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(86, 13)
+        Me.Label4.Size = New System.Drawing.Size(116, 17)
         Me.Label4.TabIndex = 5
         Me.Label4.Text = "Course Publisher"
         '
         'txtPublisher
         '
-        Me.txtPublisher.Location = New System.Drawing.Point(5, 93)
+        Me.txtPublisher.Location = New System.Drawing.Point(7, 114)
+        Me.txtPublisher.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtPublisher.Name = "txtPublisher"
-        Me.txtPublisher.Size = New System.Drawing.Size(523, 20)
+        Me.txtPublisher.Size = New System.Drawing.Size(696, 22)
         Me.txtPublisher.TabIndex = 5
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(417, 23)
+        Me.Label3.Location = New System.Drawing.Point(556, 28)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(65, 13)
+        Me.Label3.Size = New System.Drawing.Size(86, 17)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Grade Level"
         '
         'txtGradeLevel
         '
-        Me.txtGradeLevel.Location = New System.Drawing.Point(484, 20)
+        Me.txtGradeLevel.Location = New System.Drawing.Point(645, 25)
+        Me.txtGradeLevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtGradeLevel.Name = "txtGradeLevel"
-        Me.txtGradeLevel.Size = New System.Drawing.Size(42, 20)
+        Me.txtGradeLevel.Size = New System.Drawing.Size(55, 22)
         Me.txtGradeLevel.TabIndex = 3
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(4, 27)
+        Me.Label2.Location = New System.Drawing.Point(5, 33)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(63, 13)
+        Me.Label2.Size = New System.Drawing.Size(84, 17)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Course Title"
         '
         'txtTitle
         '
-        Me.txtTitle.Location = New System.Drawing.Point(4, 46)
+        Me.txtTitle.Location = New System.Drawing.Point(5, 57)
+        Me.txtTitle.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtTitle.Name = "txtTitle"
-        Me.txtTitle.Size = New System.Drawing.Size(523, 20)
+        Me.txtTitle.Size = New System.Drawing.Size(696, 22)
         Me.txtTitle.TabIndex = 4
         '
         'btnAddCourse
         '
-        Me.btnAddCourse.Location = New System.Drawing.Point(462, 22)
+        Me.btnAddCourse.Location = New System.Drawing.Point(616, 27)
+        Me.btnAddCourse.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnAddCourse.Name = "btnAddCourse"
-        Me.btnAddCourse.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddCourse.Size = New System.Drawing.Size(100, 28)
         Me.btnAddCourse.TabIndex = 7
         Me.btnAddCourse.Text = "Add Course"
         Me.btnAddCourse.UseVisualStyleBackColor = True
@@ -191,32 +209,36 @@ Partial Class frmAddCourse
         'dgvCourses
         '
         Me.dgvCourses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvCourses.Location = New System.Drawing.Point(12, 223)
+        Me.dgvCourses.Location = New System.Drawing.Point(16, 274)
+        Me.dgvCourses.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dgvCourses.Name = "dgvCourses"
-        Me.dgvCourses.Size = New System.Drawing.Size(527, 279)
+        Me.dgvCourses.Size = New System.Drawing.Size(703, 343)
         Me.dgvCourses.TabIndex = 5
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(12, 204)
+        Me.Label5.Location = New System.Drawing.Point(16, 251)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(84, 13)
+        Me.Label5.Size = New System.Drawing.Size(112, 17)
         Me.Label5.TabIndex = 6
         Me.Label5.Text = "Existing Courses"
         '
         'frmAddCourse
         '
         Me.AcceptButton = Me.btnAddCourse
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(557, 514)
+        Me.ClientSize = New System.Drawing.Size(743, 633)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.dgvCourses)
         Me.Controls.Add(Me.btnAddCourse)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.cboStudents)
         Me.Controls.Add(Me.Label1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "frmAddCourse"
         Me.Text = "Add Course for Student"
         Me.GroupBox1.ResumeLayout(False)

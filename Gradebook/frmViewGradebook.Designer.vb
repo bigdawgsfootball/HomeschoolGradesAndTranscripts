@@ -22,6 +22,7 @@ Partial Class frmViewGradebook
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmViewGradebook))
         Me.cboStudents = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cboGradeLevel = New System.Windows.Forms.ComboBox()
@@ -40,7 +41,7 @@ Partial Class frmViewGradebook
         '
         Me.cboStudents.FormattingEnabled = True
         Me.cboStudents.Location = New System.Drawing.Point(17, 39)
-        Me.cboStudents.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboStudents.Margin = New System.Windows.Forms.Padding(4)
         Me.cboStudents.Name = "cboStudents"
         Me.cboStudents.Size = New System.Drawing.Size(160, 24)
         Me.cboStudents.TabIndex = 0
@@ -59,7 +60,7 @@ Partial Class frmViewGradebook
         '
         Me.cboGradeLevel.FormattingEnabled = True
         Me.cboGradeLevel.Location = New System.Drawing.Point(200, 38)
-        Me.cboGradeLevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboGradeLevel.Margin = New System.Windows.Forms.Padding(4)
         Me.cboGradeLevel.Name = "cboGradeLevel"
         Me.cboGradeLevel.Size = New System.Drawing.Size(119, 24)
         Me.cboGradeLevel.TabIndex = 2
@@ -88,7 +89,7 @@ Partial Class frmViewGradebook
         '
         Me.cboCourses.FormattingEnabled = True
         Me.cboCourses.Location = New System.Drawing.Point(343, 38)
-        Me.cboCourses.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboCourses.Margin = New System.Windows.Forms.Padding(4)
         Me.cboCourses.Name = "cboCourses"
         Me.cboCourses.Size = New System.Drawing.Size(303, 24)
         Me.cboCourses.TabIndex = 4
@@ -101,7 +102,7 @@ Partial Class frmViewGradebook
         Me.dgvGradebook.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.dgvGradebook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvGradebook.Location = New System.Drawing.Point(21, 103)
-        Me.dgvGradebook.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvGradebook.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvGradebook.Name = "dgvGradebook"
         Me.dgvGradebook.Size = New System.Drawing.Size(1156, 485)
         Me.dgvGradebook.TabIndex = 6
@@ -109,7 +110,7 @@ Partial Class frmViewGradebook
         'btnSave
         '
         Me.btnSave.Location = New System.Drawing.Point(1063, 38)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(115, 28)
         Me.btnSave.TabIndex = 7
@@ -119,7 +120,7 @@ Partial Class frmViewGradebook
         'btnCalc
         '
         Me.btnCalc.Location = New System.Drawing.Point(924, 39)
-        Me.btnCalc.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCalc.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCalc.Name = "btnCalc"
         Me.btnCalc.Size = New System.Drawing.Size(100, 28)
         Me.btnCalc.TabIndex = 8
@@ -131,7 +132,7 @@ Partial Class frmViewGradebook
         Me.cboRatingPeriod.FormattingEnabled = True
         Me.cboRatingPeriod.Items.AddRange(New Object() {"All"})
         Me.cboRatingPeriod.Location = New System.Drawing.Point(671, 39)
-        Me.cboRatingPeriod.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboRatingPeriod.Margin = New System.Windows.Forms.Padding(4)
         Me.cboRatingPeriod.Name = "cboRatingPeriod"
         Me.cboRatingPeriod.Size = New System.Drawing.Size(137, 24)
         Me.cboRatingPeriod.TabIndex = 9
@@ -162,7 +163,8 @@ Partial Class frmViewGradebook
         Me.Controls.Add(Me.cboGradeLevel)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cboStudents)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmViewGradebook"
         Me.Text = "Gradebook"
         CType(Me.dgvGradebook, System.ComponentModel.ISupportInitialize).EndInit()

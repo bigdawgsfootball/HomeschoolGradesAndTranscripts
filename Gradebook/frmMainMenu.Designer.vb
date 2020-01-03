@@ -294,6 +294,7 @@ Partial Class frmMainMenu
         Me.Controls.Add(Me.btnViewGradebook)
         Me.Controls.Add(Me.btnOpenGB)
         Me.Controls.Add(Me.mnuMain)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.mnuMain
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmMainMenu"

@@ -136,10 +136,10 @@ Public Class frmViewGradebook
                     If CurCourse.Assignments.Count > 0 Then
                         dt = ConvertToDataTable(Of Assignment)(CurCourse.Assignments)
 
-                        dt.Columns("ID").AutoIncrement = True
-                        dt.Columns("ID").AutoIncrementStep = 1
+                        'dt.Columns("ID").AutoIncrement = True
+                        'dt.Columns("ID").AutoIncrementStep = 1
                         dt.Columns("ID").ReadOnly = True
-                        dt.Columns("ID").Unique = True
+                        'dt.Columns("ID").Unique = True
 
                         Dim cmb As New DataGridViewComboBoxColumn()
                         cmb.HeaderText = "AssignmentType"
@@ -177,10 +177,10 @@ Public Class frmViewGradebook
                         dt.Columns.Add("RatingPeriod")
                         dt.Columns.Add("Grade")
 
-                        dt.Columns("ID").AutoIncrement = True
-                        dt.Columns("ID").AutoIncrementStep = 1
+                        'dt.Columns("ID").AutoIncrement = True
+                        'dt.Columns("ID").AutoIncrementStep = 1
                         dt.Columns("ID").ReadOnly = True
-                        dt.Columns("ID").Unique = True
+                        'dt.Columns("ID").Unique = True
 
                         Dim cmb As New DataGridViewComboBoxColumn()
                         cmb.HeaderText = "AssignmentType"

@@ -33,8 +33,8 @@
     <UpdateUrl>https://bigdawgsfootball.blob.core.windows.net/gradebook/</UpdateUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.8.1.%2a</ApplicationVersion>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>1.8.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -279,9 +279,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="add.ico" />
+    <Content Include="calc.ico" />
     <Content Include="edit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="editicon.ico" />
     <Content Include="gradebook.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -311,6 +314,8 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <Content Include="print.ico" />
+    <Content Include="school.ico" />
     <Content Include="TranscriptTemplate.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

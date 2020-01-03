@@ -22,6 +22,7 @@ Partial Class frmAddStudent
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAddStudent))
         Me.dgvStudents = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtNewStudent = New System.Windows.Forms.TextBox()
@@ -33,41 +34,46 @@ Partial Class frmAddStudent
         'dgvStudents
         '
         Me.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvStudents.Location = New System.Drawing.Point(13, 69)
+        Me.dgvStudents.Location = New System.Drawing.Point(17, 85)
+        Me.dgvStudents.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dgvStudents.Name = "dgvStudents"
-        Me.dgvStudents.Size = New System.Drawing.Size(434, 179)
+        Me.dgvStudents.Size = New System.Drawing.Size(579, 220)
         Me.dgvStudents.TabIndex = 0
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(13, 50)
+        Me.Label1.Location = New System.Drawing.Point(17, 62)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(86, 13)
+        Me.Label1.Size = New System.Drawing.Size(115, 17)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Current Students"
         '
         'txtNewStudent
         '
-        Me.txtNewStudent.Location = New System.Drawing.Point(13, 26)
+        Me.txtNewStudent.Location = New System.Drawing.Point(17, 32)
+        Me.txtNewStudent.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtNewStudent.Name = "txtNewStudent"
-        Me.txtNewStudent.Size = New System.Drawing.Size(373, 20)
+        Me.txtNewStudent.Size = New System.Drawing.Size(496, 22)
         Me.txtNewStudent.TabIndex = 2
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(16, 7)
+        Me.Label2.Location = New System.Drawing.Point(21, 9)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(69, 13)
+        Me.Label2.Size = New System.Drawing.Size(88, 17)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "New Student"
         '
         'btnAddStudent
         '
-        Me.btnAddStudent.Location = New System.Drawing.Point(393, 26)
+        Me.btnAddStudent.Location = New System.Drawing.Point(524, 32)
+        Me.btnAddStudent.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnAddStudent.Name = "btnAddStudent"
-        Me.btnAddStudent.Size = New System.Drawing.Size(54, 23)
+        Me.btnAddStudent.Size = New System.Drawing.Size(72, 28)
         Me.btnAddStudent.TabIndex = 4
         Me.btnAddStudent.Text = "Add"
         Me.btnAddStudent.UseVisualStyleBackColor = True
@@ -75,14 +81,16 @@ Partial Class frmAddStudent
         'frmAddStudent
         '
         Me.AcceptButton = Me.btnAddStudent
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(459, 261)
+        Me.ClientSize = New System.Drawing.Size(612, 321)
         Me.Controls.Add(Me.btnAddStudent)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtNewStudent)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.dgvStudents)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "frmAddStudent"
         Me.Text = "Add Student to Gradebook"
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).EndInit()
