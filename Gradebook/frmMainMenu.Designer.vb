@@ -53,6 +53,7 @@ Partial Class frmMainMenu
         Me.lblSchoolName = New System.Windows.Forms.Label()
         Me.lblAddr1 = New System.Windows.Forms.Label()
         Me.lblAddr2 = New System.Windows.Forms.Label()
+        Me.GenerateAssignmentListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuMain.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -218,7 +219,7 @@ Partial Class frmMainMenu
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcGradeToolStripMenuItem, Me.GenReportCardToolStripMenuItem, Me.GenerateTranscriptToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcGradeToolStripMenuItem, Me.GenReportCardToolStripMenuItem, Me.GenerateTranscriptToolStripMenuItem, Me.GenerateAssignmentListToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(56, 24)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -227,21 +228,21 @@ Partial Class frmMainMenu
         '
         Me.CalcGradeToolStripMenuItem.Enabled = False
         Me.CalcGradeToolStripMenuItem.Name = "CalcGradeToolStripMenuItem"
-        Me.CalcGradeToolStripMenuItem.Size = New System.Drawing.Size(228, 26)
+        Me.CalcGradeToolStripMenuItem.Size = New System.Drawing.Size(251, 26)
         Me.CalcGradeToolStripMenuItem.Text = "Calculate Grade"
         '
         'GenReportCardToolStripMenuItem
         '
         Me.GenReportCardToolStripMenuItem.Enabled = False
         Me.GenReportCardToolStripMenuItem.Name = "GenReportCardToolStripMenuItem"
-        Me.GenReportCardToolStripMenuItem.Size = New System.Drawing.Size(228, 26)
+        Me.GenReportCardToolStripMenuItem.Size = New System.Drawing.Size(251, 26)
         Me.GenReportCardToolStripMenuItem.Text = "Generate Report Card"
         '
         'GenerateTranscriptToolStripMenuItem
         '
         Me.GenerateTranscriptToolStripMenuItem.Enabled = False
         Me.GenerateTranscriptToolStripMenuItem.Name = "GenerateTranscriptToolStripMenuItem"
-        Me.GenerateTranscriptToolStripMenuItem.Size = New System.Drawing.Size(228, 26)
+        Me.GenerateTranscriptToolStripMenuItem.Size = New System.Drawing.Size(251, 26)
         Me.GenerateTranscriptToolStripMenuItem.Text = "Generate Transcript"
         '
         'btnBackUp
@@ -281,6 +282,12 @@ Partial Class frmMainMenu
         Me.lblAddr2.Name = "lblAddr2"
         Me.lblAddr2.Size = New System.Drawing.Size(0, 17)
         Me.lblAddr2.TabIndex = 16
+        '
+        'GenerateAssignmentListToolStripMenuItem
+        '
+        Me.GenerateAssignmentListToolStripMenuItem.Name = "GenerateAssignmentListToolStripMenuItem"
+        Me.GenerateAssignmentListToolStripMenuItem.Size = New System.Drawing.Size(251, 26)
+        Me.GenerateAssignmentListToolStripMenuItem.Text = "Generate Assignment List"
         '
         'frmMainMenu
         '
@@ -336,4 +343,5 @@ Partial Class frmMainMenu
     Friend WithEvents EditCourseCategoriesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EditAssignmentTypesWeightsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RestoreFromBackupToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GenerateAssignmentListToolStripMenuItem As ToolStripMenuItem
 End Class

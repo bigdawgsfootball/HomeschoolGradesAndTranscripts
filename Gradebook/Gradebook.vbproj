@@ -33,7 +33,7 @@
     <UpdateUrl>https://bigdawgsfootball.blob.core.windows.net/gradebook/</UpdateUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.8.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -178,6 +178,12 @@
     <Compile Include="frmEditCategories.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPrintAssigns.Designer.vb">
+      <DependentUpon>frmPrintAssigns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrintAssigns.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPrintTranscript.Designer.vb">
       <DependentUpon>frmPrintTranscript.vb</DependentUpon>
     </Compile>
@@ -232,6 +238,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="PrintAssignmentList.vb" />
     <Compile Include="PrintReportCard.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintAssigns.resx">
+      <DependentUpon>frmPrintAssigns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrintTranscript.resx">
       <DependentUpon>frmPrintTranscript.vb</DependentUpon>
@@ -316,9 +326,7 @@
     <None Include="packages.config" />
     <Content Include="print.ico" />
     <Content Include="school.ico" />
-    <Content Include="TranscriptTemplate.pdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="TranscriptTemplate.pdf" />
   </ItemGroup>
   <ItemGroup>
     <PublishFile Include="AppData.json">
@@ -332,16 +340,6 @@
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="gradebook.json">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
-    <PublishFile Include="TranscriptTemplate.pdf">
       <Visible>False</Visible>
       <Group>
       </Group>

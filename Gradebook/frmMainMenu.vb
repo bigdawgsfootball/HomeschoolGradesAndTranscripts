@@ -192,4 +192,8 @@ Public Class frmMainMenu
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
     End Sub
+
+    Private Sub GenerateAssignmentListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerateAssignmentListToolStripMenuItem.Click
+        frmPrintAssigns.Show()
+    End Sub
 End Class
