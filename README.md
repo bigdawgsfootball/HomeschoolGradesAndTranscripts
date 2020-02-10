@@ -4,6 +4,8 @@ Full featured Windows application to track homeschool grades and create high sch
 
 This application currently allows you to track grades for any number of students across different grade years. I am currently using it to be able to generate transcripts for my kids when they graduate high school, and there wasn't a good way to track their grades for 4 years without paying a bunch of money. 
 
+<b>* 02/10/2020 UPDATE - </b>You can now create a listing of assignments taken per course. This is to answer any questions on the course load. This listing is in tabular format, showing the course then assignment name, description, assignment type and grade. You can select multiple courses within the same grade level to print as a list.
+
 <b>* 01/21/2020 UPDATE - </b>I have included an ability to generate transcripts. The 3 page transcript will fill out up to 14 courses per grade year, 4 grade years total, and calculate grades and credits for each grade year, direct from your gradebook entries. I have purchased the pdf editing software, so there is no more watermark on the template.
 
 <b>* 12/16/2019 UPDATE - </b>Printing a report card is now completely configurable to the number of rating periods you have. Just make sure the rating period for each assignment is correct.
