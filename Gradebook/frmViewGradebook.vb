@@ -138,7 +138,7 @@ Public Class frmViewGradebook
 
                         'dt.Columns("ID").AutoIncrement = True
                         'dt.Columns("ID").AutoIncrementStep = 1
-                        dt.Columns("ID").ReadOnly = True
+                        dt.Columns("ID").ReadOnly = False
                         'dt.Columns("ID").Unique = True
 
                         Dim cmb As New DataGridViewComboBoxColumn()
@@ -179,7 +179,7 @@ Public Class frmViewGradebook
 
                         'dt.Columns("ID").AutoIncrement = True
                         'dt.Columns("ID").AutoIncrementStep = 1
-                        dt.Columns("ID").ReadOnly = True
+                        dt.Columns("ID").ReadOnly = False
                         'dt.Columns("ID").Unique = True
 
                         Dim cmb As New DataGridViewComboBoxColumn()
@@ -288,6 +288,7 @@ Public Class frmViewGradebook
                 Else
                     'add new assignment
                     CurCourse.Assignments.Add(CurAssignment)
+                    row("ID") = CurAssignment.ID
                 End If
             Next
 
