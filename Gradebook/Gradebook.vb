@@ -150,7 +150,7 @@ End Class
 Public Class Assignment
     Implements IEquatable(Of Assignment)
 
-    Private Shared NextID As Integer = 0
+    'Private Shared NextID As Integer = 0
 
     Public Property ID As Integer
 
@@ -162,8 +162,8 @@ Public Class Assignment
     Public Property Grade As String
 
     Public Sub New()
-        ID = NextID
-        NextID += 1
+        'ID = NextID
+        'NextID += 1
     End Sub
 
     Public Shared Function FindPredicate(ByVal Assign As Assignment) _
