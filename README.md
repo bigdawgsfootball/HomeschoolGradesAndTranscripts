@@ -4,16 +4,15 @@ Full featured Windows application to track homeschool grades and create high sch
 
 This application currently allows you to track grades for any number of students across different grade years. I am currently using it to be able to generate transcripts for my kids when they graduate high school, and there wasn't a good way to track their grades for 4 years without paying a bunch of money. 
 
-<b>* 02/10/2020 UPDATE - </b>You can now create a listing of assignments taken per course. This is to answer any questions on the course load. This listing is in tabular format, showing the course then assignment name, description, assignment type and grade. You can select multiple courses within the same grade level to print as a list.
-
-<b>* 01/21/2020 UPDATE - </b>I have included an ability to generate transcripts. The 3 page transcript will fill out up to 14 courses per grade year, 4 grade years total, and calculate grades and credits for each grade year, direct from your gradebook entries. I have purchased the pdf editing software, so there is no more watermark on the template.
-
-<b>* 12/16/2019 UPDATE - </b>Printing a report card is now completely configurable to the number of rating periods you have. Just make sure the rating period for each assignment is correct.
-
-The data format is a json file. I am working to allow for multiple files, but right now there is only 1 file for everything.
-<b>* UPDATE - </b>you can now have different gradebook files, with option to create new and change working file
-
-There is a rudimentary feature for backup and version control of your gradebook data file using whatever backup features you already have (Google Backup and Sync, OneDrive, etc). 
-<b>* 12/16/2019 UPDATE - </b>you can now select which folder is synched for backup. The program will copy your gradebook file to the backup folder, leaving your backup software to sync it. You can also restore from this backup location.
+<b>Features</b>
+  * <b>Student Numbers</b> - Manage as many students as you need. You can have multiple students in a single data file, or manage multiple files each with a single student.
+  * <b>Report Card</b> - Print a report card for each rating period, which will show the grades for each rating period as well as cumulative Semester and Year End grades
+  * <b>Quick Grades</b> - Calculate and display current grade for a student
+  * <b>Transcript</b> - Print a 3-page transcript showing the course grades / credits for each school year, then a cumulative credit table by subject. No PII is kept within
+  the application - you can add in SSN and student full name (as well as modify any editible field) in the transcript once created
+  * <b>Assignment Listing</b> - Print a list of all assignments taken within a course, and as many courses as you like per year
+  * <b>Backup / Restore</b> - Can utilize your existing folder based backup solution by copying  your data file to this folder, and restoring from there later
+  * <b>Calculator</b> - Bring up the calc.exe from within the application to assist with figuring out the correct grade
+  * <b>Custom Credit</b> - Assign your own credit values to your courses. Have a course that only lasts 1/2 a year? Assign it a .5 credit value.
 
 <b>If you want to try out the executable without compiling from the code, just let me know. I'll send you a link to install</b>
