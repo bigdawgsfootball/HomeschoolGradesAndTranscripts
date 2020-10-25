@@ -8,6 +8,7 @@ Public Class frmViewGradebook
     Private PrevStudent As Student
     Private PrevGradeLevel As String
     Private Skip As Boolean = False
+    Private GridDT As New DataTable
 
 
     Private Sub frmViewGradebook_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -214,6 +215,7 @@ Public Class frmViewGradebook
                     End If
 
                     dgvGradebook.Columns("ID").Visible = False
+                    GridDT = dt
 
                     dgvGradebook.Refresh()
                 Catch ex As Exception
@@ -240,7 +242,8 @@ Public Class frmViewGradebook
             Dim row As DataRow = table.NewRow()
             For Each field In fields
                 Dim p = item.GetType.GetProperty(field.Name)
-                row(field.Name) = p.GetValue(item, Nothing)
+                'row(field.Name) = p.GetValue(item, Nothing)
+                row(field.Name) = p.GetValue(item)
             Next
             table.Rows.Add(row)
         Next
@@ -298,6 +301,8 @@ Public Class frmViewGradebook
             GB.Students(StudentIndex).Courses(CourseIndex) = CurCourse
 
             SaveGradebook()
+            'GridDT = dt
+            OpenGradebook(False)
 
             HasChanges = False
 
@@ -391,5 +396,17 @@ Public Class frmViewGradebook
 
         HasChanges = True
 
+    End Sub
+
+    Private Sub Undo(dt As DataTable)
+        dt.RejectChanges()
+    End Sub
+
+    Private Sub dgvGradebook_KeyPress(sender As Object, e As KeyPressEventArgs) Handles dgvGradebook.KeyPress
+        If Keys.ControlKey AndAlso Keys.Z Then
+            Undo(GridDT)
+            dgvGradebook.DataSource = GridDT
+            dgvGradebook.Refresh()
+        End If
     End Sub
 End Class

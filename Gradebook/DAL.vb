@@ -4,7 +4,7 @@ Imports System.Deployment.Application
 
 Module DAL
 
-    Friend Sub OpenGradebook()
+    Friend Sub OpenGradebook(Optional ByVal ShowMessage As Boolean = True)
         Dim FStream As Stream
         Dim JSONString As String = ""
 
@@ -13,7 +13,7 @@ Module DAL
                 dialog.Filter = "JSON Files (*.json) | *.json"
                 dialog.Title = "Select Gradebook file to open"
 #If DEBUG Then
-               dialog.InitialDirectory = "C:\Users\Kurt\Downloads"
+                dialog.InitialDirectory = "C:\Users\Kurt\Downloads"
 #Else
                 dialog.InitialDirectory = ApplicationDeployment.CurrentDeployment.DataDirectory
 #End If
@@ -34,9 +34,11 @@ Module DAL
 
         If Not IsNothing(JSONString) Then
             GB = JsonConvert.DeserializeObject(Of Gradebook)(JSONString)
-            MsgBox("Gradebook Opened!", vbOKOnly, "Success!")
+            If ShowMessage Then
+                MsgBox("Gradebook Opened!", vbOKOnly, "Success!")
+            End If
         Else
-            MsgBox("JSON string invalid.", vbOKOnly)
+                MsgBox("JSON string invalid.", vbOKOnly)
         End If
 
     End Sub
