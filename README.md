@@ -11,6 +11,12 @@ This application currently allows you to track grades for any number of students
   * <b>Transcript</b> - Print a 3-page transcript showing the course grades / credits for each school year, then a cumulative credit table by subject. No PII is kept within
   the application - you can add in SSN and student full name (as well as modify any editible field) in the transcript once created
   * <b>Assignment Listing</b> - Print a list of all assignments taken within a course, and as many courses as you like per year
+  * <b>Custom Assignment Weights</b> - Ability to customize the weight of each assignment. Default weights are:
+    * Assignment = 1
+    * Quiz = 2
+    * Project = 3
+    * Test = 4
+    * Exam = 5
   * <b>Backup / Restore</b> - Can utilize your existing folder based backup solution by copying  your data file to this folder, and restoring from there later
   * <b>Calculator</b> - Bring up the calc.exe from within the application to assist with figuring out the correct grade
   * <b>Custom Credit</b> - Assign your own credit values to your courses. Have a course that only lasts 1/2 a year? Assign it a .5 credit value.
