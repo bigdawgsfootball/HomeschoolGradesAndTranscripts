@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Deployment.Application
 
 Public Class frmMainMenu
+    Public Shared AssignWeights As New List(Of AssignmentType)
 
     Private Sub btnOpenGB_Click(sender As Object, e As EventArgs) Handles btnOpenGB.Click
         OpenGradebook()
@@ -63,6 +64,9 @@ Public Class frmMainMenu
         Dim content As String = File.ReadAllText(FileName)
         AD = JsonConvert.DeserializeObject(content, GetType(AppData))
 
+        For Each weight In AD.AssignmentTypes
+            AssignWeights.Add(weight)
+        Next
 
     End Sub
 

@@ -20,7 +20,7 @@ Public Class frmEditCategories
         Dim FStream As Stream
 
 #If DEBUG Then
-        Dim FileName As String = "C:\Users\Kurt\documents\visual studio 2017\Projects\Gradebook\Gradebook\bin\Debug\AppData.json"
+        Dim FileName As String = "C:\Users\Kurt\Source\Workspaces\Gradebook\Gradebook\Gradebook\bin\Debug\AppData.json"
 #Else
         Dim FileName As String = Path.Combine(ApplicationDeployment.CurrentDeployment.DataDirectory, "AppData.json")
 #End If

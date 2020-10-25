@@ -100,24 +100,38 @@ Public Class Course
         EGrade = EGrade / ECount
 
         If ACount > 0 Then
-            grade += (AGrade * AssignTypes.Assignment)
-            Weights += AssignTypes.Assignment
+            'grade += (AGrade * AssignTypes.Assignment)
+            'Weights += AssignTypes.Assignment
+            grade += (AGrade * frmMainMenu.AssignWeights.Item("Assignment").Weight)
+            Weights += frmMainMenu.AssignWeights.Item("Assignment").Weight
         End If
         If QCount > 0 Then
-            grade += (QGrade * AssignTypes.Quiz)
-            Weights += AssignTypes.Quiz
+            'grade += (QGrade * AssignTypes.Quiz)
+            'Weights += AssignTypes.Quiz
+            grade += (QGrade * frmMainMenu.AssignWeights.Item("Quiz").Weight)
+            Weights += frmMainMenu.AssignWeights.Item("Quiz").Weight
+
         End If
         If TCount > 0 Then
-            grade += (TGrade * AssignTypes.Test)
-            Weights += AssignTypes.Test
+            'grade += (TGrade * AssignTypes.Test)
+            'Weights += AssignTypes.Test
+            grade += (TGrade * frmMainMenu.AssignWeights.Item("Test").Weight)
+            Weights += frmMainMenu.AssignWeights.Item("Test").Weight
+
         End If
         If PCount > 0 Then
-            grade += (PGrade * AssignTypes.Project)
-            Weights += AssignTypes.Project
+            'grade += (PGrade * AssignTypes.Project)
+            'Weights += AssignTypes.Project
+            grade += (PGrade * frmMainMenu.AssignWeights.Item("Project").Weight)
+            Weights += frmMainMenu.AssignWeights.Item("Project").Weight
+
         End If
         If ECount > 0 Then
-            grade += (EGrade * AssignTypes.Exam)
-            Weights += AssignTypes.Exam
+            'grade += (EGrade * AssignTypes.Exam)
+            'Weights += AssignTypes.Exam
+            grade += (EGrade * frmMainMenu.AssignWeights.Item("Exam").Weight)
+            Weights += frmMainMenu.AssignWeights.Item("Exam").Weight
+
         End If
 
         If (grade > 0) Then

@@ -1,5 +1,7 @@
 ﻿Imports Newtonsoft.Json
 Imports System.IO
+Imports System.Deployment.Application
+
 
 Public Class frmAddCourse
     Private studentsbindingsource As New BindingSource
@@ -15,9 +17,9 @@ Public Class frmAddCourse
         dgvCourses.DataSource = coursesbindingsource
 
 #If DEBUG Then
-        Dim CatFile As String = "C:\Users\Kurt\documents\visual studio 2017\Projects\Gradebook\Gradebook\AppData.json"
+        Dim CatFile As String = "C:\Users\Kurt\Source\Workspaces\Gradebook\Gradebook\Gradebook\bin\Debug\AppData.json"
 #Else
-        Dim CatFile As String = Application.CommonAppDataPath & "\AppData.json"
+        Dim CatFile As String = Path.Combine(ApplicationDeployment.CurrentDeployment.DataDirectory, "AppData.json")
 #End If
 
         Dim FStream As Stream

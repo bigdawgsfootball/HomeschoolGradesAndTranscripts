@@ -25,23 +25,23 @@
   "AssignmentTypes": [
     {
       "Name": "Assignment",
-      "Weight": 1.0
+      "Weight": 1
     },
     {
       "Name": "Quiz",
-        "Weight": 2.0
+        "Weight": 2
     },
     {
       "Name": "Project",
-      "Weight": 3.0
+      "Weight": 3
     },
     {
       "Name": "Test",
-      "Weight": 4.0
+      "Weight": 4
     },
     {
       "Name": "Exam",
-      "Weight": 5.0
+      "Weight": 5
     }
   ]
 }

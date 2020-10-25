@@ -21,6 +21,7 @@ Public Class frmPrintTranscript
 #Else
         Dim template As String = Application.CommonAppDataPath & "\TranscriptTemplate.pdf"
 #End If
+
         Dim transcriptfilepath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
         Dim transcriptfilename As String = ""
 
