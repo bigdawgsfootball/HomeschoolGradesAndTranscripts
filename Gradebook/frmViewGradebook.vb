@@ -9,6 +9,7 @@ Public Class frmViewGradebook
     Private PrevGradeLevel As String
     Private Skip As Boolean = False
     Private GridDT As New DataTable
+    Private CtrlKeyEntered As Boolean
 
 
     Private Sub frmViewGradebook_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -398,15 +399,4 @@ Public Class frmViewGradebook
 
     End Sub
 
-    Private Sub Undo(dt As DataTable)
-        dt.RejectChanges()
-    End Sub
-
-    Private Sub dgvGradebook_KeyPress(sender As Object, e As KeyPressEventArgs) Handles dgvGradebook.KeyPress
-        If Keys.ControlKey AndAlso Keys.Z Then
-            Undo(GridDT)
-            dgvGradebook.DataSource = GridDT
-            dgvGradebook.Refresh()
-        End If
-    End Sub
 End Class
