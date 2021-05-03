@@ -202,6 +202,6 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
-        Process.Start(Application.UserAppDataPath & "\GradebookHelp.pdf")
+        Process.Start(Application.StartupPath & "\GradebookHelp.pdf")
     End Sub
 End Class
