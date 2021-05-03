@@ -159,7 +159,7 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub EditSchoolInfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditSchoolInfoToolStripMenuItem.Click
-        frmSchoolInfo.ShowDialog()
+        frmSchoolInfo.Show()
         LoadSchoolInfo()
     End Sub
 
@@ -199,5 +199,9 @@ Public Class frmMainMenu
 
     Private Sub GenerateAssignmentListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerateAssignmentListToolStripMenuItem.Click
         frmPrintAssigns.Show()
+    End Sub
+
+    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
+        Process.Start(Application.UserAppDataPath & "\GradebookHelp.pdf")
     End Sub
 End Class

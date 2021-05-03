@@ -24,7 +24,7 @@
 
     End Sub
 
-    Private Sub frmSchoolInfo_Invalidated(sender As Object, e As InvalidateEventArgs) Handles Me.Invalidated
+    Private Sub frmSchoolInfo_Load() Handles MyBase.Load
         Dim stringSeparators() As String = {"``"}
 
         Dim Info As String = Environment.GetEnvironmentVariable("GBSCHOOLINFO", EnvironmentVariableTarget.User)
@@ -35,4 +35,5 @@
             txtAddr2.Text = Pieces(2)
         End If
     End Sub
+
 End Class
