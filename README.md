@@ -20,6 +20,6 @@ This application currently allows you to track grades for any number of students
   * <b>Backup / Restore</b> - Can utilize your existing folder based backup solution by copying  your data file to this folder, and restoring from there later
   * <b>Calculator</b> - Bring up the calc.exe from within the application to assist with figuring out the correct grade
   * <b>Custom Credit</b> - Assign your own credit values to your courses. Have a course that only lasts 1/2 a year? Assign it a .5 credit value.
-  * <b>*NEW* Help Documentation</b> - Full documentation on installing, configuring and using the Gradebook application.
+  * <b>*NEW* Help Documentation</b> - Full documentation on installing, configuring and using the Gradebook application. <a href="https://github.com/bigdawgsfootball/HomeschoolGradesAndTranscripts/blob/6e88e4c54a550290613850b793f702a805241052/Gradebook/GradeBookHelp.pdf">View here</a>
 
 <b>If you want to try out the executable without compiling from the code, just let me know. I'll send you a link to install</b>
