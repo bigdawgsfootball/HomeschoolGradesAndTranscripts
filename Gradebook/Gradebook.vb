@@ -13,8 +13,42 @@ Public Class Category
 End Class
 
 Public Class AssignmentType
+    Implements IEquatable(Of String)
+
     Public Property Name As String
     Public Property Weight As Double
+
+    Public Overloads Function Equals(other As String) As Boolean _
+                   Implements IEquatable(Of String).Equals
+        If other Is Nothing Then Return False
+
+        If Me.Name = other Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Overrides Function GetHashCode() As Integer
+        Return Me.Name.GetHashCode()
+    End Function
+
+    Public Shared Operator =(A1 As AssignmentType, A2 As AssignmentType) As Boolean
+        If A1 Is Nothing OrElse A2 Is Nothing Then
+            Return Object.Equals(A1, A2)
+        End If
+
+        Return A1.Equals(A2)
+    End Operator
+
+    Public Shared Operator <>(A1 As AssignmentType, A2 As AssignmentType) As Boolean
+        If A1 Is Nothing OrElse A2 Is Nothing Then
+            Return Not Object.Equals(A1, A2)
+        End If
+
+        Return Not A1.Equals(A2)
+    End Operator
+
 End Class
 
 Public Class AppData
@@ -99,38 +133,56 @@ Public Class Course
         PGrade = PGrade / PCount
         EGrade = EGrade / ECount
 
+        Dim ndx As Integer = 0
+        Dim FindAssign As AssignmentType
+
         If ACount > 0 Then
-            'grade += (AGrade * AssignTypes.Assignment)
-            'Weights += AssignTypes.Assignment
-            grade += (AGrade * frmMainMenu.AssignWeights.Item("Assignment").Weight)
-            Weights += frmMainMenu.AssignWeights.Item("Assignment").Weight
+            FindAssign = frmMainMenu.AssignWeights.Where(Function(x) x.Name = "Assignment").FirstOrDefault
+            If FindAssign IsNot Nothing Then
+                ndx = frmMainMenu.AssignWeights.IndexOf(FindAssign)
+            End If
+
+            grade += (AGrade * frmMainMenu.AssignWeights.Item(ndx).Weight)
+            Weights += frmMainMenu.AssignWeights.Item(ndx).Weight
         End If
         If QCount > 0 Then
-            'grade += (QGrade * AssignTypes.Quiz)
-            'Weights += AssignTypes.Quiz
-            grade += (QGrade * frmMainMenu.AssignWeights.Item("Quiz").Weight)
-            Weights += frmMainMenu.AssignWeights.Item("Quiz").Weight
+            FindAssign = frmMainMenu.AssignWeights.Where(Function(x) x.Name = "Quiz").FirstOrDefault
+            If FindAssign IsNot Nothing Then
+                ndx = frmMainMenu.AssignWeights.IndexOf(FindAssign)
+            End If
+
+            grade += (QGrade * frmMainMenu.AssignWeights.Item(ndx).Weight)
+            Weights += frmMainMenu.AssignWeights.Item(ndx).Weight
 
         End If
         If TCount > 0 Then
-            'grade += (TGrade * AssignTypes.Test)
-            'Weights += AssignTypes.Test
-            grade += (TGrade * frmMainMenu.AssignWeights.Item("Test").Weight)
-            Weights += frmMainMenu.AssignWeights.Item("Test").Weight
+            FindAssign = frmMainMenu.AssignWeights.Where(Function(x) x.Name = "Test").FirstOrDefault
+            If FindAssign IsNot Nothing Then
+                ndx = frmMainMenu.AssignWeights.IndexOf(FindAssign)
+            End If
+
+            grade += (TGrade * frmMainMenu.AssignWeights.Item(ndx).Weight)
+            Weights += frmMainMenu.AssignWeights.Item(ndx).Weight
 
         End If
         If PCount > 0 Then
-            'grade += (PGrade * AssignTypes.Project)
-            'Weights += AssignTypes.Project
-            grade += (PGrade * frmMainMenu.AssignWeights.Item("Project").Weight)
-            Weights += frmMainMenu.AssignWeights.Item("Project").Weight
+            FindAssign = frmMainMenu.AssignWeights.Where(Function(x) x.Name = "Project").FirstOrDefault
+            If FindAssign IsNot Nothing Then
+                ndx = frmMainMenu.AssignWeights.IndexOf(FindAssign)
+            End If
+
+            grade += (PGrade * frmMainMenu.AssignWeights.Item(ndx).Weight)
+            Weights += frmMainMenu.AssignWeights.Item(ndx).Weight
 
         End If
         If ECount > 0 Then
-            'grade += (EGrade * AssignTypes.Exam)
-            'Weights += AssignTypes.Exam
-            grade += (EGrade * frmMainMenu.AssignWeights.Item("Exam").Weight)
-            Weights += frmMainMenu.AssignWeights.Item("Exam").Weight
+            FindAssign = frmMainMenu.AssignWeights.Where(Function(x) x.Name = "Exam").FirstOrDefault
+            If FindAssign IsNot Nothing Then
+                ndx = frmMainMenu.AssignWeights.IndexOf(FindAssign)
+            End If
+
+            grade += (EGrade * frmMainMenu.AssignWeights.Item(ndx).Weight)
+            Weights += frmMainMenu.AssignWeights.Item(ndx).Weight
 
         End If
 
