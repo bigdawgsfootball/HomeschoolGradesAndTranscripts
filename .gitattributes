@@ -15,3 +15,8 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+# Handle ClickOnce files correctly
+*.manifest binary
+*.application binary
+*.deploy binary
