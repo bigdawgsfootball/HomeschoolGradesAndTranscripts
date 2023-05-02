@@ -44,5 +44,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"bigdawgsfootball_HomeschoolGradesAndTranscripts" /o:"bigdawgsfootball-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          msbuild .\Gradebook.sln -t:rebuild -verbosity:diag -property:Configuration=Release
+          msbuild.exe .\Gradebook.sln -t:rebuild -verbosity:diag -property:Configuration=Release
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
