@@ -1,0 +1,47 @@
+﻿{
+  "Categories": [
+    {
+      "Name": "Math"
+    },
+    {
+      "Name": "Science"
+    },
+    {
+      "Name": "Social Studies"
+    },
+    {
+      "Name": "Language Arts"
+    },
+    {
+      "Name": "Foreign Language"
+    },
+    {
+      "Name": "Health & PE"
+    },
+    {
+      "Name": "Elective"
+    }
+  ],
+  "AssignmentTypes": [
+    {
+      "Name": "Assignment",
+      "Weight": 1
+    },
+    {
+      "Name": "Quiz",
+        "Weight": 2
+    },
+    {
+      "Name": "Project",
+      "Weight": 3
+    },
+    {
+      "Name": "Test",
+      "Weight": 4
+    },
+    {
+      "Name": "Exam",
+      "Weight": 5
+    }
+  ]
+}
